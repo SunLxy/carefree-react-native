@@ -9,20 +9,16 @@
  */
 
 import React from 'react'
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-} from 'react-native'
-import Animated from "./components/Animated"
-
+import { SafeAreaView, ScrollView, StatusBar } from 'react-native'
+import Animated from './components/Animated'
+// import Demo from "./Demo"
+// import Demo from "./components/Table/demo"
 const App = () => {
+  // return <Demo />
   return (
-    <SafeAreaView >
+    <SafeAreaView>
       <StatusBar barStyle={'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-      >
+      <ScrollView contentInsetAdjustmentBehavior="automatic">
         <Animated />
       </ScrollView>
     </SafeAreaView>
