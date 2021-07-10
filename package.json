@@ -7,12 +7,13 @@
     "ios": "react-native run-ios",
     "start": "react-native start --port=8082",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,json}'"
   },
   "dependencies": {
     "react": "17.0.1",
     "react-native": "0.64.1",
-    "react-native-svg": "^12.1.1"
+    "react-native-svg": "12.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -24,9 +25,12 @@
     "babel-jest": "^26.6.3",
     "eslint": "^7.14.0",
     "jest": "^26.6.3",
+    "lint-staged": "^11.0.0",
     "metro-react-native-babel-preset": "^0.64.0",
+    "prettier": "^2.3.2",
     "react-test-renderer": "17.0.1",
-    "typescript": "^3.8.3"
+    "typescript": "^3.8.3",
+    "yorkie": "2.0.0"
   },
   "resolutions": {
     "@types/react": "^17"
@@ -41,5 +45,16 @@
       "json",
       "node"
     ]
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ],
+    "*.{js,jsx,ts,tsx,less,md,json}": [
+      "prettier --write"
+    ]
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
   }
 }
