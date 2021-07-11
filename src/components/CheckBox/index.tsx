@@ -97,8 +97,8 @@ const Item: React.FC<CheckBoxItemProps> = props => {
     checkAlign = 'left',
     flexDirection = 'row',
     checkColor = '#1890ff',
-    disabled = false,
     checkValue = [],
+    disabled = false,
     disabledBG = 'rgba(0,0,0,0.1)',
     disabledFontColor = '#000',
     children,
@@ -139,7 +139,7 @@ const Item: React.FC<CheckBoxItemProps> = props => {
           type === 'button'
             ? {
                 paddingHorizontal: 10,
-                paddingVertical: 5,
+                paddingVertical: 10,
                 borderWidth: 0.5,
                 borderColor: '#ccc',
                 borderRadius: 5,
@@ -209,7 +209,7 @@ const CheckBox: React.FC<CheckBoxProps> & {
     checkFontColor = '#000',
     checkSize = 20,
     checkAlign = 'left',
-    flexDirection = 'column',
+    flexDirection = 'row',
     checkColor = '#1890ff',
     onChange,
     itemBtnStyle = {},
