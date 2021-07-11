@@ -260,8 +260,15 @@ const Radio: React.FC<RadioProps> & { Item: React.FC<RadioItemProps> } =
           <Item
             {...props}
             radioColor={radioColor}
-            checkValue={checkActionValue}
+            isCancel={isCancel}
+            disabled={disabled}
+            disabledBG={disabledBG}
+            disabledFontColor={disabledFontColor}
+            itemTextStyle={itemTextStyle}
+            itemBtnStyle={itemBtnStyle}
+            {...item}
             key={key}
+            checkValue={checkActionValue}
             label={item.label}
             value={item.value}
             onChange={handleValue}
@@ -269,13 +276,7 @@ const Radio: React.FC<RadioProps> & { Item: React.FC<RadioItemProps> } =
             checkAlign={checkAlign}
             checkSize={checkSize}
             type={type}
-            isCancel={isCancel}
             checkFontColor={checkFontColor}
-            itemTextStyle={itemTextStyle}
-            itemBtnStyle={itemBtnStyle}
-            disabled={disabled}
-            disabledBG={disabledBG}
-            disabledFontColor={disabledFontColor}
           />
         )
       })

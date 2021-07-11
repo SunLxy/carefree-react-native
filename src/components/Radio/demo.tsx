@@ -15,7 +15,7 @@ const VirtualizedListExample = () => {
           console.log(value)
         }}>
         <Radio.Item value="12">单标签</Radio.Item>
-        <Radio.Item value="13">单标签</Radio.Item>
+        <Radio.Item value="13">单标签2</Radio.Item>
       </Radio>
       <Radio
         value={value2}
@@ -25,11 +25,10 @@ const VirtualizedListExample = () => {
           console.log(value)
         }}
         options={[
-          { label: '哈哈', value: '1' },
-          { label: '哈哈', value: '2' },
-          { label: '哈哈', value: '3' },
-          { label: '哈哈', value: '4' },
-          { label: '哈哈', value: '5' },
+          { label: '哈哈1', value: '1' },
+          { label: '哈哈2', value: '2' },
+          { label: '哈哈3', value: '3' },
+          { label: '哈哈4', value: '4' },
         ]}
       />
     </SafeAreaView>
