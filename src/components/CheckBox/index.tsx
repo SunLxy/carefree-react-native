@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useMemo } from 'react'
 import {
   View,
   Text,
@@ -13,82 +13,82 @@ import { CheckBoxIcon, CheckMarkIcon } from './../Icons'
 // 2. button 形式
 
 export interface RadioOptionsProps {
-  label: string | React.ReactNode | undefined;
-  value: string | number | undefined;
-  [k: string]: any;
+  label: string | React.ReactNode | undefined
+  value: string | number | undefined
+  [k: string]: any
 }
 
 export interface CheckBoxItemProps {
   /** 选项内容 */
-  label?: string | React.ReactNode | undefined;
+  label?: string | React.ReactNode | undefined
   /** 选中值 */
-  checkValue?: Array<string | number | undefined>;
+  checkValue?: Array<string | number | undefined>
   /** 当前项 值 */
-  value: string | number | undefined;
+  value: string | number | undefined
   /** 选中 颜色 */
-  checkColor?: string;
+  checkColor?: string
   /** 按钮时横向还是竖向 */
-  flexDirection?: 'column' | 'row';
+  flexDirection?: 'column' | 'row'
   /** 选中图标显示位置 */
-  checkAlign?: 'left' | 'right';
+  checkAlign?: 'left' | 'right'
   /** 图标的大小 */
-  checkSize?: number;
+  checkSize?: number
   /** 是显示按钮形式还是默认 */
-  type?: 'button' | 'default';
+  type?: 'button' | 'default'
   /** 选中时字体颜色 */
-  checkFontColor?: string;
+  checkFontColor?: string
   /** 每项的按钮样式 */
-  itemBtnStyle?: StyleProp<ViewStyle>;
+  itemBtnStyle?: StyleProp<ViewStyle>
   /** 每项的text样式 */
-  itemTextStyle?: StyleProp<TextStyle>;
+  itemTextStyle?: StyleProp<TextStyle>
   /** 是否禁用 */
-  disabled?: boolean;
+  disabled?: boolean
   /** 禁用背景色 */
-  disabledBG?: string;
+  disabledBG?: string
   /** 禁用字体颜色 */
-  disabledFontColor?: string;
+  disabledFontColor?: string
   /** 值 变化事件 */
-  onChange: (v: Array<string | number | undefined>, t: any) => void;
-  children?: React.ReactNode;
+  onChange?: (v: Array<string | number | undefined>, t: any) => void
+  children?: React.ReactNode
 }
 
 export interface CheckBoxProps {
   /** 选择数据 */
-  options?: Array<RadioOptionsProps>;
+  options?: Array<RadioOptionsProps>
   /** 选中颜色 */
-  checkColor?: string;
+  checkColor?: string
   /** 按钮时横向还是竖向 */
-  flexDirection?: 'column' | 'row';
+  flexDirection?: 'column' | 'row'
   /** 选中值 */
-  value?: Array<string | number | undefined>;
+  value?: Array<string | number | undefined>
   /** 值 变化事件 */
   /** 选中图标显示位置 */
-  checkAlign?: 'left' | 'right';
+  checkAlign?: 'left' | 'right'
   /** 图标的大小 */
-  checkSize?: number;
+  checkSize?: number
   /** 是显示按钮形式还是默认 */
-  type?: 'button' | 'default';
+  type?: 'button' | 'default'
   /** 选中时字体颜色 */
-  checkFontColor?: string;
+  checkFontColor?: string
   /** 每项的按钮样式 */
-  itemBtnStyle?: StyleProp<ViewStyle>;
+  itemBtnStyle?: StyleProp<ViewStyle>
   /** 每项的text样式 */
-  itemTextStyle?: StyleProp<TextStyle>;
+  itemTextStyle?: StyleProp<TextStyle>
   /** 是否禁用 */
-  disabled?: boolean;
+  disabled?: boolean
   /** 禁用背景色 */
-  disabledBG?: string;
+  disabledBG?: string
   /** 禁用字体颜色 */
-  disabledFontColor?: string;
-  onChange?: (v: Array<string | number | undefined>, t: any) => void;
-  children?: React.ReactNode;
+  disabledFontColor?: string
+  onChange?: (v: Array<string | number | undefined>, t: any) => void
+  children?: React.ReactNode
 }
 
 const Item: React.FC<CheckBoxItemProps> = props => {
   const {
     label,
     value,
-    onChange,
+    onChange = () => {},
     itemBtnStyle = {},
     itemTextStyle = {},
     type = 'default',
@@ -200,7 +200,7 @@ const Item: React.FC<CheckBoxItemProps> = props => {
 }
 
 const CheckBox: React.FC<CheckBoxProps> & {
-  Item: React.FC<CheckBoxItemProps>,
+  Item: React.FC<CheckBoxItemProps>
 } = props => {
   const {
     value,
@@ -221,28 +221,31 @@ const CheckBox: React.FC<CheckBoxProps> & {
   } = props
 
   const [actionValue, setActionValue] = useState(value)
-
+  const checkActionValue = useMemo(() => {
+    if (Reflect.has(props, 'value')) {
+      return value
+    }
+    return actionValue
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [actionValue, value])
   const handleValue = (valu: Array<string | number | undefined>, item: any) => {
     if (disabled) {
       return
     }
     if (onChange) {
       onChange(valu, item)
-    } else {
+    }
+    if (!Reflect.has(props, 'value')) {
       setActionValue(valu)
     }
   }
-  useEffect(() => {
-    setActionValue(value)
-  }, [value])
-
   const _optionsRender = () => {
     return options.map((item, key) => {
       return (
         <Item
           {...props}
           checkColor={checkColor}
-          checkValue={actionValue}
+          checkValue={checkActionValue}
           key={key}
           label={item.label}
           value={item.value}
@@ -274,6 +277,7 @@ const CheckBox: React.FC<CheckBoxProps> & {
             disabledBG,
             disabledFontColor,
             ...(child.props || {}),
+            checkValue: checkActionValue,
             flexDirection,
             checkAlign,
             checkSize,

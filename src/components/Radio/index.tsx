@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useMemo } from 'react'
 import {
   View,
   Text,
@@ -13,79 +13,79 @@ import { RadioIcon, CheckMarkIcon } from './../Icons'
 // 2. button 形式
 
 export interface RadioOptionsProps {
-  label: string | React.ReactNode | undefined;
-  value: string | number | undefined;
-  [k: string]: any;
+  label: string | React.ReactNode | undefined
+  value: string | number | undefined
+  [k: string]: any
 }
 
 export interface RadioItemProps {
   /** 选项内容 */
-  label?: string | React.ReactNode | undefined;
+  label?: string | React.ReactNode | undefined
   /** 选中值 */
-  checkValue?: string | number | undefined;
+  checkValue?: string | number | undefined
   /** 当前项 值 */
-  value: string | number | undefined;
+  value: string | number | undefined
   /** 选中 颜色 */
-  radioColor?: string;
+  radioColor?: string
   /** 是否可取消 */
-  isCancel?: boolean;
+  isCancel?: boolean
   /** 按钮时横向还是竖向 */
-  flexDirection?: 'column' | 'row';
+  flexDirection?: 'column' | 'row'
   /** 选中图标显示位置 */
-  checkAlign?: 'left' | 'right';
+  checkAlign?: 'left' | 'right'
   /** 图标的大小 */
-  checkSize?: number;
+  checkSize?: number
   /** 是显示按钮形式还是默认 */
-  type?: 'button' | 'default';
+  type?: 'button' | 'default'
   /** 选中时字体颜色 */
-  checkFontColor?: string;
+  checkFontColor?: string
   /** 每项的按钮样式 */
-  itemBtnStyle?: StyleProp<ViewStyle>;
+  itemBtnStyle?: StyleProp<ViewStyle>
   /** 每项的text样式 */
-  itemTextStyle?: StyleProp<TextStyle>;
+  itemTextStyle?: StyleProp<TextStyle>
   /** 值 变化事件 */
-  onChange: (v: string | number | undefined, t: any) => void;
+  onChange?: (v: string | number | undefined, t: any) => void
   /** 是否禁用 */
-  disabled?: boolean;
+  disabled?: boolean
   /** 禁用背景色 */
-  disabledBG?: string;
+  disabledBG?: string
   /** 禁用字体颜色 */
-  disabledFontColor?: string;
-  children?: React.ReactNode;
+  disabledFontColor?: string
+  children?: React.ReactNode
 }
 
 export interface RadioProps {
   /** 选择数据 */
-  options?: Array<RadioOptionsProps>;
+  options?: Array<RadioOptionsProps>
   /** 选中颜色 */
-  radioColor?: string;
+  radioColor?: string
   /** 按钮时横向还是竖向 */
-  flexDirection?: 'column' | 'row';
+  flexDirection?: 'column' | 'row'
   /** 是否可取消 */
-  isCancel?: boolean;
+  isCancel?: boolean
   /** 选中值 */
-  value?: string | number | undefined;
+  value?: string | number | undefined
   /** 值 变化事件 */
-  onChange?: (v: string | number | undefined, t: any) => void;
+  onChange?: (v: string | number | undefined, t: any) => void
   /** 选中图标显示位置 */
-  checkAlign?: 'left' | 'right';
+  checkAlign?: 'left' | 'right'
   /** 图标的大小 */
-  checkSize?: number;
+  checkSize?: number
   /** 是显示按钮形式还是默认 */
-  type?: 'button' | 'default';
+  type?: 'button' | 'default'
   /** 选中时字体颜色 */
-  checkFontColor?: string;
+  checkFontColor?: string
   /** 每项的按钮样式 */
-  itemBtnStyle?: StyleProp<ViewStyle>;
+  itemBtnStyle?: StyleProp<ViewStyle>
   /** 每项的text样式 */
-  itemTextStyle?: StyleProp<TextStyle>;
+  itemTextStyle?: StyleProp<TextStyle>
   /** 是否禁用 */
-  disabled?: boolean;
+  disabled?: boolean
   /** 禁用背景色 */
-  disabledBG?: string;
+  disabledBG?: string
   /** 禁用字体颜色 */
-  disabledFontColor?: string;
-  children?: React.ReactNode;
+  disabledFontColor?: string
+  children?: React.ReactNode
 }
 
 const checkValueFig = (
@@ -105,7 +105,7 @@ const Item: React.FC<RadioItemProps> = props => {
   const {
     label,
     value,
-    onChange,
+    onChange = () => {},
     itemBtnStyle = {},
     itemTextStyle = {},
     type = 'default',
@@ -235,28 +235,32 @@ const Radio: React.FC<RadioProps> & { Item: React.FC<RadioItemProps> } =
     } = props
 
     const [actionValue, setActionValue] = useState(value)
+    const checkActionValue = useMemo(() => {
+      if (Reflect.has(props, 'value')) {
+        return value
+      }
+      return actionValue
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [actionValue, value])
 
     const handleValue = (valu: number | string | undefined, item: any) => {
+      if (disabled) {
+        return
+      }
       if (onChange) {
-        if (disabled) {
-          return
-        }
         onChange(valu, item)
-      } else {
+      }
+      if (!Reflect.has(props, 'value')) {
         setActionValue(valu)
       }
     }
-    useEffect(() => {
-      setActionValue(value)
-    }, [value])
-
     const _optionsRender = () => {
       return options.map((item, key) => {
         return (
           <Item
             {...props}
             radioColor={radioColor}
-            checkValue={actionValue}
+            checkValue={checkActionValue}
             key={key}
             label={item.label}
             value={item.value}
@@ -290,6 +294,7 @@ const Radio: React.FC<RadioProps> & { Item: React.FC<RadioItemProps> } =
               disabledBG,
               disabledFontColor,
               ...(child.props || {}),
+              checkValue: checkActionValue,
               flexDirection,
               checkAlign,
               checkSize,
