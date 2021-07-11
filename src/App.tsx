@@ -11,6 +11,9 @@
 import React from 'react'
 import { SafeAreaView, ScrollView, StatusBar } from 'react-native'
 import Animated from './components/Animated'
+import RadioDemo from './components/Radio/demo'
+import CheckBox from './components/CheckBox/demo'
+
 // import Demo from "./Demo"
 // import Demo from "./components/Table/demo"
 const App = () => {
@@ -20,6 +23,8 @@ const App = () => {
       <StatusBar barStyle={'dark-content'} />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <Animated />
+        <RadioDemo />
+        <CheckBox />
       </ScrollView>
     </SafeAreaView>
   )
