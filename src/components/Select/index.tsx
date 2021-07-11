@@ -273,6 +273,7 @@ const Select: React.FC<SelectProps> = props => {
         </View>
       </TouchableOpacity>
       <ModalSelect
+        value={value}
         multiple={multiple}
         visible={visible}
         options={options}
