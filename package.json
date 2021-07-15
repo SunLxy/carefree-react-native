@@ -1,13 +1,15 @@
 {
-  "name": "rncomponents",
+  "name": "carefree-react-native",
   "description": "练习 react native ,并尝试封装常用的组件",
   "version": "0.0.1",
-  "private": true,
+  "main": "lib/index.js",
+  "module": "es/index.js",
   "scripts": {
     "android": "react-native run-android ",
     "ios": "react-native run-ios",
     "start": "react-native start --port=8082",
     "test": "jest",
+    "build": "father-build",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,json}'"
   },
@@ -27,6 +29,7 @@
     "@types/react-test-renderer": "^16.9.2",
     "babel-jest": "^26.6.3",
     "eslint": "^7.14.0",
+    "father-build": "^1.19.6",
     "jest": "^26.6.3",
     "lint-staged": "^11.0.0",
     "metro-react-native-babel-preset": "^0.64.0",
@@ -38,6 +41,10 @@
   "resolutions": {
     "@types/react": "^17"
   },
+  "files": [
+    "lib",
+    "es"
+  ],
   "jest": {
     "preset": "react-native",
     "moduleFileExtensions": [
