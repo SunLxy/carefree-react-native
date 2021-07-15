@@ -10,6 +10,8 @@
     "start": "react-native start --port=8082",
     "test": "jest",
     "build": "father-build",
+    "postpublish": "git clean -fd",
+    "release": "npm run build && npm publish",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,json}'"
   },
