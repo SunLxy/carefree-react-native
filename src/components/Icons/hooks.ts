@@ -1,23 +1,23 @@
-import { Animated } from 'react-native';
-import { useRef, useMemo } from "react"
+import { Animated } from 'react-native'
+import { useRef, useMemo } from 'react'
 
-export const useAnimated = (props: { visible: boolean }) => {
-  const { visible } = props
+export const useAnimated = (props: { visible: boolean; toValue?: number }) => {
+  const { visible, toValue = 1 } = props
   const fadeAnim = useRef(new Animated.Value(0)).current
   const fadeOut = () => {
     Animated.timing(fadeAnim, {
       toValue: 0,
       duration: 300,
-      useNativeDriver: false
-    }).start();
-  };
+      useNativeDriver: false,
+    }).start()
+  }
   const fadeIn = () => {
     Animated.timing(fadeAnim, {
-      toValue: 1,
+      toValue: toValue,
       duration: 300,
-      useNativeDriver: false
-    }).start();
-  };
+      useNativeDriver: false,
+    }).start()
+  }
   useMemo(() => {
     if (visible) {
       fadeIn()
@@ -26,9 +26,10 @@ export const useAnimated = (props: { visible: boolean }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible])
+
   return {
     fadeAnim,
     fadeOut,
-    fadeIn
+    fadeIn,
   }
 }

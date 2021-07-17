@@ -8,16 +8,25 @@
  * @format
  */
 
-import React from 'react'
-import { SafeAreaView, ScrollView, StatusBar, View, Text } from 'react-native'
+import React, { useState } from 'react'
+import {
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  View,
+  Text,
+  TouchableOpacity,
+} from 'react-native'
 import Animated from './components/Animated'
 import RadioDemo from './components/Radio/demo'
 import CheckBox from './components/CheckBox/demo'
 import Select from './components/Select/demo'
+import ModalLay from './components/Modal'
 
 // import Demo from "./Demo"
 // import Demo from "./components/Table/demo"
 const App = () => {
+  const [visible, setVisible] = useState(false)
   // return <Demo />
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -46,6 +55,13 @@ const App = () => {
           </Text>
           <Select />
         </View>
+        <TouchableOpacity
+          onPress={() => {
+            setVisible(true)
+          }}>
+          <Text>点击</Text>
+        </TouchableOpacity>
+        <ModalLay visible={visible} onRequestClose={() => setVisible(false)} />
       </ScrollView>
     </SafeAreaView>
   )
