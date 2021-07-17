@@ -2,7 +2,6 @@ import React, { useState, useMemo, useRef, useEffect } from 'react'
 import {
   Modal,
   View,
-  Text,
   Dimensions,
   TouchableOpacity,
   Animated,
@@ -35,7 +34,8 @@ const ModalLay: React.FC<ModalLayProps> = props => {
   const fadeAnim = useRef(new Animated.Value(0)).current
   const height = Dimensions.get('window').height
   const width = Dimensions.get('window').width
-  const getPosition = useMemo(() => {
+  // 动画位置
+  const getTransform = useMemo(() => {
     switch (mode) {
       case 'left':
         return {
@@ -107,9 +107,8 @@ const ModalLay: React.FC<ModalLayProps> = props => {
           style={{ flex: 1 }}
           onPress={() => {
             fadeOut()
-          }}>
-          <Text>点击</Text>
-        </TouchableOpacity>
+          }}
+        />
       </View>
     )
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -169,7 +168,7 @@ const ModalLay: React.FC<ModalLayProps> = props => {
               bodyStyle,
               whStyles,
               {
-                transform: [getPosition],
+                transform: [getTransform],
               },
             ]}>
             {props.children}
