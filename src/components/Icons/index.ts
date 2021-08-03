@@ -9,4 +9,7 @@ export { default as CheckMarkIcon } from './CheckMark'
 export { default as XIcon } from './X'
 export { default as UpIcon } from './Up'
 export { default as DownIcon } from './Down'
+export { default as HalfIcon } from './Half'
+export { default as RightIcon } from './Right'
+
 export { useAnimated } from './hooks'

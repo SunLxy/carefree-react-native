@@ -22,6 +22,7 @@ import RadioDemo from './components/Radio/demo'
 import CheckBox from './components/CheckBox/demo'
 import Select from './components/Select/demo'
 import ModalLay from './components/Modal'
+import Tree from './components/Tree/Demo'
 
 // import Demo from "./Demo"
 // import Demo from "./components/Table/demo"
@@ -62,6 +63,9 @@ const App = () => {
           <Text>点击</Text>
         </TouchableOpacity>
         <ModalLay visible={visible} onRequestClose={() => setVisible(false)} />
+        <View style={{ paddingLeft: 20 }}>
+          <Tree />
+        </View>
       </ScrollView>
     </SafeAreaView>
   )

@@ -17,6 +17,8 @@
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,json}'"
   },
   "dependencies": {
+    "jcore-react-native": "^1.9.2",
+    "jpush-react-native": "^2.8.3",
     "react": "17.0.1",
     "react-native": "0.64.1",
     "react-native-svg": "12.1.1"

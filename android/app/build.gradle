@@ -157,6 +157,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            storeFile file('my-release-key.keystore')
+            storePassword 'xy123456'
+            keyAlias 'my-key-alias'
+            keyPassword 'xy123456'
+        }
     }
     buildTypes {
         debug {
@@ -165,7 +171,8 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            // signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
@@ -215,6 +222,9 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+    // 极光认证
+    implementation project(':jverification-react-native') // 添加 jverification 依赖
        // 添加 jpush 依赖
     implementation project(':jpush-react-native')  // 添加 jpush 依赖
     implementation project(':jcore-react-native')  // 添加 jcore 依赖

@@ -164,7 +164,7 @@ const Item: React.FC<CheckBoxItemProps> = props => {
               : {},
           ]}>
           {checkAlign === 'left' && type === 'default' ? (
-            <View style={{ marginHorizontal: 5 }}>
+            <View style={{ marginRight: 5 }}>
               <CheckBoxIcon
                 size={checkSize}
                 color={checkColor}
