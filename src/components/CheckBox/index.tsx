@@ -8,10 +8,6 @@ import {
   TextStyle,
 } from 'react-native'
 import { CheckBoxIcon, CheckMarkIcon } from './../Icons'
-
-// 1. 单选按钮
-// 2. button 形式
-
 export interface RadioOptionsProps {
   label: string | React.ReactNode | undefined
   value: string | number | undefined
@@ -50,6 +46,8 @@ export interface CheckBoxItemProps {
   /** 值 变化事件 */
   onChange?: (v: Array<string | number | undefined>, t: any) => void
   children?: React.ReactNode
+  /** 每个选项最外层样式 */
+  itemWarpStyle?: StyleProp<ViewStyle>
 }
 
 export interface CheckBoxProps {
@@ -80,8 +78,13 @@ export interface CheckBoxProps {
   disabledBG?: string
   /** 禁用字体颜色 */
   disabledFontColor?: string
+  /** 选择变更值事件 */
   onChange?: (v: Array<string | number | undefined>, t: any) => void
   children?: React.ReactNode
+  /** 最外层样式 */
+  warpSatyle?: StyleProp<ViewStyle>
+  /** 每个选项最外层样式 */
+  itemWarpStyle?: StyleProp<ViewStyle>
 }
 
 const Item: React.FC<CheckBoxItemProps> = props => {
@@ -218,6 +221,8 @@ const CheckBox: React.FC<CheckBoxProps> & {
     disabledBG = 'rgba(0,0,0,0.1)',
     disabledFontColor = '#000',
     children,
+    warpSatyle,
+    itemWarpStyle,
   } = props
 
   const [actionValue, setActionValue] = useState(value)
@@ -244,6 +249,7 @@ const CheckBox: React.FC<CheckBoxProps> & {
       return (
         <Item
           {...props}
+          itemWarpStyle={itemWarpStyle}
           checkColor={checkColor}
           checkValue={checkActionValue}
           key={key}
@@ -276,6 +282,7 @@ const CheckBox: React.FC<CheckBoxProps> & {
             disabled,
             disabledBG,
             disabledFontColor,
+            itemWarpStyle,
             ...(child.props || {}),
             checkValue: checkActionValue,
             flexDirection,
@@ -294,7 +301,12 @@ const CheckBox: React.FC<CheckBoxProps> & {
     )
   }
   return (
-    <View style={{ flexDirection }}>
+    <View
+      style={[
+        { flexWrap: 'wrap', paddingTop: 5 },
+        warpSatyle,
+        { flexDirection },
+      ]}>
       {children ? _children() : _optionsRender()}
     </View>
   )

@@ -23,11 +23,13 @@ import CheckBox from './components/CheckBox/demo'
 import Select from './components/Select/demo'
 import ModalLay from './components/Modal'
 import Tree from './components/Tree/Demo'
+import A from './components/a'
 
 // import Demo from "./Demo"
 // import Demo from "./components/Table/demo"
 const App = () => {
   const [visible, setVisible] = useState(false)
+
   // return <Demo />
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -62,6 +64,7 @@ const App = () => {
           }}>
           <Text>点击</Text>
         </TouchableOpacity>
+        <A />
         <ModalLay visible={visible} onRequestClose={() => setVisible(false)} />
         <View style={{ paddingLeft: 20 }}>
           <Tree />

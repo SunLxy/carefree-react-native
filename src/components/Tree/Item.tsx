@@ -15,9 +15,6 @@ interface CheckBoxHalfProps {
   onClick?: (...arg: any) => void
 }
 
-interface CheckBoxHalfProps {
-  checked: number
-}
 const CheckBoxHalf: React.FC<CheckBoxHalfProps> = props => {
   const { checked } = props
   if (checked === 2) {

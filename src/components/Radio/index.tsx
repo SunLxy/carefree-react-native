@@ -9,9 +9,6 @@ import {
 } from 'react-native'
 import { RadioIcon, CheckMarkIcon } from './../Icons'
 
-// 1. 单选按钮
-// 2. button 形式
-
 export interface RadioOptionsProps {
   label: string | React.ReactNode | undefined
   value: string | number | undefined
@@ -52,6 +49,8 @@ export interface RadioItemProps {
   /** 禁用字体颜色 */
   disabledFontColor?: string
   children?: React.ReactNode
+  /** 每个选项最外层样式 */
+  itemWarpStyle?: StyleProp<ViewStyle>
 }
 
 export interface RadioProps {
@@ -86,6 +85,10 @@ export interface RadioProps {
   /** 禁用字体颜色 */
   disabledFontColor?: string
   children?: React.ReactNode
+  /** 最外层样式 */
+  warpSatyle?: StyleProp<ViewStyle>
+  /** 每个选项最外层样式 */
+  itemWarpStyle?: StyleProp<ViewStyle>
 }
 
 const checkValueFig = (
@@ -120,6 +123,7 @@ const Item: React.FC<RadioItemProps> = props => {
     disabledBG = 'rgba(0,0,0,0.1)',
     disabledFontColor = '#000',
     children,
+    itemWarpStyle,
   } = props
   const check = useMemo(() => {
     return checkValueFig(value, checkValue)
@@ -139,7 +143,7 @@ const Item: React.FC<RadioItemProps> = props => {
   }
 
   return (
-    <View style={disabled ? { opacity: 0.6 } : {}}>
+    <View style={[disabled ? { opacity: 0.6 } : {}, itemWarpStyle]}>
       <TouchableOpacity
         onPress={handleOnValue}
         disabled={disabled}
@@ -181,7 +185,7 @@ const Item: React.FC<RadioItemProps> = props => {
               : {},
           ]}>
           {checkAlign === 'left' && type === 'default' ? (
-            <View style={{ marginHorizontal: 5 }}>
+            <View style={{ marginRight: 5 }}>
               <RadioIcon size={checkSize} color={radioColor} visible={check} />
             </View>
           ) : (
@@ -197,7 +201,7 @@ const Item: React.FC<RadioItemProps> = props => {
             {children ? children : label}
           </Text>
           {checkAlign === 'right' && type === 'default' ? (
-            <View>
+            <View style={{ marginRight: 5 }}>
               <CheckMarkIcon
                 size={checkSize}
                 color={radioColor}
@@ -232,6 +236,8 @@ const Radio: React.FC<RadioProps> & { Item: React.FC<RadioItemProps> } =
       disabledBG = 'rgba(0,0,0,0.1)',
       disabledFontColor = '#000',
       children,
+      warpSatyle,
+      itemWarpStyle,
     } = props
 
     const [actionValue, setActionValue] = useState(value)
@@ -259,6 +265,7 @@ const Radio: React.FC<RadioProps> & { Item: React.FC<RadioItemProps> } =
         return (
           <Item
             {...props}
+            itemWarpStyle={itemWarpStyle}
             radioColor={radioColor}
             isCancel={isCancel}
             disabled={disabled}
@@ -294,6 +301,7 @@ const Radio: React.FC<RadioProps> & { Item: React.FC<RadioItemProps> } =
               disabled,
               disabledBG,
               disabledFontColor,
+              itemWarpStyle,
               ...(child.props || {}),
               checkValue: checkActionValue,
               flexDirection,
@@ -312,7 +320,12 @@ const Radio: React.FC<RadioProps> & { Item: React.FC<RadioItemProps> } =
       )
     }
     return (
-      <View style={{ flexDirection }}>
+      <View
+        style={[
+          { flexWrap: 'wrap', paddingTop: 5 },
+          warpSatyle,
+          { flexDirection },
+        ]}>
         {children ? _children() : _optionsRender()}
       </View>
     )
