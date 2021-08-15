@@ -6,6 +6,7 @@ import {
   PanResponder,
   Text,
   Dimensions,
+  NativeSyntheticEvent,
 } from 'react-native'
 const App = () => {
   const width = Dimensions.get('window').width
@@ -35,7 +36,10 @@ const App = () => {
           { dx: pan.x },
         ], // 手势状态参数
         {
-          listener: (event: any, gestureState: any) => {
+          listener: (
+            event: NativeSyntheticEvent<unknown>,
+            gestureState: any,
+          ) => {
             const { moveX, x0 } = gestureState
             const mov = x0 - moveX
             if (mov > 0 && !pan3.current) {
@@ -59,7 +63,7 @@ const App = () => {
               }
             }
           },
-        }, // 可选的异步监听函数
+        } as any, // 可选的异步监听函数
       ),
       onPanResponderRelease: (e, gestureState) => {
         const { moveX, x0 } = gestureState
