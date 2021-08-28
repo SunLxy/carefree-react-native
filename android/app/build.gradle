@@ -133,11 +133,6 @@ android {
     defaultConfig {
         applicationId "com.rncomponents"
         minSdkVersion rootProject.ext.minSdkVersion
-          // 极光推送配置
-        manifestPlaceholders = [
-            JPUSH_APPKEY: "45ea35a91ccce92a277a7143",         //在此替换你的APPKey
-            JPUSH_CHANNEL: "developer-default"        //在此替换你的channel
-        ]
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
@@ -222,12 +217,6 @@ dependencies {
     } else {
         implementation jscFlavor
     }
-
-    // 极光认证
-    // implementation project(':jverification-react-native') // 添加 jverification 依赖
-       // 添加 jpush 依赖
-    implementation project(':jpush-react-native')  // 添加 jpush 依赖
-    implementation project(':jcore-react-native')  // 添加 jcore 依赖
 
 }
 
