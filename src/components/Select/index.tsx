@@ -118,6 +118,7 @@ const ModalSelect: React.FC<ModalSelectProps> = props => {
         <CheckBox
           {...checkOther}
           checkAlign={checkAlign}
+          warpSatyle={{ flexWrap: 'nowrap' }}
           flexDirection="column"
           value={val}
           options={options}
@@ -130,6 +131,7 @@ const ModalSelect: React.FC<ModalSelectProps> = props => {
         <Radio
           {...checkOther}
           checkAlign={checkAlign}
+          warpSatyle={{ flexWrap: 'nowrap' }}
           flexDirection="column"
           value={val}
           options={options}

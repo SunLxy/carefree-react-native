@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { SafeAreaView } from 'react-native'
+import { SafeAreaView, View, Text } from 'react-native'
 import Radio from './'
 
 const VirtualizedListExample = () => {
   const [value1, setValue1] = useState<string | number | undefined>('')
   const [value2, setValue2] = useState<string | number | undefined>('')
+  const [value3, setValue3] = useState<string | number | undefined>('')
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Radio
@@ -17,6 +18,20 @@ const VirtualizedListExample = () => {
         <Radio.Item value="12">单标签</Radio.Item>
         <Radio.Item value="13">单标签2</Radio.Item>
       </Radio>
+      <View style={{ paddingLeft: 20 }}>
+        <Text>单个Item标签</Text>
+        <View style={{ flexDirection: 'row' }}>
+          <Radio.Item checkValue={value3} onChange={setValue3} value="13">
+            单个标签1
+          </Radio.Item>
+          <Radio.Item checkValue={value3} onChange={setValue3} value="14">
+            单个标签2
+          </Radio.Item>
+          <Radio.Item checkValue={value3} onChange={setValue3} value="15">
+            单个标签3
+          </Radio.Item>
+        </View>
+      </View>
       <Radio
         value={value2}
         onChange={value => {

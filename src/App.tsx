@@ -23,7 +23,6 @@ import CheckBox from './components/CheckBox/demo'
 import Select from './components/Select/demo'
 import ModalLay from './components/Modal'
 import Tree from './components/Tree/Demo'
-import A from './components/a'
 
 // import Demo from "./Demo"
 // import Demo from "./components/Table/demo"
@@ -35,24 +34,24 @@ const App = () => {
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar barStyle={'dark-content'} />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <View style={{ height: 100 }}>
+        <View style={{ minHeight: 100 }}>
           <Text style={{ fontSize: 20, fontWeight: 'bold' }}>动画图标</Text>
           <Animated />
         </View>
 
-        <View style={{ height: 100 }}>
+        <View style={{ minHeight: 100 }}>
           <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 10 }}>
             单选框
           </Text>
           <RadioDemo />
         </View>
-        <View style={{ height: 100 }}>
+        <View style={{ minHeight: 100 }}>
           <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 10 }}>
             多选框
           </Text>
           <CheckBox />
         </View>
-        <View style={{ height: 100 }}>
+        <View style={{ minHeight: 100 }}>
           <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 10 }}>
             下拉选择框
           </Text>
@@ -64,7 +63,6 @@ const App = () => {
           }}>
           <Text>点击</Text>
         </TouchableOpacity>
-        <A />
         <ModalLay visible={visible} onRequestClose={() => setVisible(false)} />
         <View style={{ paddingLeft: 20 }}>
           <Tree />

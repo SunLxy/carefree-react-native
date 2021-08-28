@@ -154,7 +154,11 @@ const ModalLay: React.FC<ModalLayProps> = props => {
 
   return (
     <React.Fragment>
-      <Modal animationType="none" visible={show} {...restProps}>
+      <Modal
+        animationType="none"
+        visible={show}
+        onRequestClose={() => fadeOut()}
+        {...restProps}>
         <View
           style={[
             { flex: 1, backgroundColor: 'rgba(0,0,0,0.3)' },
