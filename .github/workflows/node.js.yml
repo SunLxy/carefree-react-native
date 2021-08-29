@@ -30,6 +30,8 @@ jobs:
       - run: echo "successful - ${{ steps.create_tag.outputs.successful }}"
       - run: echo "successful - ${{ steps.create_tag.outputs.successful }}"
 
+      - run: echo "tags - ${{ startsWith(github.ref, 'refs/tags/') }}"
+        # if: startsWith(github.ref, 'refs/tags/')
       - name: Generate changelog
         id: changelog
         uses: jaywcjlove/changelog-generator@main
@@ -45,8 +47,8 @@ jobs:
         if: steps.create_tag.outputs.successful
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          name: ${{ steps.create_tag.outputs.tag }}
-          tag: ${{ steps.create_tag.outputs.tag }}
+          name: ${{ steps.changelog.outputs.tag }}
+          tag: ${{ steps.changelog.outputs.tag }}
           body: |
             ```bash
             npm i carefree-react-native@${{steps.changelog.outputs.version}}
