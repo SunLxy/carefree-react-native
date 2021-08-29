@@ -26,6 +26,11 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           package-path: ./package.json
 
+      - run: npm i -g github-release-from-changelog
+      - run: github-release-from-changelog
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
       # - name: Generate changelog
       #   id: changelog
       #   uses: jaywcjlove/changelog-generator@main
