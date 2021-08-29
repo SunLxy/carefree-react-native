@@ -21,21 +21,22 @@ jobs:
 
       - name: Create Tag
         id: create_tag
-        uses: jaywcjlove/create-tag-action@v1.2.0
+        uses: jaywcjlove/create-tag-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           package-path: ./package.json
 
       - run: echo "version - ${{ steps.create_tag.outputs.version }}"
       - run: echo "successful - ${{ steps.create_tag.outputs.successful }}"
+      - run: echo "successful - ${{ steps.create_tag.outputs.successful }}"
 
       - name: Generate changelog
         id: changelog
-        uses: jaywcjlove/changelog-generator@v1.4.3
+        uses: jaywcjlove/changelog-generator@main
         if: steps.create_tag.outputs.successful
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          head-ref: ${{steps.create_tag.outputs.version}}
+          head-ref: ${{ steps.create_tag.outputs.version }}
           filter-author: (SunLxy|sunluxy|dependabot\[bot\]|Renovate Bot)
           filter: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}'
 
@@ -44,8 +45,8 @@ jobs:
         if: steps.create_tag.outputs.successful
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          name: ${{ steps.changelog.outputs.tag }}
-          tag: ${{ steps.changelog.outputs.tag }}
+          name: ${{ steps.create_tag.outputs.tag }}
+          tag: ${{ steps.create_tag.outputs.tag }}
           body: |
             ```bash
             npm i carefree-react-native@${{steps.changelog.outputs.version}}
@@ -56,6 +57,6 @@ jobs:
             ${{ steps.changelog.outputs.changelog }}
 
     
-      - run: npm install @jsdevtools/npm-publish -g
-      - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./package.json
+      # - run: npm install @jsdevtools/npm-publish -g
+      # - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./package.json
 
