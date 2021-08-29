@@ -30,7 +30,7 @@ jobs:
       - run: echo "successful - ${{ steps.create_tag.outputs.successful }}"
       - run: echo "successful - ${{ steps.create_tag.outputs.successful }}"
 
-      - run: echo "tags - ${{ startsWith(github.ref, 'refs/tags/') }}"
+      - run: echo "tags - ${{ startsWith(github.ref, 'refs/tags/') }} - {{ github.ref }}"
         # if: startsWith(github.ref, 'refs/tags/')
       - name: Generate changelog
         id: changelog
