@@ -4,53 +4,26 @@ on:
     branches:
       - main
 
-env:
-  SKIP_PREFLIGHT_CHECK: true
-
 jobs:
-  build-deploy:
-    runs-on: ubuntu-18.04
+  test:
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
-      with:
-        node-version: 14
-
-    - run: npm install
-    - run: npm build 
-    
-    - name: Is a tag created auto?
-      id: create_tag
-      uses: jaywcjlove/create-tag-action@v1.2.0
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        package-path: ./package.json
-
-    - name: Generate changelog
-      id: changelog
-      uses: jaywcjlove/changelog-generator@v1.4.3
-      if: steps.create_tag.outputs.successful
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        head-ref: ${{steps.create_tag.outputs.version}}
-        filter-author: (SunLxy|sunluxy|SunLuxy|SL|逍遥|dependabot\[bot\]|renovate\[bot\]|Renovate Bot)
-        filter: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}'
-
-    - name: Create Release
-      uses: ncipollo/release-action@v1
-      if: steps.create_tag.outputs.successful
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        name: ${{ steps.changelog.outputs.tag }}
-        tag: ${{ steps.changelog.outputs.tag }}
-        body: |
-          ```bash
-          npm i carefree-react-native@${{steps.changelog.outputs.version}}
-          ```
-          ${{ steps.changelog.outputs.compareurl }}
-          ${{ steps.changelog.outputs.changelog }}
-
-    - run: echo ${{ steps.changelog.outputs.tag }}
-    - run: npm install @jsdevtools/npm-publish -g
-    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./package.json
-
+      # To use this repository's private action, you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Generate changelog
+        id: changelog
+        uses: metcalfc/changelog-generator@main
+        with:
+          myToken: ${{ secrets.GITHUB_TOKEN }}
+          head-ref: 'v0.0.10'
+          base-ref: 'v0.0.9'
+      - name: Get the changelog
+        run: echo "${{ steps.changelog.outputs.changelog }}"
+      - name: Generate changelog from release
+        id: release
+        uses: metcalfc/changelog-generator@main
+        with:
+          myToken: ${{ secrets.GITHUB_TOKEN }}
+      - name: Get the changelog
+        run: echo "${{ steps.release.outputs.changelog }}"
