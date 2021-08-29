@@ -26,39 +26,33 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           package-path: ./package.json
 
-      - run: echo "version - ${{ steps.create_tag.outputs.version }}"
-      - run: echo "successful - ${{ steps.create_tag.outputs.successful }}"
-      - run: echo "successful - ${{ steps.create_tag.outputs.successful }}"
+      # - name: Generate changelog
+      #   id: changelog
+      #   uses: jaywcjlove/changelog-generator@main
+      #   if: steps.create_tag.outputs.successful
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     head-ref: ${{ steps.create_tag.outputs.version }}
+      #     filter-author: (SunLxy|sunluxy|dependabot\[bot\]|Renovate Bot)
+      #     filter: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}'
 
-      - run: echo "tags - ${{ startsWith(github.ref, 'refs/tags/') }} - ${{ github.ref }}"
-        # if: startsWith(github.ref, 'refs/tags/')
-      - name: Generate changelog
-        id: changelog
-        uses: jaywcjlove/changelog-generator@main
-        if: steps.create_tag.outputs.successful
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          head-ref: ${{ steps.create_tag.outputs.version }}
-          filter-author: (SunLxy|sunluxy|dependabot\[bot\]|Renovate Bot)
-          filter: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}'
+      # - name: Create Release
+      #   uses: ncipollo/release-action@v1
+      #   if: steps.create_tag.outputs.successful
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     name: ${{ steps.changelog.outputs.tag }}
+      #     tag: ${{ steps.changelog.outputs.tag }}
+      #     body: |
+      #       ```bash
+      #       npm i carefree-react-native@${{steps.changelog.outputs.version}}
 
-      - name: Create Release
-        uses: ncipollo/release-action@v1
-        if: steps.create_tag.outputs.successful
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          name: ${{ steps.changelog.outputs.tag }}
-          tag: ${{ steps.changelog.outputs.tag }}
-          body: |
-            ```bash
-            npm i carefree-react-native@${{steps.changelog.outputs.version}}
+      #       ```
+      #       ${{ steps.changelog.outputs.compareurl }}
 
-            ```
-            ${{ steps.changelog.outputs.compareurl }}
-
-            ${{ steps.changelog.outputs.changelog }}
+      #       ${{ steps.changelog.outputs.changelog }}
 
     
-      # - run: npm install @jsdevtools/npm-publish -g
-      # - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./package.json
+      - run: npm install @jsdevtools/npm-publish -g
+      - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./package.json
 
