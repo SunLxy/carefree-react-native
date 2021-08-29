@@ -12,6 +12,9 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
     - uses: actions/setup-node@v2
       with:
         node-version: 14
@@ -26,6 +29,9 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         package-path: ./package.json
 
+    - run: echo "version - ${{ steps.create_tag.outputs.version }}"
+    - run: echo "successful - ${{ steps.create_tag.outputs.successful }}"
+
     - name: Generate changelog
       id: changelog
       uses: jaywcjlove/changelog-generator@v1.4.3
@@ -39,17 +45,19 @@ jobs:
     - name: Create Release
       uses: ncipollo/release-action@v1
       if: steps.create_tag.outputs.successful
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        release_name: ${{ steps.changelog.outputs.tag }}
-        tag_name: ${{ steps.changelog.outputs.tag }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        name: ${{ steps.changelog.outputs.tag }}
+        tag: ${{ steps.changelog.outputs.tag }}
         body: |
           ```bash
           npm i carefree-react-native@${{steps.changelog.outputs.version}}
+
           ```
           ${{ steps.changelog.outputs.compareurl }}
+
           ${{ steps.changelog.outputs.changelog }}
+
    
     - run: npm install @jsdevtools/npm-publish -g
     - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./package.json
