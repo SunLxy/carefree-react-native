@@ -9,6 +9,9 @@ env:
 
 jobs:
   build-deploy:
+    outputs:
+      created: ${{ steps.daily-version.outputs.created }}
+      version: ${{ steps.daily-version.outputs.version }}
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -26,10 +29,14 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           package-path: ./package.json
 
-      - run: npm i -g github-release-from-changelog
-      - run: github-release-from-changelog
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - uses: fregante/daily-version-action@v1
+        name: Create tag if necessary
+        id: daily-version
+      - uses: notlmn/release-with-changelog@v3
+        if: steps.daily-version.outputs.created
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          exclude: true
 
       # - name: Generate changelog
       #   id: changelog
