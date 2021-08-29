@@ -184,7 +184,7 @@ const Select: React.FC<SelectProps> = props => {
     placeholderTextColor = '#ccc',
     isClean = true,
     bordered = true,
-    cleanColor = '#1890ff',
+    cleanColor = 'rgba(197,197,197,0.7)',
     iconColor = '#1890ff',
     iconSize = 20,
     cleanSize = 14,

@@ -21,8 +21,9 @@ import Animated from './components/Animated'
 import RadioDemo from './components/Radio/demo'
 import CheckBox from './components/CheckBox/demo'
 import Select from './components/Select/demo'
-import ModalLay from './components/Modal'
+import ModalLay from './components/ModalLay'
 import Tree from './components/Tree/Demo'
+import FuzzySearch from './components/FuzzySearch/demo'
 
 // import Demo from "./Demo"
 // import Demo from "./components/Table/demo"
@@ -57,6 +58,13 @@ const App = () => {
           </Text>
           <Select />
         </View>
+        <View style={{ minHeight: 100 }}>
+          <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 10 }}>
+            模糊查询
+          </Text>
+          <FuzzySearch />
+        </View>
+
         <TouchableOpacity
           onPress={() => {
             setVisible(true)

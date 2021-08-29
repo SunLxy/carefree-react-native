@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef, useEffect } from 'react'
+import React, { useState, useMemo, useRef, useEffect, useCallback } from 'react'
 import {
   Modal,
   View,
@@ -76,7 +76,7 @@ const ModalLay: React.FC<ModalLayProps> = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode, fadeAnim])
 
-  const fadeOut = () => {
+  const fadeOut = useCallback(() => {
     if (onRequestClose) {
       Animated.timing(fadeAnim, {
         toValue: 0,
@@ -87,8 +87,8 @@ const ModalLay: React.FC<ModalLayProps> = props => {
         setShow(false)
       })
     }
-  }
-  const fadeIn = () => {
+  }, [fadeAnim, onRequestClose])
+  const fadeIn = useCallback(() => {
     setShow(true)
     Animated.sequence([
       Animated.delay(1),
@@ -98,7 +98,7 @@ const ModalLay: React.FC<ModalLayProps> = props => {
         useNativeDriver: false,
       }),
     ]).start()
-  }
+  }, [fadeAnim])
 
   const whiteRender = useMemo(() => {
     return (
@@ -157,8 +157,9 @@ const ModalLay: React.FC<ModalLayProps> = props => {
       <Modal
         animationType="none"
         visible={show}
-        onRequestClose={() => fadeOut()}
-        {...restProps}>
+        transparent
+        {...restProps}
+        onRequestClose={() => fadeOut()}>
         <View
           style={[
             { flex: 1, backgroundColor: 'rgba(0,0,0,0.3)' },
@@ -175,7 +176,7 @@ const ModalLay: React.FC<ModalLayProps> = props => {
                 transform: [getTransform],
               },
             ]}>
-            {props.children}
+            {show && props.children}
           </Animated.View>
           {['top', 'left'].includes(mode) && whiteRender}
         </View>
