@@ -274,17 +274,19 @@ const Select: React.FC<SelectProps> = props => {
           )}
         </View>
       </TouchableOpacity>
-      <ModalSelect
-        value={value}
-        multiple={multiple}
-        visible={visible}
-        options={options}
-        handleOk={handleOk}
-        handleCancel={() => setVisible(false)}
-        height={height}
-        checkOther={checkOther}
-        checkAlign={checkAlign}
-      />
+      {visible && (
+        <ModalSelect
+          value={value}
+          multiple={multiple}
+          visible={visible}
+          options={options}
+          handleOk={handleOk}
+          handleCancel={() => setVisible(false)}
+          height={height}
+          checkOther={checkOther}
+          checkAlign={checkAlign}
+        />
+      )}
     </React.Fragment>
   )
 }

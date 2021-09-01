@@ -179,6 +179,7 @@ const Item: React.FC<CheckBoxItemProps> = props => {
           )}
           <Text
             style={[
+              { color: '#000' },
               itemTextStyle,
               disabled ? { color: disabledFontColor } : {},
               check ? { color: checkFontColor } : {},

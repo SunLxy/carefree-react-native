@@ -24,6 +24,7 @@ import Select from './components/Select/demo'
 import ModalLay from './components/ModalLay'
 import Tree from './components/Tree/Demo'
 import FuzzySearch from './components/FuzzySearch/demo'
+import Card from './components/Card/demo'
 // import Demo from "./Demo"
 // import Demo from "./components/Table/demo"
 const App = () => {
@@ -63,6 +64,7 @@ const App = () => {
           </Text>
           <FuzzySearch />
         </View>
+        <Card />
 
         <TouchableOpacity
           onPress={() => {
