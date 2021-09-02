@@ -4,7 +4,6 @@ export default StyleSheet.create({
   warpStyle: {
     borderRadius: 5,
     minHeight: 30,
-    flex: 1,
     paddingBottom: 5,
     backgroundColor: 'white',
     marginHorizontal: 10,

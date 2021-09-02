@@ -1,7 +1,7 @@
 {
   "name": "carefree-react-native",
   "description": "练习 react native ,并尝试封装常用的组件",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "ISC",
