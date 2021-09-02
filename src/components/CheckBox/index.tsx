@@ -8,7 +8,7 @@ import {
   TextStyle,
 } from 'react-native'
 import { CheckBoxIcon, CheckMarkIcon } from './../Icons'
-export interface RadioOptionsProps {
+export interface CheckBoxOptionsProps {
   label: string | React.ReactNode | undefined
   value: string | number | undefined
   [k: string]: any
@@ -52,7 +52,7 @@ export interface CheckBoxItemProps {
 
 export interface CheckBoxProps {
   /** 选择数据 */
-  options?: Array<RadioOptionsProps>
+  options?: Array<CheckBoxOptionsProps>
   /** 选中颜色 */
   checkColor?: string
   /** 按钮时横向还是竖向 */
