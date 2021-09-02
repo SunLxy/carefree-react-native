@@ -1,7 +1,7 @@
 {
   "name": "carefree-react-native",
   "description": "练习 react native ,并尝试封装常用的组件",
-  "version": "0.0.24",
+  "version": "0.0.25",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "ISC",
@@ -17,13 +17,17 @@
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,json}'"
   },
   "dependencies": {
-    "@babel/runtime": "^7.12.5"
+    "@babel/runtime": "7.15.3"
+  },
+  "peerDependencies": {
+    "react": ">=16.9.0",
+    "react-native": ">=0.60.0"
   },
   "devDependencies": {
     "react": "17.0.1",
     "react-native": "0.64.1",
     "react-native-svg": "12.1.1",
-    "@babel/core": "^7.12.9",
+    "@babel/core": "7.15.0",
     "@react-native-community/eslint-config": "^2.0.0",
     "@types/jest": "^26.0.23",
     "@types/react-native": "^0.64.5",
