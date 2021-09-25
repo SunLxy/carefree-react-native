@@ -4,7 +4,7 @@
   "version": "0.0.27",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "license": "ISC",
+  "license": "MIT",
   "scripts": {
     "build": "tsc",
     "android": "react-native run-android",
