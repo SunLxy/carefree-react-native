@@ -25,6 +25,7 @@ import ModalLay from './components/ModalLay'
 import Tree from './components/Tree/Demo'
 import FuzzySearch from './components/FuzzySearch/demo'
 import Card from './components/Card/demo'
+import Form from './components/Form/demo'
 // import Demo from "./Demo"
 // import Demo from "./components/Table/demo"
 const App = () => {
@@ -76,6 +77,7 @@ const App = () => {
         <View style={{ paddingLeft: 20 }}>
           <Tree />
         </View>
+        <Form />
       </ScrollView>
     </SafeAreaView>
   )

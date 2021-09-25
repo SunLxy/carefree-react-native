@@ -1,0 +1,85 @@
+import React from 'react'
+import { View, Text, ViewStyle, TextStyle, StyleProp } from 'react-native'
+import { Field } from 'rc-field-form'
+import styles from './styles'
+import { InternalFieldProps } from 'rc-field-form/lib/Field'
+
+export interface FieldProps<Values = any>
+  extends Omit<InternalFieldProps<Values>, 'name' | 'fieldContext'> {
+  name?: string
+}
+export interface ItemProps extends FieldProps {
+  /** 布局 */
+  layout?: 'vertical' | 'horizontal'
+  /** 标签和输入框外层样式(不包含错误提示) */
+  itemStyle?: StyleProp<ViewStyle>
+  /** label 标签的文本	   */
+  label?: string | React.ReactNode
+  /**  标签的文本 View 样式   */
+  labelStyle?: StyleProp<ViewStyle>
+  /**  标签的文本  Text 样式   */
+  labelTextStyle?: StyleProp<TextStyle>
+  /** 输入框 外层 样式   */
+  style?: StyleProp<ViewStyle>
+  /** 是否有边框   */
+  bordered?: boolean
+  /** 错误提示 View 样式     */
+  errStyle?: StyleProp<ViewStyle>
+  /** 错误提示 Text 样式   */
+  errTextStyle?: StyleProp<TextStyle>
+}
+
+const CarefreeFormItem: React.FC<ItemProps> = props => {
+  const {
+    children,
+    layout = 'horizontal',
+    itemStyle,
+    style,
+    label,
+    labelStyle,
+    labelTextStyle,
+    bordered = true,
+    errStyle,
+    errTextStyle,
+    ...other
+  } = props
+
+  return (
+    <Field {...other}>
+      {(control, meta, form) => {
+        const childNode =
+          typeof children === 'function'
+            ? children(control, meta, form)
+            : React.cloneElement(children as React.ReactElement, {
+                ...control,
+              })
+        const errs = meta.errors.map(err => err)
+        return (
+          <React.Fragment>
+            <View style={[styles[layout], itemStyle]}>
+              <View style={[styles[`label${layout}`], labelStyle]}>
+                <Text style={[styles.itemLabelText, labelTextStyle]}>
+                  {label} :
+                </Text>
+              </View>
+              <View
+                style={[
+                  styles.itemInput,
+                  bordered && styles.itemInputBorder,
+                  style,
+                ]}>
+                {childNode}
+              </View>
+            </View>
+            <View style={[errStyle]}>
+              <Text style={[[styles.itemErrText, errTextStyle]]}>
+                {errs.join(',')}
+              </Text>
+            </View>
+          </React.Fragment>
+        )
+      }}
+    </Field>
+  )
+}
+export default CarefreeFormItem
