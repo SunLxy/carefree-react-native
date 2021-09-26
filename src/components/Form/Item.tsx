@@ -1,3 +1,7 @@
+/*
+ * @Description: 当前内容直接参照 https://github.com/react-component/field-form ，Item 为 Field 组件进行改造的
+ */
+
 import React from 'react'
 import { View, Text, ViewStyle, TextStyle, StyleProp } from 'react-native'
 import { Field } from 'rc-field-form'
