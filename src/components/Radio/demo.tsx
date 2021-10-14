@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import { SafeAreaView, View, Text } from 'react-native'
 import Radio from './'
 
+type ValueType = string | number | undefined
+
 const VirtualizedListExample = () => {
-  const [value1, setValue1] = useState<string | number | undefined>('')
-  const [value2, setValue2] = useState<string | number | undefined>('')
-  const [value3, setValue3] = useState<string | number | undefined>('')
+  const [value1, setValue1] = useState<ValueType | ValueType[]>('')
+  const [value2, setValue2] = useState<ValueType | ValueType[]>('')
+  const [value3, setValue3] = useState<ValueType | ValueType[]>('')
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Radio
@@ -37,7 +39,7 @@ const VirtualizedListExample = () => {
         onChange={value => {
           setValue2(value)
           // eslint-disable-next-line no-console
-          console.log(value)
+          console.log('value2-----', value)
         }}
         options={[
           { label: '哈哈1', value: '1' },

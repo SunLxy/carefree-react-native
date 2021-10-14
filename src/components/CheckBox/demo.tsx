@@ -17,7 +17,7 @@ const VirtualizedListExample = () => {
       <CheckBox
         onChange={value => {
           // eslint-disable-next-line no-console
-          console.log(value)
+          console.log('demo--->', value)
         }}
         options={[
           { label: '哈哈1', value: '1' },
