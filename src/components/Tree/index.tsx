@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import { getParentChildKey, getCheckedTrue, getCheckedFalse } from './utils'
-import ParentItem from './Item'
+import Item from './Item'
+import { TreeChildContext } from './useTree'
 export interface TreeProps {
   labelField?: string
   valueField?: string
@@ -115,21 +116,18 @@ const Tree: React.FC<TreeProps> = props => {
     }
   }
   return (
-    <React.Fragment>
+    <TreeChildContext.Provider
+      value={{
+        labelField: labelField,
+        valueField: valueField,
+        childrenField: childrenField,
+        onCheck: onCheck,
+        getCheckedSatus: getCheckedSatus,
+      }}>
       {treeData.map((item, key) => {
-        return (
-          <ParentItem
-            key={key}
-            Item={item}
-            labelField={labelField}
-            valueField={valueField}
-            childrenField={childrenField}
-            onCheck={onCheck}
-            getCheckedSatus={getCheckedSatus}
-          />
-        )
+        return <Item key={key} item={item} />
       })}
-    </React.Fragment>
+    </TreeChildContext.Provider>
   )
 }
 export default Tree

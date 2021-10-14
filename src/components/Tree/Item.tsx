@@ -1,20 +1,8 @@
 import React, { useState } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { HalfIcon, DownIcon, CheckBoxIcon, RightIcon } from './../Icons'
-
-export interface ParentItemProps {
-  Item: any
-  labelField: string
-  valueField: string
-  childrenField: string
-  onCheck: (...arg: any) => void
-  getCheckedSatus: (it: any) => number
-}
-interface CheckBoxHalfProps {
-  checked: number
-  onClick?: (...arg: any) => void
-}
-
+import { ItemProps, CheckBoxHalfProps, UpDownProps } from './interface'
+import { useTreeChild } from './useTree'
 const CheckBoxHalf: React.FC<CheckBoxHalfProps> = props => {
   const { checked } = props
   if (checked === 2) {
@@ -24,9 +12,7 @@ const CheckBoxHalf: React.FC<CheckBoxHalfProps> = props => {
   }
   return <CheckBoxIcon visible={false} />
 }
-interface UpDownProps {
-  visible: boolean
-}
+
 const UpDown: React.FC<UpDownProps> = props => {
   const { visible } = props
   if (visible) {
@@ -35,22 +21,18 @@ const UpDown: React.FC<UpDownProps> = props => {
   return <RightIcon color="#000" size={8} visible={true} />
 }
 
-const ParentItem: React.FC<ParentItemProps> = props => {
-  const {
-    Item,
-    labelField,
-    valueField,
-    childrenField,
-    onCheck,
-    getCheckedSatus,
-  } = props
+const Item: React.FC<ItemProps> = props => {
+  const { item } = props
+  const { labelField, valueField, childrenField, onCheck, getCheckedSatus } =
+    useTreeChild()
+
   const [visible, setVisible] = useState<boolean>(false)
   const _render = () => {
     const {
       [childrenField]: children,
       [labelField]: label,
       [valueField]: value,
-    } = Item
+    } = item
     const isChild = (Array.isArray(children) && children.length) || false
     return (
       <View>
@@ -72,25 +54,15 @@ const ParentItem: React.FC<ParentItemProps> = props => {
           )}
           <TouchableOpacity
             style={{ marginRight: 3 }}
-            onPress={onCheck.bind(this, Item)}>
+            onPress={onCheck.bind(this, item)}>
             <CheckBoxHalf checked={getCheckedSatus(value)} />
           </TouchableOpacity>
           <Text>{label}</Text>
         </View>
         {isChild && (
           <View style={{ paddingLeft: 23, display: visible ? 'flex' : 'none' }}>
-            {children.map((item: any, k: number) => {
-              return (
-                <ParentItem
-                  key={k}
-                  Item={item}
-                  labelField={labelField}
-                  valueField={valueField}
-                  childrenField={childrenField}
-                  onCheck={onCheck}
-                  getCheckedSatus={getCheckedSatus}
-                />
-              )
+            {children.map((ite: any, k: number) => {
+              return <Item key={k} item={ite} />
             })}
           </View>
         )}
@@ -101,4 +73,4 @@ const ParentItem: React.FC<ParentItemProps> = props => {
   return <React.Fragment>{_render()}</React.Fragment>
 }
 
-export default ParentItem
+export default Item
