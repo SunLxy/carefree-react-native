@@ -27,7 +27,10 @@ export default StyleSheet.create({
     fontWeight: '600',
   },
   itemErrText: {
-    fontSize: 10,
+    fontSize: 12,
     color: 'red',
+    textAlign: 'right',
+    marginTop: 3,
+    minHeight: 0,
   },
 })

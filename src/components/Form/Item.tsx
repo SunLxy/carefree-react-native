@@ -57,7 +57,7 @@ const CarefreeFormItem: React.FC<ItemProps> = props => {
             : React.cloneElement(children as React.ReactElement, {
                 ...control,
               })
-        const errs = meta.errors.map(err => err)
+        const errs = meta.errors.map(err => err).join(',')
         return (
           <React.Fragment>
             <View style={[styles[layout], itemStyle]}>
@@ -75,11 +75,13 @@ const CarefreeFormItem: React.FC<ItemProps> = props => {
                 {childNode}
               </View>
             </View>
-            <View style={[errStyle]}>
-              <Text style={[[styles.itemErrText, errTextStyle]]}>
-                {errs.join(',')}
-              </Text>
-            </View>
+            {errs.length ? (
+              <View style={[errStyle]}>
+                <Text style={[[styles.itemErrText, errTextStyle]]}>{errs}</Text>
+              </View>
+            ) : (
+              <React.Fragment />
+            )}
           </React.Fragment>
         )
       }}
