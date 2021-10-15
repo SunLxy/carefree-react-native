@@ -1,6 +1,6 @@
 ---
-title: Form表单
-order: 1
+title: Form
+order: 5
 ---
 
 > 参数与 antd form 表单参数一致, 使用 [rc-field-form](https://github.com/react-component/field-form) 进行处理  
@@ -10,7 +10,7 @@ order: 1
 ```js
 import React from 'react'
 import { View, TextInput, Text, TouchableOpacity } from 'react-native'
-import Form, { useForm } from 'carefree-react-native'
+import  { Form } from 'carefree-react-native'
 const { Item } = Form
 const ComInput = props => {
   const { value, onChange, ...other } = props
@@ -24,7 +24,7 @@ const ComInput = props => {
   )
 }
 export default () => {
-  const [form] = useForm()
+  const [form] = Form.useForm()
   const onFish = async () => {
     form
       .validateFields()
