@@ -61,7 +61,13 @@ buck-out/
 /ios/Pods/
 /ios/Podfile.lock
 
+# umi
+**/**/.umi
+**/**/.umi-production
 
 /lib
 /es
 /dist
+
+
+/website/src/*

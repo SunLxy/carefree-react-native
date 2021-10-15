@@ -50,6 +50,8 @@ export default StyleSheet.create({
     paddingRight: 10,
     flex: 1,
     fontSize: 14,
+    paddingTop: 0,
+    paddingBottom: 0,
   },
   searchBtn: {
     width: 25,
