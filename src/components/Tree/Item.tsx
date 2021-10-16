@@ -53,16 +53,15 @@ const Item: React.FC<ItemProps> = props => {
   const checked = getCheckedSatus(value)
 
   const [visible, setVisible] = useState<boolean>(false)
-  const deep = JSON.stringify({
+  const deepRight = JSON.stringify({
     checked,
     layout,
     isParentCheck,
     isChild,
     isReadOnly,
-    item,
   })
 
-  const leftBtn = React.useMemo(() => {
+  const leftBtn = () => {
     // 1. 父级不可选
     // 2. 只读
     // 3. layout === 'left'
@@ -76,8 +75,7 @@ const Item: React.FC<ItemProps> = props => {
         <CheckBoxHalf checked={checked} />
       </TouchableOpacity>
     )
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [deep])
+  }
 
   const rightBtn = React.useMemo(() => {
     if (isReadOnly || layout !== 'right' || (!isParentCheck && isChild)) {
@@ -89,7 +87,7 @@ const Item: React.FC<ItemProps> = props => {
       </View>
     )
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [deep])
+  }, [deepRight])
 
   const onPress = () => {
     // 父级不可选
@@ -114,7 +112,7 @@ const Item: React.FC<ItemProps> = props => {
             activeOpacity={1}
             style={styles.itemRowTouch}
             onPress={onPress}>
-            {leftBtn}
+            {leftBtn()}
             <View style={{ flex: 1 }}>
               <Text>{label}</Text>
             </View>
