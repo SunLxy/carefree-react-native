@@ -87,7 +87,7 @@ export default () => {
     <Tree
       onChange={selectAll => {
         // eslint-disable-next-line no-console
-        console.log('全选数据', selectAllKeys)
+        console.log('全选数据', selectAll, selectAllKeys)
         setSelectAllKeys(selectAll)
       }}
       treeData={initValueData}

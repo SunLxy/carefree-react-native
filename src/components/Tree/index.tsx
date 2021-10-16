@@ -38,7 +38,7 @@ const Tree: React.FC<TreeProps> = props => {
     isCancelParenthalf = false, // 子集取消选择，父级是否联动取消半选状态
     onChange = () => {},
     multiple = true,
-    isParentCheck = true,
+    isParentCheck = false,
     isReadOnly = false,
     layout = 'right',
     isRowClick = true,
@@ -122,7 +122,7 @@ const Tree: React.FC<TreeProps> = props => {
     }
 
     // isParentCheck 不进行父级选中
-    if (isParentCheck) {
+    if (!isParentCheck) {
       let saveList = initSelectKeys.selectAllKeys as ValueArrType
       if (check === 2) {
         saveList = saveList.filter(it => it !== value)

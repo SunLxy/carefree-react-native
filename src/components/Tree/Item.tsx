@@ -63,7 +63,7 @@ const Item: React.FC<ItemProps> = props => {
           }}>
           {isChild && (
             <TouchableOpacity
-              style={{ padding: 5, paddingLeft: 0 }}
+              style={{ padding: 5, paddingLeft: 0, width: 15 }}
               onPress={() => setVisible(e => !e)}>
               <UpDown visible={visible} />
             </TouchableOpacity>
@@ -92,9 +92,12 @@ const Item: React.FC<ItemProps> = props => {
             ) : (
               <React.Fragment />
             )}
-            <Text style={{ flex: 1 }}>{label}</Text>
+            <View style={{ flex: 1 }}>
+              <Text>{label}</Text>
+            </View>
             {layout === 'right' && !isReadOnly ? (
-              <View style={{ paddingRight: 10 }}>
+              <View
+                style={[{ paddingRight: 10 }, isChild && { marginRight: 15 }]}>
                 <CheckMarkIcon
                   visible={[1, 2].includes(getCheckedSatus(value))}
                 />
