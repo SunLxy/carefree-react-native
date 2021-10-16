@@ -40,7 +40,7 @@ const Tree: React.FC<TreeProps> = props => {
     multiple = true,
     isParentCheck = false,
     isReadOnly = false,
-    layout = 'right',
+    layout = 'left',
     isRowClick = true,
   } = props
   // 选中

@@ -17,6 +17,8 @@ export interface ItemProps extends FieldProps {
   layout?: 'vertical' | 'horizontal'
   /** 标签和输入框外层样式(不包含错误提示) */
   itemStyle?: StyleProp<ViewStyle>
+  /** 表单项外层样式 */
+  warpStyle?: StyleProp<ViewStyle>
   /** label 标签的文本	   */
   label?: string | React.ReactNode
   /**  标签的文本 View 样式   */
@@ -45,6 +47,7 @@ const CarefreeFormItem: React.FC<ItemProps> = props => {
     bordered = true,
     errStyle,
     errTextStyle,
+    warpStyle,
     ...other
   } = props
 
@@ -59,7 +62,7 @@ const CarefreeFormItem: React.FC<ItemProps> = props => {
               })
         const errs = meta.errors.map(err => err).join(',')
         return (
-          <React.Fragment>
+          <View style={[styles.itemWarp, warpStyle]}>
             <View style={[styles[layout], itemStyle]}>
               <View style={[styles[`label${layout}`], labelStyle]}>
                 <Text style={[styles.itemLabelText, labelTextStyle]}>
@@ -82,7 +85,7 @@ const CarefreeFormItem: React.FC<ItemProps> = props => {
             ) : (
               <React.Fragment />
             )}
-          </React.Fragment>
+          </View>
         )
       }}
     </Field>

@@ -4,6 +4,8 @@ import Item from './Item'
 import { CheckRadioContext } from './useContext'
 import { CheckRadioProps, ValueType, ItemProps } from './interface'
 
+export type { CheckRadioProps, ValueType, ItemProps }
+
 const CheckRadio: React.FC<CheckRadioProps> & { Item: React.FC<ItemProps> } =
   props => {
     const {

@@ -1,6 +1,23 @@
 import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
+  inputWarp: {
+    height: 35,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 8,
+  },
+  inputWarpBorder: {
+    borderWidth: 0.5,
+    borderColor: '#ccc',
+    marginHorizontal: 10,
+    borderRadius: 5,
+  },
+  clear: {
+    height: '100%',
+    justifyContent: 'center',
+    paddingHorizontal: 3,
+  },
   modal: {
     flex: 1,
     justifyContent: 'center',

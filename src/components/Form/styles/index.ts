@@ -1,7 +1,9 @@
 import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
-  itemWarp: {},
+  itemWarp: {
+    marginVertical: 3,
+  },
   horizontal: {
     flexDirection: 'row',
     alignItems: 'center',
