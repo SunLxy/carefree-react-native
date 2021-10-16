@@ -1,6 +1,12 @@
 import React, { useState } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
-import { HalfIcon, DownIcon, CheckBoxIcon, RightIcon } from './../Icons'
+import {
+  HalfIcon,
+  DownIcon,
+  CheckBoxIcon,
+  RightIcon,
+  CheckMarkIcon,
+} from './../Icons'
 import { ItemProps, CheckBoxHalfProps, UpDownProps } from './interface'
 import { useTreeChild } from './useTree'
 const CheckBoxHalf: React.FC<CheckBoxHalfProps> = props => {
@@ -23,10 +29,20 @@ const UpDown: React.FC<UpDownProps> = props => {
 
 const Item: React.FC<ItemProps> = props => {
   const { item } = props
-  const { labelField, valueField, childrenField, onCheck, getCheckedSatus } =
-    useTreeChild()
+  const {
+    labelField,
+    valueField,
+    childrenField,
+    onCheck,
+    getCheckedSatus,
+    isParentCheck,
+    isReadOnly,
+    layout,
+    isRowClick,
+  } = useTreeChild()
 
   const [visible, setVisible] = useState<boolean>(false)
+
   const _render = () => {
     const {
       [childrenField]: children,
@@ -53,14 +69,43 @@ const Item: React.FC<ItemProps> = props => {
             </TouchableOpacity>
           )}
           <TouchableOpacity
-            style={{ marginRight: 3 }}
-            onPress={onCheck.bind(this, item)}>
-            <CheckBoxHalf checked={getCheckedSatus(value)} />
+            activeOpacity={1}
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'flex-start',
+            }}
+            onPress={() => {
+              if (isRowClick && !(isParentCheck && isChild) && !isReadOnly) {
+                onCheck(item)
+              }
+            }}>
+            {!(isParentCheck && isChild) && !isReadOnly && layout === 'left' ? (
+              <TouchableOpacity
+                style={{ marginRight: 3 }}
+                onPress={() => {
+                  if (!isRowClick) {
+                    onCheck(item)
+                  }
+                }}>
+                <CheckBoxHalf checked={getCheckedSatus(value)} />
+              </TouchableOpacity>
+            ) : (
+              <React.Fragment />
+            )}
+            <Text style={{ flex: 1 }}>{label}</Text>
+            {layout === 'right' && !isReadOnly ? (
+              <View style={{ paddingRight: 10 }}>
+                <CheckMarkIcon
+                  visible={[1, 2].includes(getCheckedSatus(value))}
+                />
+              </View>
+            ) : (
+              <React.Fragment />
+            )}
           </TouchableOpacity>
-          <Text>{label}</Text>
         </View>
-        {isChild && (
-          <View style={{ paddingLeft: 23, display: visible ? 'flex' : 'none' }}>
+        {isChild && visible && (
+          <View style={{ paddingLeft: 23 }}>
             {children.map((ite: any, k: number) => {
               return <Item key={k} item={ite} />
             })}

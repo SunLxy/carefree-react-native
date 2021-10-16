@@ -82,7 +82,7 @@ const initValueData = [
   },
 ]
 export default () => {
-  const [selectAllKeys, setSelectAllKeys] = useState([])
+  const [selectAllKeys, setSelectAllKeys] = useState<any>([])
   return (
     <Tree
       onChange={selectAll => {
