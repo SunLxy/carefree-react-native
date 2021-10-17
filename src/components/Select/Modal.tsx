@@ -2,15 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { TouchableOpacity, Text, View, Modal, ScrollView } from 'react-native'
 import CheckRadio, { CheckRadioProps } from '../CheckRadio'
 import styles from './styles'
-import { CheckOptionsProps } from '.'
-export interface OptionsProps {
-  label: number | string
-  value: number | string
-}
+import { OptionsProps } from '.'
 
 export interface ModalSelectProps {
   visible: boolean
-  options: Array<CheckOptionsProps>
+  options: Array<OptionsProps>
   // onChange: (v: string | number | undefined, t: any) => void;
   /** 是否多选 */
   multiple: boolean

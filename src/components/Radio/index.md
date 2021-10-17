@@ -3,6 +3,11 @@ title: Radio
 order: 9
 ---
 
+### 参数
+
+> 去除 `multiple` 其他参数与 `CheckRadio` 组件传递参数一致
+
+
 ### demo
 
 ```js

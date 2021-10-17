@@ -7,28 +7,42 @@ import {
   Text,
   ListRenderItemInfo,
   ViewStyle,
+  StyleProp,
 } from 'react-native'
 import styles from './styles'
 
 export interface TableItemProps {
-  title: string | React.ReactNode;
-  dataIndex: string;
-  width: number;
-  algin?: 'left' | 'center' | 'right';
-  style?: ViewStyle;
-  render?: (text: any, record: any, index: number) => React.ReactNode;
+  /** 标题 */
+  title: string | React.ReactNode
+  /** 展示字段 */
+  dataIndex: string
+  /** 宽度 */
+  width: number
+  /** 内容展示位置 */
+  algin?: 'left' | 'center' | 'right'
+  /** 内容样式 */
+  style?: StyleProp<ViewStyle>
+  /**自己写渲染 */
+  render?: (text: any, record: any, index: number) => React.ReactNode
 }
 // data, renderItem
 
 export interface TableProps
   extends Omit<FlatListProps<any>, 'data' | 'renderItem'> {
-  dataSource: Array<any>;
-  columns: Array<TableItemProps>;
-  rowKey: string | Function;
-  borderColor?: string;
-  borderWidth?: number;
-  itemStyle?: ViewStyle;
-  titleStyle?: ViewStyle;
+  /**展示数据  */
+  dataSource: Array<any>
+  /** 表头 */
+  columns: Array<TableItemProps>
+  /** 主键 */
+  rowKey: string | Function
+  /** 边框颜色 */
+  borderColor?: string
+  /** 边框宽度 */
+  borderWidth?: number
+  /** 没一项 样式*/
+  itemStyle?: StyleProp<ViewStyle>
+  /** 表头样式 */
+  titleStyle?: StyleProp<ViewStyle>
 }
 
 const getTitle = (item: any) => {

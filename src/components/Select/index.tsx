@@ -12,8 +12,9 @@ import { XIcon, UpIcon, DownIcon } from './../Icons'
 import ModalSelect from './Modal'
 import styles from './styles'
 export interface OptionsProps {
-  label: number | string
-  value: number | string
+  label: string | React.ReactNode | undefined | number
+  value: string | number | undefined
+  [k: string]: any
 }
 
 export interface SelectProps {
@@ -54,12 +55,6 @@ export interface SelectProps {
   checkAlign?: 'left' | 'right'
   /** 其他 选项配置 */
   checkOther?: Omit<CheckRadioProps, 'multiple'>
-}
-
-export interface CheckOptionsProps {
-  label: string | React.ReactNode | undefined
-  value: string | number | undefined
-  [k: string]: any
 }
 
 const Select: React.FC<SelectProps> = props => {

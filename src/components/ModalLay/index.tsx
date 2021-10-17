@@ -12,11 +12,17 @@ import {
 import styles from './styles'
 
 export interface ModalLayProps extends ModalProps {
+  /** 宽度 */
   modalWidth?: number | string
+  /** 高度 */
   modalHeight?: number | string
+  /** 展示位置 */
   mode?: 'bottom' | 'top' | 'right' | 'left'
+  /** 内容区域样式 */
   bodyStyle?: StyleProp<ViewStyle>
+  /** 展示 隐藏 */
   visible?: boolean
+  /** 关闭 */
   onRequestClose?: () => void
 }
 
