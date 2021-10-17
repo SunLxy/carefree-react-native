@@ -3,6 +3,8 @@ title: Radio
 order: 9
 ---
 
+## 单选
+
 ### 参数
 
 > 去除 `multiple` 其他参数与 [CheckRadio](/components/check-radio) 组件传递参数一致

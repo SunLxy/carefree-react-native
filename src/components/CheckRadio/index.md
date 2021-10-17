@@ -3,6 +3,8 @@ title: CheckRadio
 order: 4
 ---
 
+## 单选 多选 公共组件
+
 > 当前这个组件封装用于 `CheckBox` 和 `Radio` 公共部分
 
 ### 参数

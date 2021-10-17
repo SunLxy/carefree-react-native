@@ -3,6 +3,8 @@ title: FuzzySearch
 order: 6
 ---
 
+## 模糊查询
+
 ### 参数
 
 ```ts 
