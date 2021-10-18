@@ -1,7 +1,6 @@
 import React from 'react'
 import { View, TextInput, Text, TouchableOpacity } from 'react-native'
 import Form, { useForm } from '.'
-import Item from './Item'
 const ComInput = props => {
   const { value, onChange, ...other } = props
   return (
@@ -30,12 +29,12 @@ export default () => {
   return (
     <View style={{ marginVertical: 20, marginHorizontal: 20 }}>
       <Form form={form}>
-        <Item
+        <Form.Item
           name="names"
           rules={[{ required: true, message: '请输入' }]}
           label="测试输入框">
           <ComInput placeholder="请输入" />
-        </Item>
+        </Form.Item>
       </Form>
       <TouchableOpacity onPress={onFish}>
         <Text>测试</Text>

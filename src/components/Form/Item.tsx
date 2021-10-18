@@ -7,44 +7,54 @@ import { View, Text, ViewStyle, TextStyle, StyleProp } from 'react-native'
 import { Field } from 'rc-field-form'
 import styles from './styles'
 import { InternalFieldProps } from 'rc-field-form/lib/Field'
+import { useFormContext } from './hooks'
 
 export interface FieldProps<Values = any>
   extends Omit<InternalFieldProps<Values>, 'name' | 'fieldContext'> {
   name?: string
 }
-export interface ItemProps extends FieldProps {
-  /** 布局 */
-  layout?: 'vertical' | 'horizontal'
+
+export interface ItemWarpProps {
   /** 标签和输入框外层样式(不包含错误提示) */
   itemStyle?: StyleProp<ViewStyle>
   /** 表单项外层样式 */
   warpStyle?: StyleProp<ViewStyle>
-  /** label 标签的文本	   */
-  label?: string | React.ReactNode
   /**  标签的文本 View 样式   */
   labelStyle?: StyleProp<ViewStyle>
   /**  标签的文本  Text 样式   */
   labelTextStyle?: StyleProp<TextStyle>
-  /** 输入框 外层 样式   */
-  style?: StyleProp<ViewStyle>
-  /** 是否有边框   */
-  bordered?: boolean
   /** 错误提示 View 样式     */
   errStyle?: StyleProp<ViewStyle>
   /** 错误提示 Text 样式   */
   errTextStyle?: StyleProp<TextStyle>
+  /** 输入框 外层 样式   */
+  style?: StyleProp<ViewStyle>
+}
+
+export interface ItemProps extends FieldProps, ItemWarpProps {
+  /** label 标签的文本	   */
+  label?: string | React.ReactNode
 }
 
 const CarefreeFormItem: React.FC<ItemProps> = props => {
   const {
-    children,
     layout = 'horizontal',
+    inputStyle: styleW,
+    itemStyle: itemW,
+    labelStyle: labelW,
+    labelTextStyle: labelTextW,
+    bordered,
+    errStyle: errW,
+    errTextStyle: errTextW,
+    warpStyle: warpW,
+  } = useFormContext()
+  const {
+    children,
     itemStyle,
     style,
     label,
     labelStyle,
     labelTextStyle,
-    bordered = true,
     errStyle,
     errTextStyle,
     warpStyle,
@@ -62,10 +72,11 @@ const CarefreeFormItem: React.FC<ItemProps> = props => {
               })
         const errs = meta.errors.map(err => err).join(',')
         return (
-          <View style={[styles.itemWarp, warpStyle]}>
-            <View style={[styles[layout], itemStyle]}>
-              <View style={[styles[`label${layout}`], labelStyle]}>
-                <Text style={[styles.itemLabelText, labelTextStyle]}>
+          <View style={[styles.itemWarp, warpW, warpStyle]}>
+            <View style={[styles[layout], itemW, itemStyle]}>
+              <View style={[styles[`label${layout}`], labelW, labelStyle]}>
+                <Text
+                  style={[styles.itemLabelText, labelTextW, labelTextStyle]}>
                   {label} :
                 </Text>
               </View>
@@ -73,14 +84,17 @@ const CarefreeFormItem: React.FC<ItemProps> = props => {
                 style={[
                   styles.itemInput,
                   bordered && styles.itemInputBorder,
+                  styleW,
                   style,
                 ]}>
                 {childNode}
               </View>
             </View>
             {errs.length ? (
-              <View style={[errStyle]}>
-                <Text style={[[styles.itemErrText, errTextStyle]]}>{errs}</Text>
+              <View style={[errW, errStyle]}>
+                <Text style={[[styles.itemErrText, errTextW, errTextStyle]]}>
+                  {errs}
+                </Text>
               </View>
             ) : (
               <React.Fragment />

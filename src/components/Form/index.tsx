@@ -10,31 +10,68 @@ import Form, {
   FormProvider,
   List,
 } from 'rc-field-form'
-import Item from './Item'
+import Item, { ItemWarpProps } from './Item'
+import { FormContext } from './hooks'
 
-const InitForm: React.ForwardRefRenderFunction<FormInstance, FormProps> = (
-  props,
-  ref,
-) => {
-  const { children, ...other } = props
+export interface CarefreeFormProps
+  extends FormProps,
+    Omit<ItemWarpProps, 'style'> {
+  /** 布局 */
+  layout?: 'vertical' | 'horizontal'
+  /** 输入框外层样式 */
+  inputStyle?: ItemWarpProps['style']
+  /** 是否有边框   */
+  bordered?: boolean
+}
+
+const InitForm: React.ForwardRefRenderFunction<
+  FormInstance,
+  CarefreeFormProps
+> = (props, ref) => {
+  const {
+    children,
+    layout = 'horizontal',
+    inputStyle,
+    itemStyle,
+    labelStyle,
+    labelTextStyle,
+    bordered = true,
+    errStyle,
+    errTextStyle,
+    warpStyle,
+    ...other
+  } = props
   return (
-    <Form {...other} ref={ref} component={false}>
-      {children}
-    </Form>
+    <FormContext.Provider
+      value={{
+        layout,
+        inputStyle,
+        itemStyle,
+        labelStyle,
+        labelTextStyle,
+        bordered,
+        errStyle,
+        errTextStyle,
+        warpStyle,
+      }}>
+      <Form {...other} ref={ref} component={false}>
+        {children}
+      </Form>
+    </FormContext.Provider>
   )
 }
 
-const InternalForm = React.forwardRef<FormInstance, FormProps>(InitForm) as <
-  Values = any,
->(
-  props: React.PropsWithChildren<FormProps<Values>> & {
+const InternalForm = React.forwardRef<FormInstance, CarefreeFormProps>(
+  InitForm,
+) as <Values = any>(
+  props: React.PropsWithChildren<CarefreeFormProps> & {
     ref?: React.Ref<FormInstance<Values>>
   },
 ) => React.ReactElement
 
-export type CarefreeFormProps = typeof InternalForm
+export type RCFormProps = typeof InternalForm
 
-interface RefForm extends CarefreeFormProps {
+interface RefForm extends RCFormProps {
   Item: typeof Item
   useForm: typeof useForm
   FormProvider: typeof FormProvider
