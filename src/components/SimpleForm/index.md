@@ -112,10 +112,10 @@ export default () => (
 
 ## antd 使用表单
 
-```tsx
+```js
 import React from 'react';
 import { SimpleForm } from 'carefree-react-native';
-import {TextInput } from "react-native
+import {TextInput } from "react-native"
 
 export default () => (
   <SimpleForm layout="vertical" isSearch={true} displayPre={1}>
