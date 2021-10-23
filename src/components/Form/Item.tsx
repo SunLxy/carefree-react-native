@@ -7,7 +7,9 @@ import { View, Text, ViewStyle, TextStyle, StyleProp } from 'react-native'
 import { Field } from 'rc-field-form'
 import styles from './styles'
 import { InternalFieldProps } from 'rc-field-form/lib/Field'
-import { useFormContext } from './hooks'
+import { useFormContext, useFormWatchList } from './hooks'
+
+import { toArray, getFieldId } from './utils'
 
 export interface FieldProps<Values = any>
   extends Omit<InternalFieldProps<Values>, 'name' | 'fieldContext'> {
@@ -47,6 +49,8 @@ const CarefreeFormItem: React.FC<ItemProps> = props => {
     errStyle: errW,
     errTextStyle: errTextW,
     warpStyle: warpW,
+    name: formName,
+    colon,
   } = useFormContext()
   const {
     children,
@@ -58,51 +62,68 @@ const CarefreeFormItem: React.FC<ItemProps> = props => {
     errStyle,
     errTextStyle,
     warpStyle,
+    name,
     ...other
   } = props
 
+  const colonRender = React.useMemo(() => {
+    if (colon && layout === 'horizontal') {
+      return ':'
+    }
+    return <React.Fragment />
+  }, [colon, layout])
+
   return (
-    <Field {...other}>
+    <Field {...other} name={name}>
       {(control, meta, form) => {
+        const mergedName = toArray(name).length && meta ? meta.name : []
+        const fieldId = getFieldId(mergedName, formName)
         const childNode =
           typeof children === 'function'
-            ? children(control, meta, form)
+            ? children({ ...control, id: fieldId }, meta, form)
             : React.cloneElement(children as React.ReactElement, {
                 ...control,
               })
         const errs = meta.errors.map(err => err).join(',')
         return (
-          <View style={[styles.itemWarp, warpW, warpStyle]}>
-            <View style={[styles[layout], itemW, itemStyle]}>
-              <View style={[styles[`label${layout}`], labelW, labelStyle]}>
-                <Text
-                  style={[styles.itemLabelText, labelTextW, labelTextStyle]}>
-                  {label} :
-                </Text>
+          <WatchItem id={fieldId} {...control}>
+            <View style={[styles.itemWarp, warpW, warpStyle]}>
+              <View style={[styles[layout], itemW, itemStyle]}>
+                <View style={[styles[`label${layout}`], labelW, labelStyle]}>
+                  <Text
+                    style={[styles.itemLabelText, labelTextW, labelTextStyle]}>
+                    {label} {colonRender}
+                  </Text>
+                </View>
+                <View
+                  style={[
+                    styles.itemInput,
+                    bordered && styles.itemInputBorder,
+                    styleW,
+                    style,
+                  ]}>
+                  {childNode}
+                </View>
               </View>
-              <View
-                style={[
-                  styles.itemInput,
-                  bordered && styles.itemInputBorder,
-                  styleW,
-                  style,
-                ]}>
-                {childNode}
-              </View>
+              {errs.length ? (
+                <View style={[errW, errStyle]}>
+                  <Text style={[[styles.itemErrText, errTextW, errTextStyle]]}>
+                    {errs}
+                  </Text>
+                </View>
+              ) : (
+                <React.Fragment />
+              )}
             </View>
-            {errs.length ? (
-              <View style={[errW, errStyle]}>
-                <Text style={[[styles.itemErrText, errTextW, errTextStyle]]}>
-                  {errs}
-                </Text>
-              </View>
-            ) : (
-              <React.Fragment />
-            )}
-          </View>
+          </WatchItem>
         )
       }}
     </Field>
   )
 }
 export default CarefreeFormItem
+
+export const WatchItem = (props: any) => {
+  useFormWatchList(props)
+  return props.children
+}

@@ -12,6 +12,28 @@ order: 5
 
 ```ts 
 
+export interface WatchListProps {
+  [x: string]: (value: any,
+    formValue?: any,
+    child?: GetItemFunType,
+    hideContext?: any,) => void
+}
+
+export interface CarefreeFormProps
+  extends FormProps,
+  Omit<ItemWarpProps, 'style'> {
+  /** 布局 */
+  layout?: 'vertical' | 'horizontal'
+  /** 输入框外层样式 */
+  inputStyle?: ItemWarpProps['style']
+  /** 是否有边框   */
+  bordered?: boolean;
+  /** 字段监听 用于数据联动处理 */
+  watchList?: WatchListProps;
+  /** 是否显示冒号 */ 
+  colon?: boolean
+}
+
 // 表单每一项 自己定义的参数 其他的继承  rc-field-form 的 Field组件参数
 export interface ItemProps extends FieldProps {
   /** 布局 */
@@ -75,9 +97,16 @@ export default () => {
   }
   // const usernameError = form.getFieldError('username');
 
+  const watchList = {
+    "names": (value) => {
+      // eslint-disable-next-line no-console
+      console.log("监听值---", value)
+    }
+  }
+
   return (
     <View style={{ marginVertical: 20, marginHorizontal: 20 }}>
-      <Form form={form}>
+      <Form form={form}  watchList={watchList}>
         <Item
           name="names"
           rules={[{ required: true, message: '请输入' }]}

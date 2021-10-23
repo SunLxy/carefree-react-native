@@ -13,6 +13,17 @@ import Form, {
 import Item, { ItemWarpProps } from './Item'
 import { FormContext } from './hooks'
 
+import { GetItemFunType } from './utils'
+
+export interface WatchListProps {
+  [x: string]: (
+    value: any,
+    formValue?: any,
+    child?: GetItemFunType,
+    hideContext?: any,
+  ) => void
+}
+
 export interface CarefreeFormProps
   extends FormProps,
     Omit<ItemWarpProps, 'style'> {
@@ -22,6 +33,10 @@ export interface CarefreeFormProps
   inputStyle?: ItemWarpProps['style']
   /** 是否有边框   */
   bordered?: boolean
+  /** 字段监听 用于数据联动处理 */
+  watchList?: WatchListProps
+  /** 是否显示冒号 */
+  colon?: boolean
 }
 
 const InitForm: React.ForwardRefRenderFunction<
@@ -39,8 +54,25 @@ const InitForm: React.ForwardRefRenderFunction<
     errStyle,
     errTextStyle,
     warpStyle,
+    watchList,
+    form,
+    name,
+    colon = true,
     ...other
   } = props
+
+  const [forms] = Form.useForm(form)
+
+  const [firstMont, setFirstMont] = React.useState(false)
+
+  React.useEffect(() => {
+    let timer
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      setFirstMont(true)
+    }, 300)
+  }, [])
+
   return (
     <FormContext.Provider
       value={{
@@ -53,8 +85,13 @@ const InitForm: React.ForwardRefRenderFunction<
         errStyle,
         errTextStyle,
         warpStyle,
+        watchList: watchList || {},
+        form: forms,
+        firstMont: firstMont,
+        name,
+        colon,
       }}>
-      <Form {...other} ref={ref} component={false}>
+      <Form name={name} {...other} ref={ref} component={false}>
         {children}
       </Form>
     </FormContext.Provider>

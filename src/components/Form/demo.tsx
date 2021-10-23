@@ -24,11 +24,17 @@ export default () => {
       // eslint-disable-next-line no-console
       .catch(e => console.log(e))
   }
-  // const usernameError = form.getFieldError('username');
+
+  const watchList = {
+    names: value => {
+      // eslint-disable-next-line no-console
+      console.log('监听值---', value)
+    },
+  }
 
   return (
     <View style={{ marginVertical: 20, marginHorizontal: 20 }}>
-      <Form form={form}>
+      <Form form={form} watchList={watchList}>
         <Form.Item
           name="names"
           rules={[{ required: true, message: '请输入' }]}
