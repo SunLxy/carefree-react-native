@@ -1,12 +1,5 @@
 ---
 title: SimpleForm
-order: 2
-nav:
-  order: 3
-  title: SimpleForm
-  path: /form
-group:
-  path: /
 ---
 
 > `SimpleForm`组件表单属性继承 [Form](/components/form) 表单属性
