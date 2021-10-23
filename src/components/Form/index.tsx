@@ -91,7 +91,7 @@ const InitForm: React.ForwardRefRenderFunction<
         name,
         colon,
       }}>
-      <Form name={name} {...other} ref={ref} component={false}>
+      <Form name={name} form={forms} {...other} ref={ref} component={false}>
         {children}
       </Form>
     </FormContext.Provider>

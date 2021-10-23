@@ -19,10 +19,10 @@ export default () => {
       .validateFields()
       .then(values => {
         // eslint-disable-next-line no-console
-        console.log(values)
+        console.log('保存', values)
       }) // Do nothing about submit catch
       // eslint-disable-next-line no-console
-      .catch(e => console.log(e))
+      .catch(e => console.log('err', e))
   }
 
   const watchList = {
