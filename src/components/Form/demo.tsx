@@ -25,16 +25,9 @@ export default () => {
       .catch(e => console.log('err', e))
   }
 
-  const watchList = {
-    names: value => {
-      // eslint-disable-next-line no-console
-      console.log('监听值---', value)
-    },
-  }
-
   return (
     <View style={{ marginVertical: 20, marginHorizontal: 20 }}>
-      <Form form={form} watchList={watchList}>
+      <Form form={form}>
         <Form.Item
           name="names"
           rules={[{ required: true, message: '请输入' }]}
