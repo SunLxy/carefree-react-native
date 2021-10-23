@@ -9,7 +9,6 @@ import {
 } from './hooks'
 import { ItemWatch, itemRender } from './Item'
 
-import './index.css'
 import { FormInstance } from 'rc-field-form/lib/interface'
 import {
   ItemChildType,

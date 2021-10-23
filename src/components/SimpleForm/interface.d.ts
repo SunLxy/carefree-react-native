@@ -39,7 +39,7 @@ export interface SimpleFormConfigProps {
     /** 用于当前的Item项是否用于监听，(前提是watchList设置了) */ watch?: boolean
   }
   /** 组件参数 */
-  attr: Partial<ItemChildAttr>
+  attr?: Partial<ItemChildAttr>
   /** formItem 表单 规则*/
   rules?: Rule[]
   render?: React.ReactNode | ((...arg: any) => React.ReactNode)

@@ -3,15 +3,23 @@
  */
 
 import React from 'react'
-import { View, Text, ViewStyle, TextStyle, StyleProp } from 'react-native'
+import {
+  View,
+  Text,
+  ViewStyle,
+  TextStyle,
+  StyleProp,
+  TextInputChangeEventData,
+  NativeSyntheticEvent,
+} from 'react-native'
 import { Field } from 'rc-field-form'
 import styles from './styles'
 import { InternalFieldProps } from 'rc-field-form/lib/Field'
 import { useFormContext } from './hooks'
-
+import { toArray, getFieldId } from './util'
 export interface FieldProps<Values = any>
   extends Omit<InternalFieldProps<Values>, 'name' | 'fieldContext'> {
-  name?: string
+  name?: string | number | (string | number)[]
 }
 
 export interface ItemWarpProps {
@@ -47,6 +55,7 @@ const CarefreeFormItem: React.FC<ItemProps> = props => {
     errStyle: errW,
     errTextStyle: errTextW,
     warpStyle: warpW,
+    name: formName,
     colon,
   } = useFormContext()
   const {
@@ -72,11 +81,25 @@ const CarefreeFormItem: React.FC<ItemProps> = props => {
   return (
     <Field {...other}>
       {(control, meta, form) => {
+        const mergedName = toArray(props.name).length && meta ? meta.name : []
+        const fieldId = getFieldId(mergedName, formName)
+
+        const onChange = (
+          target: NativeSyntheticEvent<TextInputChangeEventData> | any,
+        ) => {
+          let value = target
+          if (target && target.nativeEvent) {
+            value = target.nativeEvent.text
+          }
+          control.onChange(value)
+        }
         const childNode =
           typeof children === 'function'
-            ? children({ ...control }, meta, form)
+            ? children({ ...control, id: fieldId }, meta, form)
             : React.cloneElement(children as React.ReactElement, {
                 ...control,
+                onChange: onChange,
+                id: fieldId,
               })
         const errs = meta.errors.map(err => err).join(',')
         return (

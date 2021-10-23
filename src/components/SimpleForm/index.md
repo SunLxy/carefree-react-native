@@ -119,7 +119,6 @@ import {TextInput } from "react-native"
 
 export default () => (
   <SimpleForm layout="vertical" isSearch={true} displayPre={1}>
-    <Col span={6}>
       <SimpleForm.Item
         label="测试antd"
         name="names"
@@ -127,17 +126,12 @@ export default () => (
       >
         <TextInput />
       </SimpleForm.Item>
-    </Col>
-    <Col span={6}>
       <SimpleForm.Item label="测试3" name="names3" style={{ marginBottom: 5 }}>
         <TextInput />
       </SimpleForm.Item>
-    </Col>
-    <Col span={6}>
       <SimpleForm.Item label="测试4" name="names4" style={{ marginBottom: 5 }}>
         <TextInput />
       </SimpleForm.Item>
-    </Col>
   </SimpleForm>
 );
 ```

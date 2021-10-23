@@ -44,17 +44,21 @@ export const itemRender = (
   },
 ) => {
   return config.map((item, index) => {
-    const { type, label, itemAttr, attr, rules, render } = item
+    const { type, label, itemAttr, attr = {}, rules, render, name } = item
     const { watch = true, ...rest } = itemAttr || {}
 
     let renderItem
 
     if (type === 'Input') {
       const attrs = attr as TextInputProps
-      renderItem = <TextInput {...attrs} />
+      renderItem = (
+        <TextInput {...attrs} style={[{ padding: 0 }, (attrs || {}).style]} />
+      )
     } else if (type === 'InputNumber') {
       const attrs = attr as TextInputProps
-      renderItem = <TextInput {...attrs} />
+      renderItem = (
+        <TextInput {...attrs} style={[{ padding: 0 }, (attrs || {}).style]} />
+      )
     } else if (type === 'Select') {
       const attrs = attr as SelectProps
       renderItem = <Select {...attrs} />
@@ -68,11 +72,16 @@ export const itemRender = (
       renderItem = render
     }
 
-    if (watchList && Object.keys(watchList).length && watch) {
+    if (
+      watchList &&
+      Object.keys(watchList).length &&
+      watch &&
+      watchList[name as string]
+    ) {
       renderItem = <Warp>{renderItem}</Warp>
     }
     return (
-      <Form.Item key={index} {...rest} label={label} rules={rules}>
+      <Form.Item key={index} name={name} {...rest} label={label} rules={rules}>
         {renderItem}
       </Form.Item>
     )

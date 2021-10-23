@@ -42,6 +42,7 @@ const InitForm: React.ForwardRefRenderFunction<
     errTextStyle,
     warpStyle,
     colon = true,
+    name,
     ...other
   } = props
 
@@ -58,8 +59,9 @@ const InitForm: React.ForwardRefRenderFunction<
         errTextStyle,
         warpStyle,
         colon,
+        name,
       }}>
-      <Form {...other} ref={ref} component={false}>
+      <Form {...other} name={name} ref={ref} component={false}>
         {children}
       </Form>
     </FormContext.Provider>
