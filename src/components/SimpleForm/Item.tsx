@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { TextInput, TextInputProps } from 'react-native'
+import Input, { InputProps } from './../Input'
+
 import Select, { SelectProps } from './../Select'
 
 import { SimpleFormConfigProps } from '.'
@@ -49,16 +50,9 @@ export const itemRender = (
 
     let renderItem
 
-    if (type === 'Input') {
-      const attrs = attr as TextInputProps
-      renderItem = (
-        <TextInput {...attrs} style={[{ padding: 0 }, (attrs || {}).style]} />
-      )
-    } else if (type === 'InputNumber') {
-      const attrs = attr as TextInputProps
-      renderItem = (
-        <TextInput {...attrs} style={[{ padding: 0 }, (attrs || {}).style]} />
-      )
+    if (type === 'Input' || type === 'InputNumber') {
+      const attrs = attr as InputProps
+      renderItem = <Input {...attrs} />
     } else if (type === 'Select') {
       const attrs = attr as SelectProps
       renderItem = <Select {...attrs} />

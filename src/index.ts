@@ -9,6 +9,8 @@ export {
 } from './components/Icons'
 export { default as CheckBox } from './components/CheckBox'
 export * from './components/CheckBox'
+export { default as Input } from './components/Input'
+export * from './components/Input'
 export { default as Radio } from './components/Radio'
 export * from './components/Radio'
 export { default as Select } from './components/Select'
