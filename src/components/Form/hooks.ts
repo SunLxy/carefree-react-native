@@ -2,7 +2,7 @@ import React from 'react'
 import { ItemWarpProps } from './Item'
 export interface FormContextProps extends Omit<ItemWarpProps, 'style'> {
   /** 布局 */
-  layout?: 'vertical' | 'horizontal'
+  layout?: 'vertical' | 'horizontal' | 'space'
   /** 输入框外层样式 */
   inputStyle?: ItemWarpProps['style']
   /** 是否有边框   */

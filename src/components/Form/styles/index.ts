@@ -11,6 +11,10 @@ export default StyleSheet.create({
   vertical: {
     flexDirection: 'column',
   },
+  space: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   itemInput: {
     flex: 1,
     paddingHorizontal: 5,
@@ -20,7 +24,13 @@ export default StyleSheet.create({
     borderWidth: 0.5,
     borderRadius: 5,
   },
+  itemInputspace: {
+    flex: 0,
+  },
   labelhorizontal: {
+    marginRight: 5,
+  },
+  labelspace: {
     marginRight: 5,
   },
   itemLabelText: {

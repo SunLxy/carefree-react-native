@@ -14,7 +14,8 @@ const ComInput = props => {
 }
 export default () => {
   const [form] = useForm()
-  const onFish = async () => {
+  const [form2] = useForm()
+  const onFish = async form => {
     form
       .validateFields()
       .then(values => {
@@ -35,7 +36,20 @@ export default () => {
           <ComInput placeholder="请输入" />
         </Form.Item>
       </Form>
-      <TouchableOpacity onPress={onFish}>
+      <TouchableOpacity onPress={onFish.bind(this, form)}>
+        <Text>测试</Text>
+      </TouchableOpacity>
+
+      <Text style={{ color: 'red' }}> space 格式</Text>
+      <Form form={form2} layout="space">
+        <Form.Item
+          name="names"
+          rules={[{ required: true, message: '请输入' }]}
+          label="测试输入框">
+          <ComInput placeholder="请输入" />
+        </Form.Item>
+      </Form>
+      <TouchableOpacity onPress={onFish.bind(this, form2)}>
         <Text>测试</Text>
       </TouchableOpacity>
     </View>

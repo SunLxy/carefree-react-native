@@ -146,6 +146,7 @@ const CarefreeFormItem: React.FC<ItemProps> = props => {
               <View
                 style={[
                   styles.itemInput,
+                  styles[`itemInput${layout}`],
                   bordered && styles.itemInputBorder,
                   styleW,
                   style,

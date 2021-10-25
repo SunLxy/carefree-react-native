@@ -17,7 +17,7 @@ export interface CarefreeFormProps
   extends FormProps,
     Omit<ItemWarpProps, 'style'> {
   /** 布局 */
-  layout?: 'vertical' | 'horizontal'
+  layout?: 'vertical' | 'horizontal' | 'space'
   /** 输入框外层样式 */
   inputStyle?: ItemWarpProps['style']
   /** 是否有边框   */
