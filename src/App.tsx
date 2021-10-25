@@ -39,7 +39,9 @@ const App = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar barStyle={'dark-content'} />
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
+      <ScrollView
+        contentInsetAdjustmentBehavior="automatic"
+        keyboardShouldPersistTaps="handled">
         <View style={{ minHeight: 100 }}>
           <Text style={{ fontSize: 20, fontWeight: 'bold' }}>动画图标</Text>
           <Animated />
