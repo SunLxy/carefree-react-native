@@ -69,6 +69,7 @@ export const getItemTouchStyle = (
     }
   }
   if (
+    number &&
     !multiple &&
     type === 'button' &&
     layout === 'default' &&
