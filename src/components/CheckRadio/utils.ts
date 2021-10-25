@@ -17,7 +17,7 @@ export const getItemTouchStyle = (
   if (flexDirection === 'column') {
     sty = {
       ...sty,
-      paddingVertical: 8,
+      paddingVertical: 5,
       borderBottomWidth: 0.5,
       borderBottomColor: '#ccc',
     }
@@ -26,8 +26,8 @@ export const getItemTouchStyle = (
   if (type === 'button') {
     sty = {
       ...sty,
-      paddingHorizontal: 10,
-      paddingVertical: 10,
+      paddingHorizontal: 5,
+      paddingVertical: 5,
       borderWidth: 0.5,
       borderColor: '#ccc',
       borderRadius: 5,
