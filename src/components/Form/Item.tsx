@@ -59,6 +59,8 @@ const CarefreeFormItem: React.FC<ItemProps> = props => {
     warpStyle: warpW,
     name: formName,
     colon,
+    bottomBorder,
+    bottomBorderColor,
   } = useFormContext()
   const {
     children,
@@ -134,7 +136,14 @@ const CarefreeFormItem: React.FC<ItemProps> = props => {
 
         const errs = meta.errors.map(err => err).join(',')
         return (
-          <View style={[styles.itemWarp, warpW, warpStyle]}>
+          <View
+            style={[
+              styles.itemWarp,
+              bottomBorder && styles.itemWarpBorderBottom,
+              { borderBottomColor: bottomBorderColor || '#ccc' },
+              warpW,
+              warpStyle,
+            ]}>
             <View style={[styles[layout], itemW, itemStyle]}>
               <View style={[styles[`label${layout}`], labelW, labelStyle]}>
                 <Text

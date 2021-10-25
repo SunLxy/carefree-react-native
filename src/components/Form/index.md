@@ -22,7 +22,11 @@ export interface CarefreeFormProps
   /** 是否有边框   */
   bordered?: boolean
   /** 是否显示冒号 */
-  colon?: boolean
+  colon?: boolean;
+    /** 每个 item 下加 下划线 */
+  bottomBorder?: boolean;
+  /** 每个 item 下加 下划线颜色 */
+  bottomBorderColor?: string;
 }
 
 
@@ -82,7 +86,7 @@ export default () => {
 
   return (
     <View style={{ marginVertical: 20, marginHorizontal: 20 }}>
-      <Form form={form}>
+      <Form form={form} bottomBorder={true}>
         <Form.Item
           name="names"
           rules={[{ required: true, message: '请输入' }]}
@@ -94,7 +98,7 @@ export default () => {
         <Text>测试</Text>
       </TouchableOpacity>
 
-      <Text style={{ color: "red" }} > space 格式</Text>
+      <Text style={{ color: 'red' }}> space 格式</Text>
       <Form form={form2} layout="space">
         <Form.Item
           name="names"
@@ -106,7 +110,6 @@ export default () => {
       <TouchableOpacity onPress={onFish.bind(this, form2)}>
         <Text>测试</Text>
       </TouchableOpacity>
-
     </View>
   )
 }

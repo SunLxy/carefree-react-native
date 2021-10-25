@@ -9,6 +9,9 @@ export interface FormContextProps extends Omit<ItemWarpProps, 'style'> {
   bordered?: boolean
   colon?: boolean
   name?: string
+  /** 每个 item 下加 下划线 */
+  bottomBorder?: boolean
+  bottomBorderColor?: string
 }
 
 export const FormContext = React.createContext<FormContextProps>({})

@@ -24,6 +24,10 @@ export interface CarefreeFormProps
   bordered?: boolean
   /** 是否显示冒号 */
   colon?: boolean
+  /** 每个 item 下加 下划线 */
+  bottomBorder?: boolean
+  /** 每个 item 下加 下划线颜色 */
+  bottomBorderColor?: string
 }
 
 const InitForm: React.ForwardRefRenderFunction<
@@ -43,6 +47,8 @@ const InitForm: React.ForwardRefRenderFunction<
     warpStyle,
     colon = true,
     name,
+    bottomBorder,
+    bottomBorderColor,
     ...other
   } = props
 
@@ -60,6 +66,8 @@ const InitForm: React.ForwardRefRenderFunction<
         warpStyle,
         colon,
         name,
+        bottomBorder,
+        bottomBorderColor,
       }}>
       <Form {...other} name={name} ref={ref} component={false}>
         {children}

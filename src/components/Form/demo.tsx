@@ -28,7 +28,7 @@ export default () => {
 
   return (
     <View style={{ marginVertical: 20, marginHorizontal: 20 }}>
-      <Form form={form}>
+      <Form form={form} bottomBorder={true}>
         <Form.Item
           name="names"
           rules={[{ required: true, message: '请输入' }]}

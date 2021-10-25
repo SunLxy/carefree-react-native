@@ -4,6 +4,11 @@ export default StyleSheet.create({
   itemWarp: {
     marginVertical: 3,
   },
+  itemWarpBorderBottom: {
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#ccc',
+    paddingBottom: 3,
+  },
   horizontal: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -29,9 +34,11 @@ export default StyleSheet.create({
   },
   labelhorizontal: {
     marginRight: 5,
+    justifyContent: 'center',
   },
   labelspace: {
     marginRight: 5,
+    justifyContent: 'center',
   },
   itemLabelText: {
     fontSize: 14,
