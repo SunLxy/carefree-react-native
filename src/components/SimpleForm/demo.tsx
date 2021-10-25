@@ -18,6 +18,7 @@ export default () => {
   return (
     <View style={{ marginVertical: 20, marginHorizontal: 20 }}>
       <SimpleForm
+        bottomBorder={true}
         form={form}
         watchList={{
           namea: value => {
@@ -32,6 +33,9 @@ export default () => {
             name: 'namea',
             type: 'Input',
             rules: [{ required: true, message: '请输入' }],
+            attr: {
+              placeholder: '请输入',
+            },
           },
         ]}
       />

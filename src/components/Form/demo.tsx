@@ -41,7 +41,7 @@ export default () => {
       </TouchableOpacity>
 
       <Text style={{ color: 'red' }}> space 格式</Text>
-      <Form form={form2} layout="space">
+      <Form form={form2} bottomBorder={true} layout="space">
         <Form.Item
           name="names"
           rules={[{ required: true, message: '请输入' }]}
