@@ -51,8 +51,15 @@ const CheckRadio: React.FC<CheckRadioProps> & { Item: React.FC<ItemProps> } =
       }
     }
     const _optionsRender = () => {
+      const lg = options.length - 1
       return options.map((item, key) => {
-        return <Item {...item} key={key} />
+        return (
+          <Item
+            {...item}
+            key={key}
+            number={key === 0 ? 'first' : key === lg ? 'last' : key}
+          />
+        )
       })
     }
     return (

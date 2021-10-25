@@ -2,8 +2,13 @@ import { ChildItemProps } from './interface'
 export const getItemTouchStyle = (
   props: Pick<
     ChildItemProps,
-    'flexDirection' | 'type' | 'checkColor' | 'disabled' | 'disabledBG'
-  > & { check: boolean },
+    | 'flexDirection'
+    | 'type'
+    | 'checkColor'
+    | 'disabled'
+    | 'disabledBG'
+    | 'layout'
+  > & { check: boolean; number: number | 'first' | 'last'; multiple: boolean },
 ) => {
   const {
     type = 'default',
@@ -12,6 +17,9 @@ export const getItemTouchStyle = (
     disabled = false,
     disabledBG = 'rgba(0,0,0,0.1)',
     check,
+    layout,
+    number,
+    multiple,
   } = props
   let sty = {}
   if (flexDirection === 'column') {
@@ -34,7 +42,44 @@ export const getItemTouchStyle = (
       marginVertical: 5,
     }
   }
-
+  if (
+    !multiple &&
+    type === 'button' &&
+    layout === 'default' &&
+    number === 'first'
+  ) {
+    sty = {
+      ...sty,
+      borderTopRightRadius: 0,
+      borderBottomRightRadius: 0,
+      marginHorizontal: 0,
+    }
+  }
+  if (
+    !multiple &&
+    type === 'button' &&
+    layout === 'default' &&
+    number === 'last'
+  ) {
+    sty = {
+      ...sty,
+      borderTopLeftRadius: 0,
+      borderBottomLeftRadius: 0,
+      marginHorizontal: 0,
+    }
+  }
+  if (
+    !multiple &&
+    type === 'button' &&
+    layout === 'default' &&
+    !(['last', 'first'] as (number | 'first' | 'last')[]).includes(number)
+  ) {
+    sty = {
+      ...sty,
+      borderRadius: 0,
+      marginHorizontal: 0,
+    }
+  }
   if (type === 'button' && check) {
     sty = {
       ...sty,

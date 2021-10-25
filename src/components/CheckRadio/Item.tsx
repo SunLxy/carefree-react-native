@@ -36,6 +36,7 @@ export const Item: React.FC<ChildItemProps> = props => {
     itemBtnStyle = {},
     itemTextStyle = {},
     type = 'default',
+    layout = 'default',
     checkFontColor = '#000',
     checkSize = 20,
     checkAlign = 'left',
@@ -49,7 +50,9 @@ export const Item: React.FC<ChildItemProps> = props => {
     multiple = false,
     children,
     itemWarpStyle,
+    number,
   } = props
+
   const check = useMemo(() => {
     return checkValueFig(value, checkValue, multiple)
   }, [value, checkValue, multiple])
@@ -91,8 +94,21 @@ export const Item: React.FC<ChildItemProps> = props => {
       disabled,
       disabledBG,
       check,
+      layout,
+      number,
+      multiple,
     })
-  }, [type, flexDirection, checkColor, disabled, disabledBG, check])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    type,
+    number,
+    layout,
+    flexDirection,
+    checkColor,
+    disabled,
+    disabledBG,
+    check,
+  ])
 
   const BoxIcon = multiple ? CheckBoxIcon : RadioIcon
 

@@ -16,7 +16,7 @@ export interface ButtonGroupProps {
   /** 圆角大小 */
   borderRadius?: number
   /** layout===space 按钮间隔宽度  */
-  spaceWidth?: 10
+  spaceWidth?: number
   /** 选中那个 */
   active?: number | string
   onChange?: (value: string | number) => void

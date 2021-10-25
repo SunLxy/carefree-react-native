@@ -35,6 +35,8 @@ const VirtualizedListExample = () => {
         </View>
       </View>
       <Radio
+        type="button"
+        layout="default"
         value={value2}
         onChange={value => {
           setValue2(value)

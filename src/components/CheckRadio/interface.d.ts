@@ -47,6 +47,7 @@ export interface CheckRadioProps {
   itemWarpStyle?: StyleProp<ViewStyle>
   /** 是否多选 */
   multiple?: boolean
+  layout?: 'space' | 'default'
 }
 
 export interface ItemProps {
@@ -68,6 +69,8 @@ export interface ItemProps {
   checkValue?: ValueType | ValueType[]
   /** 值 变化事件 */
   onChange?: (v: ItemProps['checkValue'], t: any) => void
+  /**  第几个 */
+  number?: number | 'first' | 'last'
 }
 
 export interface ChildItemProps extends ItemProps {
@@ -93,4 +96,5 @@ export interface ChildItemProps extends ItemProps {
   disabledFontColor?: string
   /** 是否多选 */
   multiple?: boolean
+  layout?: 'space' | 'default'
 }
