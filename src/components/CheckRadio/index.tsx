@@ -12,7 +12,7 @@ const CheckRadio: React.FC<CheckRadioProps> & { Item: React.FC<ItemProps> } =
       value,
       options = [],
       type = 'default',
-      checkFontColor = '#000',
+      checkFontColor = '#fff',
       checkSize = 20,
       checkAlign = 'left',
       flexDirection = 'row',

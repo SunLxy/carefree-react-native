@@ -37,7 +37,7 @@ export const Item: React.FC<ChildItemProps> = props => {
     itemTextStyle = {},
     type = 'default',
     layout = 'default',
-    checkFontColor = '#000',
+    checkFontColor = '#fff',
     checkSize = 20,
     checkAlign = 'left',
     flexDirection = 'row',
@@ -139,7 +139,7 @@ export const Item: React.FC<ChildItemProps> = props => {
               { color: '#000' },
               itemTextStyle,
               disabled ? { color: disabledFontColor } : {},
-              check ? { color: checkFontColor } : {},
+              check && type === 'button' ? { color: checkFontColor } : {},
             ]}>
             {children ? children : label}
           </Text>
