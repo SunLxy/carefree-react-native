@@ -42,7 +42,7 @@ const Input: React.FC<InputProps> = props => {
       onChangeText={onChangeText}
       value={value}
       style={[
-        { padding: 0, paddingHorizontal: 4 },
+        { padding: 0, paddingHorizontal: 4, paddingVertical: 3, fontSize: 14 },
         bordered && styles.border,
         style,
       ]}

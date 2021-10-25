@@ -30,7 +30,8 @@ export default StyleSheet.create({
     borderRadius: 5,
   },
   itemInputspace: {
-    flex: 0,
+    flex: 1,
+    alignItems: 'flex-end',
   },
   labelhorizontal: {
     marginRight: 5,
