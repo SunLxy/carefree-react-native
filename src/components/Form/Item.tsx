@@ -37,6 +37,8 @@ export interface ItemWarpProps {
   errTextStyle?: StyleProp<TextStyle>
   /** 输入框 外层 样式   */
   style?: StyleProp<ViewStyle>
+  /** 必填样式 */
+  required?: boolean
 }
 
 export interface ItemProps extends FieldProps, ItemWarpProps {
@@ -68,6 +70,8 @@ const CarefreeFormItem: React.FC<ItemProps> = props => {
     errStyle,
     errTextStyle,
     warpStyle,
+    rules,
+    required,
     ...other
   } = props
 
@@ -79,10 +83,36 @@ const CarefreeFormItem: React.FC<ItemProps> = props => {
   }, [colon, layout])
 
   return (
-    <Field {...other}>
+    <Field {...other} rules={rules}>
       {(control, meta, form) => {
         const mergedName = toArray(props.name).length && meta ? meta.name : []
         const fieldId = getFieldId(mergedName, formName)
+        //  判断是否必填
+        const isRequired =
+          required !== undefined
+            ? required
+            : !!(
+                rules &&
+                rules.some(rule => {
+                  if (
+                    rule &&
+                    typeof rule === 'object' &&
+                    rule.required &&
+                    !rule.warningOnly
+                  ) {
+                    return true
+                  }
+                  if (typeof rule === 'function') {
+                    const ruleEntity = rule(form)
+                    return (
+                      ruleEntity &&
+                      ruleEntity.required &&
+                      !ruleEntity.warningOnly
+                    )
+                  }
+                  return false
+                })
+              )
 
         const onChange = (
           target: NativeSyntheticEvent<TextInputChangeEventData> | any,
@@ -101,6 +131,7 @@ const CarefreeFormItem: React.FC<ItemProps> = props => {
                 onChange: onChange,
                 id: fieldId,
               })
+
         const errs = meta.errors.map(err => err).join(',')
         return (
           <View style={[styles.itemWarp, warpW, warpStyle]}>
@@ -108,6 +139,7 @@ const CarefreeFormItem: React.FC<ItemProps> = props => {
               <View style={[styles[`label${layout}`], labelW, labelStyle]}>
                 <Text
                   style={[styles.itemLabelText, labelTextW, labelTextStyle]}>
+                  {isRequired && <Text style={styles.labelRedStar}>*</Text>}
                   {label} {colonRender}
                 </Text>
               </View>

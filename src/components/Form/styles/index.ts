@@ -35,4 +35,7 @@ export default StyleSheet.create({
     marginTop: 3,
     minHeight: 0,
   },
+  labelRedStar: {
+    color: 'red',
+  },
 })
