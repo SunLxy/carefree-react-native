@@ -27,6 +27,7 @@ import FuzzySearch from './components/FuzzySearch/demo'
 import Card from './components/Card/demo'
 import Form from './components/Form/demo'
 import Form2 from './components/SimpleForm/demo'
+import Input from './components/Input/demo'
 // import Demo from "./Demo"
 // import Demo from "./components/Table/demo"
 const App = () => {
@@ -67,7 +68,6 @@ const App = () => {
           <FuzzySearch />
         </View>
         <Card />
-
         <TouchableOpacity
           onPress={() => {
             setVisible(true)
@@ -80,6 +80,8 @@ const App = () => {
         </View>
         <Form />
         <Form2 />
+        <Text>输入框</Text>
+        <Input />
       </ScrollView>
     </SafeAreaView>
   )

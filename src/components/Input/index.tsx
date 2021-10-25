@@ -1,5 +1,6 @@
 import React from 'react'
 import { TextInput, TextInputProps } from 'react-native'
+import styles from './styles'
 export interface InputProps extends Omit<TextInputProps, 'value' | 'onChange'> {
   value?: string | number
   onChange?: (value: string | number | undefined) => void
@@ -37,7 +38,11 @@ const Input: React.FC<InputProps> = props => {
       }}
       onChangeText={onChangeText}
       value={value}
-      style={[{ padding: 0 }, (props || {}).style]}
+      style={[
+        { padding: 0, paddingHorizontal: 4 },
+        styles.border,
+        (props || {}).style,
+      ]}
     />
   )
 }

@@ -5,8 +5,6 @@ export interface FormContextProps extends Omit<ItemWarpProps, 'style'> {
   layout?: 'vertical' | 'horizontal' | 'space'
   /** 输入框外层样式 */
   inputStyle?: ItemWarpProps['style']
-  /** 是否有边框   */
-  bordered?: boolean
   colon?: boolean
   name?: string
   /** 每个 item 下加 下划线 */

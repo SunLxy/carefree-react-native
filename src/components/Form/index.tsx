@@ -20,8 +20,6 @@ export interface CarefreeFormProps
   layout?: 'vertical' | 'horizontal' | 'space'
   /** 输入框外层样式 */
   inputStyle?: ItemWarpProps['style']
-  /** 是否有边框   */
-  bordered?: boolean
   /** 是否显示冒号 */
   colon?: boolean
   /** 每个 item 下加 下划线 */
@@ -41,7 +39,6 @@ const InitForm: React.ForwardRefRenderFunction<
     itemStyle,
     labelStyle,
     labelTextStyle,
-    bordered = true,
     errStyle,
     errTextStyle,
     warpStyle,
@@ -60,7 +57,6 @@ const InitForm: React.ForwardRefRenderFunction<
         itemStyle,
         labelStyle,
         labelTextStyle,
-        bordered,
         errStyle,
         errTextStyle,
         warpStyle,

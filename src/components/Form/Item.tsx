@@ -53,7 +53,6 @@ const CarefreeFormItem: React.FC<ItemProps> = props => {
     itemStyle: itemW,
     labelStyle: labelW,
     labelTextStyle: labelTextW,
-    bordered,
     errStyle: errW,
     errTextStyle: errTextW,
     warpStyle: warpW,
@@ -156,7 +155,6 @@ const CarefreeFormItem: React.FC<ItemProps> = props => {
                 style={[
                   styles.itemInput,
                   styles[`itemInput${layout}`],
-                  bordered && styles.itemInputBorder,
                   styleW,
                   style,
                 ]}>
