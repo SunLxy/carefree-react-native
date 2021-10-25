@@ -28,10 +28,11 @@ const Item: React.FC<ItemProps> = props => {
     spaceWidth,
     active,
     onChange,
+    isOpenCheck,
   } = useButtonContext()
 
   // 选中
-  const act = value === active
+  const act = isOpenCheck && value === active
 
   let childNode = label
   if (typeof label === 'string') {
@@ -85,7 +86,9 @@ const Item: React.FC<ItemProps> = props => {
     if (props.onPress) {
       props.onPress(event)
     }
-    onChange(value)
+    if (isOpenCheck) {
+      onChange(value)
+    }
   }
 
   return (

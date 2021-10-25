@@ -14,6 +14,7 @@ export default () => {
       />
       <Card
         title="啊哈哈哈"
+        extra="右侧"
         list={[
           { label: '测试：', value: '44' },
           { label: '测试：', value: '22' },

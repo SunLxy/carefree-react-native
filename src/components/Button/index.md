@@ -44,7 +44,9 @@ export interface ButtonGroupProps {
   /** 选中那个 */
   active?: number | string;
   // 选中时间
-  onChange?: (value: string | number) => void
+  onChange?: (value: string | number) => void;
+    /** 是否 开启选中状态 */
+  isOpenCheck?: boolean;
 }
 
 

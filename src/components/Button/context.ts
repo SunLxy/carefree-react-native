@@ -15,6 +15,9 @@ export interface ButtonContextProps {
   spaceWidth?: number
   active?: number | string
   onChange?: (value: string | number) => void
+
+  /** 是否 开启选中状态 */
+  isOpenCheck?: boolean
 }
 
 export const ButtonContext = React.createContext<ButtonContextProps>({
@@ -24,6 +27,7 @@ export const ButtonContext = React.createContext<ButtonContextProps>({
   layout: 'merge',
   borderRadius: 3,
   spaceWidth: 10,
+  isOpenCheck: false,
 })
 
 export const useButtonContext = () => React.useContext(ButtonContext)

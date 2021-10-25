@@ -26,7 +26,7 @@ export interface CardProps {
   /** 外层 View 样式 */
   warpStyle?: StyleProp<ViewStyle>
   /** 卡片标题 title */
-  title?: React.ReactNode | string
+  title?: React.ReactNode | string | number
   /** 标题 View 样式 */
   titleStyle?: StyleProp<ViewStyle>
   /** 标题 Text 样式 */
@@ -40,6 +40,10 @@ export interface CardProps {
   comLabelStyle?: StyleProp<TextStyle>
   /** 公共 的 value 样式 */
   comValueStyle?: StyleProp<TextStyle>
+
+  extra?: React.ReactNode | string | number
+  /** extra Text 样式 */
+  extraTextStyle?: StyleProp<TextStyle>
 }
 const Card: React.FC<CardProps> = props => {
   const {
@@ -52,14 +56,37 @@ const Card: React.FC<CardProps> = props => {
     comLabelStyle,
     comItemStyle,
     itemWarpStyle,
+    extra,
+    extraTextStyle,
   } = props
+
+  const Extra = useMemo(() => {
+    if (React.isValidElement(title)) {
+      return <View>{extra}</View>
+    } else if (Reflect.has(props, 'extra')) {
+      return (
+        <Text style={[styles.extraTextStyle, extraTextStyle]}>{extra}</Text>
+      )
+    }
+    return <React.Fragment />
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [extra, extraTextStyle])
+
   const Title = useMemo(() => {
     if (React.isValidElement(title)) {
-      return <View style={[styles.titleStyle, titleStyle]}>{title}</View>
+      return (
+        <View style={[styles.titleStyle, titleStyle, styles.titleStyleFlex]}>
+          <View style={{ flex: 1 }}>{title}</View>
+          <View>{Extra}</View>
+        </View>
+      )
     } else if (Reflect.has(props, 'title')) {
       return (
-        <View style={[styles.titleStyle, titleStyle]}>
-          <Text style={[styles.titleTextStyle, titleTextStyle]}>{title}</Text>
+        <View style={[styles.titleStyle, titleStyle, styles.titleStyleFlex]}>
+          <View style={{ flex: 1 }}>
+            <Text style={[styles.titleTextStyle, titleTextStyle]}>{title}</Text>
+          </View>
+          <View>{Extra}</View>
         </View>
       )
     }

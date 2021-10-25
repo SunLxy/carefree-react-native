@@ -31,10 +31,19 @@ export default StyleSheet.create({
     borderBottomColor: '#d9d9d9',
     borderBottomWidth: 1,
   },
+  titleStyleFlex: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   titleTextStyle: {
     fontSize: 16,
     fontWeight: 'bold',
     flex: 1,
+    color: '#000',
+  },
+  extraTextStyle: {
+    fontSize: 16,
+    color: '#aaa',
   },
   itemListWarp: {
     paddingHorizontal: 5,
