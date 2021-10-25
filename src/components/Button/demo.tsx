@@ -22,6 +22,10 @@ export default () => {
             { label: '测试按钮4', value: '14' },
           ]}
         />
+        <Button.Group>
+          <Button.Item label="测试" value="22" />
+          <Button.Item label="测试2" value="223" />
+        </Button.Group>
       </View>
     </React.Fragment>
   )

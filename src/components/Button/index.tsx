@@ -9,12 +9,17 @@ import {
 } from 'react-native'
 import Group from './Group'
 import styles from './styles'
+import Item from './Item'
+
 export interface ButtonProps extends TouchableOpacityProps {
   /** 只有一个字符串子项 字体样式 */
   textStyle?: StyleProp<TextStyle>
 }
 
-const Button: React.FC<ButtonProps> & { Group: typeof Group } = props => {
+const Button: React.FC<ButtonProps> & {
+  Group: typeof Group
+  Item: typeof Item
+} = props => {
   const { children, textStyle, style, ...rest } = props
   let childNode = children
   if (typeof children === 'string') {
@@ -32,5 +37,6 @@ const Button: React.FC<ButtonProps> & { Group: typeof Group } = props => {
 }
 
 Button.Group = Group
+Button.Item = Item
 
 export default Button
