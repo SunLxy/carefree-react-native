@@ -56,7 +56,7 @@ const Item: React.FC<ItemProps> = props => {
     } else if (layout === 'vertical') {
       return 'borderRightColor'
     }
-    return
+    return undefined
   }, [layout])
 
   return (
