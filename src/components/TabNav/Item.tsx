@@ -14,11 +14,11 @@ import styles from './styles'
 export interface ItemProps extends TouchableOpacityProps {
   textStyle?: StyleProp<TextStyle>
   id: number | string
-  children?: React.ReactNode
+  title?: React.ReactNode
 }
 
 const Item: React.FC<ItemProps> = props => {
-  const { textStyle, id, ...rest } = props
+  const { textStyle, id, title, ...rest } = props
   const {
     active,
     onChange,
@@ -78,7 +78,7 @@ const Item: React.FC<ItemProps> = props => {
       onPress={onPress}
       key={id}>
       <Text style={[textStyle, { color: check ? checkColor : defaultColor }]}>
-        {props.children}
+        {props.children || title}
       </Text>
     </TouchableOpacity>
   )

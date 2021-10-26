@@ -7,7 +7,7 @@ export default StyleSheet.create({
   },
   vertical: {
     flexDirection: 'column',
-    width: 200,
+    width: 100,
   },
   verticalItem: {
     borderRightWidth: 1,

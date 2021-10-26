@@ -57,10 +57,10 @@ const Demo = () => {
         </TabNav>
          <View style={{ marginVertical: 10 }} />
         <TabNav config={[
-          { id: "233", children: "测试1" },
-          { id: "34", children: "测试2" },
-          { id: "23453", children: "测试3" },
-          { id: "56", children: "测试4" },
+          { id: "233", title: "测试1" },
+          { id: "34", title: "测试2" },
+          { id: "23453", title: "测试3" },
+          { id: "56", title: "测试4" },
         ]} />
       </View>
     </SafeAreaView>

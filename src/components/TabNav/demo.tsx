@@ -6,13 +6,13 @@ const Demo = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ margin: 10 }}>
-        <TabNav>
+        <TabNav defaultId="23">
           <TabNav.Item id="23">测试1</TabNav.Item>
           <TabNav.Item id="233">测试2</TabNav.Item>
           <TabNav.Item id="234">测试3</TabNav.Item>
         </TabNav>
         <View style={{ marginVertical: 10 }} />
-        <TabNav layout="vertical">
+        <TabNav layout="vertical" defaultId="23">
           <TabNav.Item id="23">测试1</TabNav.Item>
           <TabNav.Item id="233">测试2</TabNav.Item>
           <TabNav.Item id="234">测试3</TabNav.Item>
@@ -20,11 +20,12 @@ const Demo = () => {
         <View style={{ marginVertical: 10 }} />
 
         <TabNav
+          defaultId="233"
           config={[
-            { id: '233', children: '测试1' },
-            { id: '34', children: '测试2' },
-            { id: '23453', children: '测试3' },
-            { id: '56', children: '测试4' },
+            { id: '233', title: '测试1' },
+            { id: '34', title: '测试2' },
+            { id: '23453', title: '测试3' },
+            { id: '56', title: '测试4' },
           ]}
         />
       </View>

@@ -7,6 +7,8 @@ export interface TabNavProps {
   activeId?: number | string
   onChange?: (value: string | number) => void
   layout?: 'default' | 'vertical'
+  /** 首次 默认选中 */
+  defaultId?: string | number
   config?: ItemProps[]
   warpStyle?: StyleProp<ViewStyle>
   // 默认背景整体颜色
@@ -38,9 +40,10 @@ const TabNav: React.FC<TabNavProps> & { Item: typeof Item } = props => {
     checkBorderColor = '#1890ff',
     borderWidth = 1.5,
     config,
+    defaultId,
   } = props
 
-  const [active, setActive] = React.useState(activeId)
+  const [active, setActive] = React.useState(defaultId)
   let values = active
   if (Reflect.has(props, 'activeId')) {
     values = activeId

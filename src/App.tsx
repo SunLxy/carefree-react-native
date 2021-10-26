@@ -29,7 +29,7 @@ import Form from './components/Form/demo'
 import Form2 from './components/SimpleForm/demo'
 import Input from './components/Input/demo'
 import Button from './components/Button/demo'
-// import TabBar from './components/TabBar/demo'
+import TabBar from './components/TabBar/demo'
 import TabNav from './components/TabNav/demo'
 
 // import Demo from "./Demo"
@@ -90,9 +90,7 @@ const App = () => {
         <Input />
 
         <Button />
-
-        {/* <TabBar /> */}
-
+        <TabBar />
         <TabNav />
       </ScrollView>
     </SafeAreaView>
