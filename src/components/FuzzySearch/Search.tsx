@@ -12,6 +12,7 @@ import {
 } from 'react-native'
 import { XIcon, SearchIcon, EmtyIcon } from './../Icons'
 import styles from './styles'
+import { debounce } from './../utils'
 
 export interface SearchProps {
   /** 模糊查询输入框提示 */
@@ -60,20 +61,6 @@ export interface SearchProps {
 
   /** 关闭弹框 */
   onRequestClose?: () => void
-}
-
-function debounce(fn: (...arg: any) => void, delay: number) {
-  let timer: NodeJS.Timer // 维护一个 timer
-  return function () {
-    const _this = this // 取debounce执行作用域的this
-    const args = arguments
-    if (timer) {
-      clearTimeout(timer)
-    }
-    timer = setTimeout(function () {
-      fn.apply(_this, args) // 用apply指向调用debounce的对象，相当于_this.fn(args);
-    }, delay) as unknown as NodeJS.Timer
-  }
 }
 
 const Search: React.FC<SearchProps> = props => {
@@ -174,7 +161,7 @@ const Search: React.FC<SearchProps> = props => {
           style={[styles.searchInput, searchInputStyle]}
           onChangeText={val => {
             setValue(val)
-            debounce(() => onSearchValueChange(val), 300)
+            debounce(() => onSearchValueChange(val))()
           }}
         />
         {clearValue}

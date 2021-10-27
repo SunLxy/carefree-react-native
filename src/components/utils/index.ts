@@ -1,4 +1,7 @@
 import { OptionsProps } from './../Select'
+
+export { default as debounce } from './debounce'
+
 /**
  * @description: 根据值获取options里面的值
  * @param {Array<number|string>|string|number} value 值
