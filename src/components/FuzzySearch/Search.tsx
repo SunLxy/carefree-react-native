@@ -1,24 +1,22 @@
-import React, { useMemo, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   View,
   ScrollView,
   Text,
   TouchableOpacity,
-  TextInput,
   StyleProp,
   TextStyle,
   ViewStyle,
   ActivityIndicator,
 } from 'react-native'
-import { XIcon, SearchIcon, EmtyIcon } from './../Icons'
+import { XIcon, EmtyIcon } from './../Icons'
 import styles from './styles'
 import { debounce } from './../utils'
 
-export interface SearchProps {
-  /** 模糊查询输入框提示 */
-  placeholderSearch?: string
-  /** 模糊查询输入框提示 颜色 */
-  placeholderColorSearch?: string
+import SearchList, { SearchProps as SearchPropss } from './../Search'
+
+export interface SearchProps
+  extends Omit<SearchPropss, 'value' | 'children' | 'onChange' | 'onSearch'> {
   /** 模糊查询输入框默认显示值 */
   searchValue?: string
   /** 模糊查询列表数据选中事件 */
@@ -38,13 +36,6 @@ export interface SearchProps {
   /** 是否一打开弹框调用一次OnSearch方法或onSearchValueChange方法 */
   isFirstRequest?: boolean
 
-  /** 模糊查询输入框样式  */
-  searchInputStyle?: StyleProp<TextStyle>
-  /** 模糊查询按钮占据宽度 */
-  searchBtnWidth?: number
-  /** 查询按钮图标大小 */
-  searchIconSize?: number
-
   /** 关闭弹框 X 图标大小 */
   closeModalIconSize?: number
   closeModalIconColor?: string
@@ -58,7 +49,6 @@ export interface SearchProps {
   loadingColor?: string
   /**  加载状态 大小 */
   loadingSize?: 'small' | 'large'
-
   /** 关闭弹框 */
   onRequestClose?: () => void
 }
@@ -67,25 +57,21 @@ const Search: React.FC<SearchProps> = props => {
   const {
     onRequestClose = () => {},
     searchValue,
-    placeholderSearch = '请输入',
-    placeholderColorSearch = '#ccc',
     onSearch = () => {},
     onSearchValueChange = () => {},
     onCheckValue = () => {},
     dataList = [],
     render,
     renderField = 'label',
-    searchIconSize = 25,
-    searchBtnWidth = 25,
     closeModalIconSize = 25,
     closeModalIconColor = 'rgba(0,0,0,0.1)',
-    searchInputStyle,
     checkItemTextStyle,
     checkItemStyle,
     isFirstRequest = false,
     loading = false,
     loadingColor = 'gray',
     loadingSize = 'small',
+    ...rest
   } = props
   const [value, setValue] = useState(searchValue)
 
@@ -118,22 +104,6 @@ const Search: React.FC<SearchProps> = props => {
       </View>
     )
   }
-  const clearValue = useMemo(() => {
-    if (value && `${value}`.length) {
-      return (
-        <TouchableOpacity
-          style={styles.searchClearnInput}
-          onPress={() => {
-            setValue(undefined)
-            onSearchValueChange(undefined)
-          }}>
-          <XIcon size={20} color="rgba(0,0,0,0.1)" />
-        </TouchableOpacity>
-      )
-    }
-    return <React.Fragment />
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value])
 
   useEffect(() => {
     if (isFirstRequest) {
@@ -154,22 +124,15 @@ const Search: React.FC<SearchProps> = props => {
         </TouchableOpacity>
       </View>
       <View style={styles.searchInputWarp}>
-        <TextInput
-          value={value}
-          placeholder={placeholderSearch}
-          placeholderTextColor={placeholderColorSearch}
-          style={[styles.searchInput, searchInputStyle]}
-          onChangeText={val => {
+        <SearchList
+          {...rest}
+          onSearch={onSearch.bind(this, value)}
+          onChange={debounce((val: string) => {
             setValue(val)
-            debounce(() => onSearchValueChange(val))()
-          }}
+            onSearchValueChange(val)
+          })}
+          value={value}
         />
-        {clearValue}
-        <TouchableOpacity
-          onPress={onSearch.bind(this, value)}
-          style={[styles.searchBtn, { width: searchBtnWidth }]}>
-          <SearchIcon color="#bbb" size={searchIconSize} />
-        </TouchableOpacity>
       </View>
       <ScrollView style={{ flex: 1 }}>
         {loading && (

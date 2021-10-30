@@ -35,15 +35,8 @@ export default StyleSheet.create({
     fontWeight: 'bold',
   },
   searchInputWarp: {
-    marginHorizontal: 15,
-    paddingHorizontal: 10,
     marginBottom: 5,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    overflow: 'hidden',
-    flexDirection: 'row',
-    borderWidth: 1,
-    borderColor: '#ccc',
+    height: 35,
   },
   searchInput: {
     height: 35,

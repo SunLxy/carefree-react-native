@@ -31,6 +31,7 @@ import Input from './components/Input/demo'
 import Button from './components/Button/demo'
 import TabBar from './components/TabBar/demo'
 import TabNav from './components/TabNav/demo'
+import Search from './components/Search/demo'
 
 // import Demo from "./Demo"
 // import Demo from "./components/Table/demo"
@@ -84,14 +85,14 @@ const App = () => {
         <View style={{ paddingLeft: 20 }}>
           <Tree />
         </View>
-        <Form />
-        <Form2 />
-        <Text>输入框</Text>
-        <Input />
-
         <Button />
         <TabBar />
         <TabNav />
+        <Text>输入框</Text>
+        <Input />
+        <Form />
+        <Form2 />
+        <Search />
       </ScrollView>
     </SafeAreaView>
   )

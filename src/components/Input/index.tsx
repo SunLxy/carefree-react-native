@@ -1,29 +1,39 @@
 import React from 'react'
-import { TextInput, TextInputProps } from 'react-native'
+import {
+  TextInput,
+  TextInputProps,
+  View,
+  TouchableOpacity,
+  ViewStyle,
+  StyleProp,
+} from 'react-native'
 import styles from './styles'
+import { XIcon } from './../Icons'
+
 export interface InputProps extends Omit<TextInputProps, 'value' | 'onChange'> {
   value?: string | number
   bordered?: boolean
   onChange?: (value: string | number | undefined) => void
+  warpStyle?: StyleProp<ViewStyle>
 }
 
 const Input: React.FC<InputProps> = props => {
-  const { bordered, style, ...rest } = props
+  const { bordered, style, value, warpStyle, ...rest } = props
 
   const [store, setStore] = React.useState(props.value)
   const state = React.useMemo(() => {
-    if (Reflect.has(props, 'value')) {
-      return props.value
+    if (Reflect.has(props, 'value') && value !== undefined && value !== null) {
+      return value
     }
     return store
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.value, store])
+  }, [value, store])
 
-  const value = React.useMemo(() => {
+  const values = React.useMemo(() => {
     if (typeof state === 'number') {
       return `${state}`
     }
-    return state
+    return state || ''
   }, [state])
 
   const onChangeText = (target: string | number | undefined) => {
@@ -32,21 +42,34 @@ const Input: React.FC<InputProps> = props => {
     }
     setStore(target)
   }
+  const clearValue = React.useMemo(() => {
+    if (values && `${values}`.length) {
+      return (
+        <TouchableOpacity
+          style={styles.closeBtn}
+          activeOpacity={1}
+          onPress={() => onChangeText(undefined)}>
+          <XIcon size={20} color="rgba(0,0,0,0.1)" />
+        </TouchableOpacity>
+      )
+    }
+    return <React.Fragment />
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values])
 
   return (
-    <TextInput
-      {...rest}
-      onChange={() => {
-        return
-      }}
-      onChangeText={onChangeText}
-      value={value}
-      style={[
-        { padding: 0, paddingHorizontal: 4, paddingVertical: 3, fontSize: 14 },
-        bordered && styles.border,
-        style,
-      ]}
-    />
+    <View style={[styles.warp, warpStyle, bordered && styles.border]}>
+      <TextInput
+        {...rest}
+        onChange={va => {
+          return va
+        }}
+        onChangeText={onChangeText}
+        value={values}
+        style={[styles.input, style, { borderWidth: 0, flex: 1 }]}
+      />
+      {clearValue}
+    </View>
   )
 }
 

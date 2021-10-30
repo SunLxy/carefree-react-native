@@ -29,6 +29,8 @@ const Item: React.FC<ItemProps> = props => {
     active,
     onChange,
     isOpenCheck,
+    bordered,
+    borderColor,
   } = useButtonContext()
 
   // 选中
@@ -96,12 +98,9 @@ const Item: React.FC<ItemProps> = props => {
       {...rest}
       onPress={onPress}
       style={[
-        {
-          borderWidth: 0.5,
-          borderColor: '#ccc',
-          alignItems: 'center',
-          flex: 1,
-        },
+        { alignItems: 'center', flex: 1 },
+        bordered && { borderWidth: 0.5, borderColor: '#ccc' },
+        borderColor && { borderColor: borderColor },
         styles.btnItem,
         style,
         cxStyle,

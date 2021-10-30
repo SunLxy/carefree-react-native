@@ -22,6 +22,8 @@ export interface ButtonGroupProps {
   onChange?: (value: string | number) => void
   /** 是否 开启选中状态 */
   isOpenCheck?: boolean
+  bordered?: boolean
+  borderColor?: string
 }
 
 const Group: React.FC<ButtonGroupProps> = props => {
@@ -37,6 +39,8 @@ const Group: React.FC<ButtonGroupProps> = props => {
     spaceWidth = 10,
     children,
     isOpenCheck = false,
+    bordered = true,
+    borderColor = '#ccc',
     ...rest
   } = props
 
@@ -86,6 +90,8 @@ const Group: React.FC<ButtonGroupProps> = props => {
         active: values,
         onChange: onChangeAct,
         isOpenCheck,
+        bordered,
+        borderColor,
       }}>
       <View style={{ flexDirection: 'row' }}>
         {_render}

@@ -14,13 +14,22 @@ import Item from './Item'
 export interface ButtonProps extends TouchableOpacityProps {
   /** 只有一个字符串子项 字体样式 */
   textStyle?: StyleProp<TextStyle>
+  bordered?: boolean
+  borderColor?: string
 }
 
 const Button: React.FC<ButtonProps> & {
   Group: typeof Group
   Item: typeof Item
 } = props => {
-  const { children, textStyle, style, ...rest } = props
+  const {
+    children,
+    textStyle,
+    style,
+    bordered = true,
+    borderColor,
+    ...rest
+  } = props
   let childNode = children
   if (typeof children === 'string') {
     childNode = <Text style={[styles.btnText, textStyle]}>{children}</Text>
@@ -30,7 +39,14 @@ const Button: React.FC<ButtonProps> & {
   }
 
   return (
-    <TouchableOpacity {...rest} style={[styles.btn, style]}>
+    <TouchableOpacity
+      {...rest}
+      style={[
+        styles.btn,
+        bordered && styles.bordered,
+        borderColor && { borderColor: borderColor },
+        style,
+      ]}>
       {childNode}
     </TouchableOpacity>
   )

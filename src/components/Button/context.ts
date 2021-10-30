@@ -18,6 +18,8 @@ export interface ButtonContextProps {
 
   /** 是否 开启选中状态 */
   isOpenCheck?: boolean
+  bordered?: boolean
+  borderColor?: string
 }
 
 export const ButtonContext = React.createContext<ButtonContextProps>({
@@ -28,6 +30,8 @@ export const ButtonContext = React.createContext<ButtonContextProps>({
   borderRadius: 3,
   spaceWidth: 10,
   isOpenCheck: false,
+  bordered: true,
+  borderColor: '#ccc',
 })
 
 export const useButtonContext = () => React.useContext(ButtonContext)
