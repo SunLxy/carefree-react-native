@@ -3,6 +3,8 @@ title: FuzzySearch
 order: 6
 ---
 
+> 模糊查询输入框使用[Search](/components/search)组件
+
 ## 模糊查询
 
 ### 参数
@@ -43,12 +45,9 @@ export interface FuzzySearchProps extends Omit<SearchProps, 'onRequestClose'> {
   inputTextProps?: Omit<TextProps, 'style'>
 }
 
-// 搜索和展示区域参数
-export interface SearchProps {
-  /** 模糊查询输入框提示 */
-  placeholderSearch?: string
-  /** 模糊查询输入框提示 颜色 */
-  placeholderColorSearch?: string
+// 搜索和展示区域参数 模糊查询输入框 使用 Search 组件
+export interface SearchProps
+  extends Omit<SearchPropss, 'value' | 'children' | 'onChange' | 'onSearch'> {
   /** 模糊查询输入框默认显示值 */
   searchValue?: string
   /** 模糊查询列表数据选中事件 */
@@ -68,13 +67,6 @@ export interface SearchProps {
   /** 是否一打开弹框调用一次OnSearch方法或onSearchValueChange方法 */
   isFirstRequest?: boolean
 
-  /** 模糊查询输入框样式  */
-  searchInputStyle?: StyleProp<TextStyle>
-  /** 模糊查询按钮占据宽度 */
-  searchBtnWidth?: number
-  /** 查询按钮图标大小 */
-  searchIconSize?: number
-
   /** 关闭弹框 X 图标大小 */
   closeModalIconSize?: number
   closeModalIconColor?: string
@@ -88,7 +80,6 @@ export interface SearchProps {
   loadingColor?: string
   /**  加载状态 大小 */
   loadingSize?: 'small' | 'large'
-
   /** 关闭弹框 */
   onRequestClose?: () => void
 }
