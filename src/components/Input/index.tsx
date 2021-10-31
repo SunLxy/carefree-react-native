@@ -4,6 +4,7 @@ import {
   TextInputProps,
   View,
   TouchableOpacity,
+  TouchableOpacityProps,
   ViewStyle,
   StyleProp,
 } from 'react-native'
@@ -11,14 +12,33 @@ import styles from './styles'
 import { XIcon } from './../Icons'
 
 export interface InputProps extends Omit<TextInputProps, 'value' | 'onChange'> {
+  /** 值 */
   value?: string | number
+  /** 边框 */
   bordered?: boolean
+  /** 值更新 */
   onChange?: (value: string | number | undefined) => void
+  /** 外层样式 */
   warpStyle?: StyleProp<ViewStyle>
+  /** 清除图标大小 */
+  clearSize?: number
+  /** 清除图标颜色 */
+  clearColor?: string
+  /** 清除按钮属性 */
+  clearProps?: TouchableOpacityProps
 }
 
 const Input: React.FC<InputProps> = props => {
-  const { bordered, style, value, warpStyle, ...rest } = props
+  const {
+    bordered,
+    style,
+    value,
+    warpStyle,
+    clearProps,
+    clearSize = 20,
+    clearColor = 'rgba(0,0,0,0.1)',
+    ...rest
+  } = props
 
   const [store, setStore] = React.useState(props.value)
   const state = React.useMemo(() => {
@@ -46,10 +66,11 @@ const Input: React.FC<InputProps> = props => {
     if (values && `${values}`.length) {
       return (
         <TouchableOpacity
-          style={styles.closeBtn}
           activeOpacity={1}
+          {...clearProps}
+          style={[styles.closeBtn, clearProps.style]}
           onPress={() => onChangeText(undefined)}>
-          <XIcon size={20} color="rgba(0,0,0,0.1)" />
+          <XIcon size={clearSize} color={clearColor} />
         </TouchableOpacity>
       )
     }
