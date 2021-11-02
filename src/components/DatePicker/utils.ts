@@ -18,11 +18,30 @@ type StrType = 'min' | 'max' | 'maxEqual' | 'minEqual' | 'default'
 
 type keyType = 'year' | 'month' | 'date' | 'h' | 'm' | 's'
 
+const getNumString = (value: number) => {
+  if (value < 10) {
+    return `0${value}`
+  }
+  return value
+}
+
+const getNewData = (obj: DateObjProps<number | string>) => {
+  let objs = {}
+  Object.entries(obj).forEach(([key, value]) => {
+    objs[key] = getNumString(value)
+  })
+  return objs
+}
+
 const getRangeNumber = (start: number, end: number) => {
   const lg = end - start
-  let arr: number[] = []
+  let arr: (number | string)[] = []
   for (let i = 0; i < lg; i++) {
-    arr.push(i + start)
+    let ints: string | number = i + start
+    if (ints < 10) {
+      ints = getNumString(ints)
+    }
+    arr.push(ints)
   }
   return arr
 }
@@ -43,11 +62,11 @@ class MoveDate {
   private s: number = undefined
 
   // 结果展示数组
-  private dateList: DateObjProps<number[]> = {}
+  private dateList: DateObjProps<(string | number)[]> = {}
 
-  private dateStr: DateObjProps<number> = {}
+  private dateStr: DateObjProps<string | number> = {}
 
-  constructor(props: MoveDateProps) {
+  constructor(props?: MoveDateProps) {
     this.init(props || {})
   }
 
@@ -55,6 +74,7 @@ class MoveDate {
   private init = (props: MoveDateProps) => {
     ['max', 'min'].forEach(key => {
       if (Reflect.has(props, key)) {
+        // console.log(key, this.analysisDate(props[key]))
         this[key] = this.analysisDate(props[key])
       }
     })
@@ -66,8 +86,10 @@ class MoveDate {
     })
     await this.getMonth()
     return {
+      // 最新的渲染数据列表
       data: this.dateList,
-      str: this.dateStr,
+      /** 最新的数据 */
+      new: getNewData(this.dateStr),
     }
   }
   // 解析出数据
@@ -94,32 +116,33 @@ class MoveDate {
     if (this.min && this.min.year === this.year) {
       // 判断当前选中月份是否合法
       if (this.month < this.min.month) {
-        this.dateStr.month = this.min.month
+        this.dateStr.month = getNumString(this.min.month)
         start = this.min.month
         str = 'min'
       } else if (this.month === this.min.month) {
-        this.dateStr.month = this.min.month
+        this.dateStr.month = getNumString(this.min.month)
         start = this.min.month
         str = 'minEqual'
       }
       // 获取月份数据
-      this.dateList.month = getRangeNumber(start, 12)
+      this.dateList.month = getRangeNumber(start, 13)
     } else if (this.min && this.max.year === this.year) {
       // 判断当前选中月份是否合法
       if (this.month > this.max.month) {
-        this.dateStr.month = this.max.month
+        this.dateStr.month = getNumString(this.max.month)
         start = this.max.month
         str = 'max'
       } else if (this.month === this.max.month) {
-        this.dateStr.month = this.max.month
+        this.dateStr.month = getNumString(this.max.month)
         start = this.max.month
         str = 'maxEqual'
       }
       // 获取月份数据
-      this.dateList.month = getRangeNumber(0, start)
+      this.dateList.month = getRangeNumber(1, start + 1)
     } else {
+      this.dateStr.month = getNumString(this.month)
       // 其他情况不做处理
-      this.dateList.month = getRangeNumber(0, 12)
+      this.dateList.month = getRangeNumber(1, 13)
     }
     await this.getDate(str)
   }
@@ -130,17 +153,17 @@ class MoveDate {
     num: number,
     nextFun?: string,
   ) => {
-    let start = 0
+    let start = ['date', 'month', 'h'].includes(key) ? 1 : 0
     let nextStr: StrType = 'default'
-    const monthDay = num
+    const monthDay = ['date', 'month', 'h'].includes(key) ? num + 1 : num
     if (str === 'min') {
       // 判断当前选中天数是否合法
       if (this[key] < this.min[key]) {
-        this.dateStr[key] = this.min[key]
+        this.dateStr[key] = getNumString(this.min[key])
         start = this.min[key]
         nextStr = 'min'
       } else if (this[key] === this.min[key]) {
-        this.dateStr[key] = this.min[key]
+        this.dateStr[key] = getNumString(this.min[key])
         start = this.min[key]
         nextStr = 'minEqual'
       }
@@ -149,28 +172,41 @@ class MoveDate {
     } else if (str === 'max') {
       // 判断当前选中天数是否合法
       if (this[key] > this.max[key]) {
-        this.dateStr[key] = this.max[key]
+        this.dateStr[key] = getNumString(this.max[key])
         start = this.max[key]
         nextStr = 'max'
       } else if (this[key] === this.max[key]) {
-        this.dateStr[key] = this.max[key]
+        this.dateStr[key] = getNumString(this.max[key])
         start = this.max[key]
         nextStr = 'maxEqual'
       }
+      if (['date', 'month'].includes(key)) {
+        this.dateList[key] = getRangeNumber(1, start + 1)
+      } else if (['h', 'm', 's'].includes(key)) {
+        this.dateList[key] = getRangeNumber(0, start + 1)
+      } else {
+        this.dateList[key] = getRangeNumber(0, start)
+      }
       // 当月天数
-      this.dateList[key] = getRangeNumber(0, start)
     } else if (str === 'maxEqual') {
-      this.dateStr[key] = this.max[key]
+      this.dateStr[key] = getNumString(this.max[key])
       start = this.max[key]
       nextStr = 'maxEqual'
-      this.dateList[key] = getRangeNumber(0, start)
+      if (['date', 'month'].includes(key)) {
+        this.dateList[key] = getRangeNumber(1, start + 1)
+      } else if (['h', 'm', 's'].includes(key)) {
+        this.dateList[key] = getRangeNumber(0, start + 1)
+      } else {
+        this.dateList[key] = getRangeNumber(0, start)
+      }
     } else if (str === 'minEqual') {
-      this.dateStr[key] = this.min[key]
+      this.dateStr[key] = getNumString(this.min[key])
       start = this.min[key]
       nextStr = 'minEqual'
       this.dateList[key] = getRangeNumber(start, monthDay)
     } else {
-      this.dateList[key] = getRangeNumber(0, start)
+      this.dateStr[key] = getNumString(this[key])
+      this.dateList[key] = getRangeNumber(start, monthDay)
     }
     if (nextFun && this[nextFun]) {
       await this[nextFun](nextStr)
@@ -196,7 +232,7 @@ class MoveDate {
    * 当天数开始动的时候(前面其他的不用动)
    * **/
   private getHours = async (str: StrType) => {
-    await this.setDateCom(str, 'h', 60, 'getMinutes')
+    await this.setDateCom(str, 'h', 23, 'getMinutes')
   }
   /**
    * 如果时分秒也做限制 (前面其他的不用动)
@@ -223,3 +259,58 @@ class MoveDate {
 }
 
 export default MoveDate
+
+// // 案例
+// const getslit = async () => {
+//   var dates = new MoveDate({
+//     // min: "2021-12-14 16:16:26",
+//     // max: "2022-12-14 16:16:26",
+//   });
+//   var resu = await dates.move("2022-12-17 15:14:18");
+//   // eslint-disable-next-line no-console
+//   console.log(resu);
+// }
+// getslit()
+
+// // 返回格式
+// const result = {
+//   data: {
+//     month: [
+//       '01', '02', '03', '04',
+//       '05', '06', '07', '08',
+//       '09', 10, 11, 12
+//     ],
+//     date: [
+//       '01', '02', '03', '04', '05', '06', '07',
+//       '08', '09', 10, 11, 12, 13, 14,
+//       15, 16, 17, 18, 19, 20, 21,
+//       22, 23, 24, 25, 26, 27, 28,
+//       29, 30, 31
+//     ],
+//     h: [
+//       '01', '02', '03', '04', '05', '06',
+//       '07', '08', '09', 10, 11, 12,
+//       13, 14, 15, 16, 17, 18,
+//       19, 20, 21, 22, 23
+//     ],
+//     m: [
+//       '00', '01', '02', '03', '04', '05', '06', '07', '08',
+//       '09', 10, 11, 12, 13, 14, 15, 16, 17,
+//       18, 19, 20, 21, 22, 23, 24, 25, 26,
+//       27, 28, 29, 30, 31, 32, 33, 34, 35,
+//       36, 37, 38, 39, 40, 41, 42, 43, 44,
+//       45, 46, 47, 48, 49, 50, 51, 52, 53,
+//       54, 55, 56, 57, 58, 59
+//     ],
+//     s: [
+//       '00', '01', '02', '03', '04', '05', '06', '07', '08',
+//       '09', 10, 11, 12, 13, 14, 15, 16, 17,
+//       18, 19, 20, 21, 22, 23, 24, 25, 26,
+//       27, 28, 29, 30, 31, 32, 33, 34, 35,
+//       36, 37, 38, 39, 40, 41, 42, 43, 44,
+//       45, 46, 47, 48, 49, 50, 51, 52, 53,
+//       54, 55, 56, 57, 58, 59
+//     ]
+//   },
+//   new: { month: 12, date: 17, h: 15, m: 14, s: 18 }
+// }
