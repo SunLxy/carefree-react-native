@@ -211,6 +211,15 @@ class MoveDate {
   private getSeconds = async (str: StrType) => {
     await this.setDateCom(str, 's', 60)
   }
+  getFun = () => {
+    return {
+      getSeconds: this.getSeconds,
+      getMinutes: this.getMinutes,
+      getHours: this.getHours,
+      getDate: this.getDate,
+      getMonth: this.getMonth,
+    }
+  }
 }
 
 export default MoveDate
