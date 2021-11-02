@@ -64,11 +64,11 @@ class MoveDate {
     Object.entries(result).forEach(([key, value]) => {
       this[key] = value
     })
-    this.getMonth()
-    // this.getDate()
-    // this.getHours()
-    // this.getMinutes()
-    // this.getSeconds()
+    await this.getMonth()
+    return {
+      data: this.dateList,
+      str: this.dateStr,
+    }
   }
   // 解析出数据
   private analysisDate = (dates: string) => {
@@ -88,7 +88,7 @@ class MoveDate {
    * 2. 获取点击年份的月份的天数 判断月份和天数是否在限制内，不在则取最大或最小限制月份和天数'
    * date:"2021-12-12 12:12:12"
    * */
-  private getMonth = () => {
+  private getMonth = async () => {
     let start = 0
     let str: StrType = 'default'
     if (this.min && this.min.year === this.year) {
@@ -121,10 +121,10 @@ class MoveDate {
       // 其他情况不做处理
       this.dateList.month = getRangeNumber(0, 12)
     }
-    this.getDate(str)
+    await this.getDate(str)
   }
 
-  private setDateCom = (
+  private setDateCom = async (
     str: StrType,
     key: keyType,
     num: number,
@@ -173,7 +173,7 @@ class MoveDate {
       this.dateList[key] = getRangeNumber(0, start)
     }
     if (nextFun && this[nextFun]) {
-      this[nextFun](nextStr)
+      await this[nextFun](nextStr)
     }
   }
 
@@ -181,211 +181,35 @@ class MoveDate {
    * 当月份开始动的时候(前面其他的不用动)
    * 1. 判断天数是否在限制内，不在则取最大或最小限制天数
    * **/
-  private getDate = (str: StrType) => {
+  private getDate = async (str: StrType) => {
     /**
      * 数据返回格式 返回的是天数
      * */
-    this.setDateCom(
+    await this.setDateCom(
       str,
       'date',
       new Date(this.year, this.month, 0).getDate(),
       'getHours',
     )
-    // let start = 0
-    // let nextStr: StrType = "default"
-    // const monthDay = new Date(this.year, this.month, 0).getDate()
-    // if (str === "min") {
-    //   // 判断当前选中天数是否合法
-    //   if (this.date < this.min.date) {
-    //     this.dateStr.date = this.min.date
-    //     start = this.min.date
-    //     nextStr = "min"
-    //   } else if (this.date === this.min.date) {
-    //     this.dateStr.date = this.min.date
-    //     start = this.min.date
-    //     nextStr = "minEqual"
-    //   }
-    //   // 当月天数
-    //   this.dateList.date = getRangeNumber(start, monthDay)
-    // } else if (str === "max") {
-    //   // 判断当前选中天数是否合法
-    //   if (this.date > this.max.date) {
-    //     this.dateStr.date = this.max.date
-    //     start = this.max.date
-    //     nextStr = "max"
-    //   } else if (this.date === this.max.date) {
-    //     this.dateStr.date = this.max.date
-    //     start = this.max.date
-    //     nextStr = "maxEqual"
-    //   }
-    //   // 当月天数
-    //   this.dateList.date = getRangeNumber(0, start)
-    // } else if (str === "maxEqual") {
-    //   this.dateStr.date = this.max.date
-    //   start = this.max.date
-    //   nextStr = "maxEqual"
-    //   this.dateList.date = getRangeNumber(0, start)
-    // } else if (str === "minEqual") {
-    //   this.dateStr.date = this.min.date
-    //   start = this.min.date
-    //   nextStr = "minEqual"
-    //   this.dateList.date = getRangeNumber(start, monthDay)
-    // } else {
-    //   this.dateList.date = getRangeNumber(0, start)
-    // }
-    // this.getHours(nextStr)
   }
-
   /**
    * 当天数开始动的时候(前面其他的不用动)
    * **/
-  private getHours = (str: StrType) => {
-    this.setDateCom(str, 'h', 60, 'getMinutes')
-    // /**
-    //  * 数据返回格式 返回的是小时
-    //  * */
-    // let start = 0
-    // let nextStr: StrType = "default"
-    // const monthDay = 24;
-    // if (str === "min") {
-    //   // 判断当前选中天数是否合法
-    //   if (this.h < this.min.h) {
-    //     this.dateStr.h = this.min.h
-    //     start = this.min.h
-    //     nextStr = "min"
-    //   } else if (this.h === this.min.h) {
-    //     this.dateStr.h = this.min.h
-    //     start = this.min.h
-    //     nextStr = "minEqual"
-    //   }
-    //   // 当月天数
-    //   this.dateList.h = getRangeNumber(start, monthDay)
-    // } else if (str === "max") {
-    //   // 判断当前选中天数是否合法
-    //   if (this.h > this.max.h) {
-    //     this.dateStr.h = this.max.h
-    //     start = this.max.h
-    //     nextStr = "max"
-    //   } else if (this.h === this.max.h) {
-    //     this.dateStr.h = this.max.h
-    //     start = this.max.h
-    //     nextStr = "maxEqual"
-    //   }
-    //   // 当月天数
-    //   this.dateList.h = getRangeNumber(0, start)
-    // } else if (str === "maxEqual") {
-    //   this.dateStr.h = this.max.h
-    //   start = this.max.h
-    //   nextStr = "maxEqual"
-    //   this.dateList.h = getRangeNumber(0, start)
-    // } else if (str === "minEqual") {
-    //   this.dateStr.h = this.min.h
-    //   start = this.min.h
-    //   nextStr = "minEqual"
-    //   this.dateList.h = getRangeNumber(start, monthDay)
-    // } else {
-    //   this.dateList.h = getRangeNumber(0, start)
-    // }
-    // this.getMinutes(nextStr)
+  private getHours = async (str: StrType) => {
+    await this.setDateCom(str, 'h', 60, 'getMinutes')
   }
-
   /**
    * 如果时分秒也做限制 (前面其他的不用动)
    * 1. 上面年份动 再加上时分秒的限制
    * **/
-  private getMinutes = (str: StrType) => {
-    this.setDateCom(str, 'm', 60, 'getSeconds')
-
-    // /**
-    //   * 数据返回格式 返回的是分钟
-    //   * */
-    // let start = 0
-    // let nextStr: StrType = "default"
-    // const monthDay = 60;
-    // if (str === "min") {
-    //   // 判断当前选中天数是否合法
-    //   if (this.m < this.min.m) {
-    //     this.dateStr.h = this.min.m
-    //     start = this.min.m
-    //     nextStr = "min"
-    //   } else if (this.m === this.min.m) {
-    //     this.dateStr.m = this.min.m
-    //     start = this.min.m
-    //     nextStr = "minEqual"
-    //   }
-    //   // 当月天数
-    //   this.dateList.m = getRangeNumber(start, monthDay)
-    // } else if (str === "max") {
-    //   // 判断当前选中天数是否合法
-    //   if (this.m > this.max.m) {
-    //     this.dateStr.m = this.max.m
-    //     start = this.max.m
-    //     nextStr = "max"
-    //   } else if (this.m === this.max.m) {
-    //     this.dateStr.m = this.max.m
-    //     start = this.max.m
-    //     nextStr = "maxEqual"
-    //   }
-    //   // 当月天数
-    //   this.dateList.m = getRangeNumber(0, start)
-    // } else if (str === "maxEqual") {
-    //   this.dateStr.m = this.max.m
-    //   start = this.max.m
-    //   nextStr = "maxEqual"
-    //   this.dateList.m = getRangeNumber(0, start)
-    // } else if (str === "minEqual") {
-    //   this.dateStr.m = this.min.m
-    //   start = this.min.m
-    //   nextStr = "minEqual"
-    //   this.dateList.m = getRangeNumber(start, monthDay)
-    // } else {
-    //   this.dateList.m = getRangeNumber(0, start)
-    // }
-    // this.getSeconds(nextStr)
+  private getMinutes = async (str: StrType) => {
+    await this.setDateCom(str, 'm', 60, 'getSeconds')
   }
   /**
    *  动小时(前面其他的不用动)
    * */
-  private getSeconds = (str: StrType) => {
-    this.setDateCom(str, 's', 60)
-    /**
-     * 数据返回格式 返回的是秒
-     * */
-    // let start = 0
-    // const monthDay = 60;
-    // if (str === "min") {
-    //   // 判断当前选中天数是否合法
-    //   if (this.s < this.min.s) {
-    //     this.dateStr.s = this.min.s
-    //     start = this.min.s
-    //   } else if (this.s === this.min.s) {
-    //     this.dateStr.s = this.min.s
-    //     start = this.min.s
-    //   }
-    //   // 当月天数
-    //   this.dateList.s = getRangeNumber(start, monthDay)
-    // } else if (str === "max") {
-    //   // 判断当前选中天数是否合法
-    //   if (this.s > this.max.s) {
-    //     this.dateStr.s = this.max.s
-    //     start = this.max.s
-    //   } else if (this.s === this.max.s) {
-    //     this.dateStr.s = this.max.s
-    //     start = this.max.s
-    //   }
-    //   // 当月天数
-    //   this.dateList.s = getRangeNumber(0, start)
-    // } else if (str === "maxEqual") {
-    //   this.dateStr.s = this.max.s
-    //   start = this.max.s
-    //   this.dateList.s = getRangeNumber(0, start)
-    // } else if (str === "minEqual") {
-    //   this.dateStr.s = this.min.s
-    //   start = this.min.s
-    //   this.dateList.s = getRangeNumber(start, monthDay)
-    // } else {
-    //   this.dateList.s = getRangeNumber(0, start)
-    // }
+  private getSeconds = async (str: StrType) => {
+    await this.setDateCom(str, 's', 60)
   }
 }
 
