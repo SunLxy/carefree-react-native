@@ -1,5 +1,9 @@
 import React, { useMemo, useState } from 'react'
-import { getParentChildKey, getCheckedTrue, getCheckedFalse } from './utils'
+import {
+  getParentChildKey,
+  getCheckedTrue,
+  getCheckedFalse,
+} from 'carefree-utils'
 import Item from './Item'
 import { TreeChildContext } from './useTree'
 import { ValueType, ValueArrType } from './interface'
@@ -169,16 +173,16 @@ const Tree: React.FC<TreeProps> = props => {
     }
     if (check === 2) {
       result = getCheckedFalse({
-        selectAllKeys: initSelectKeys.selectAllKeys as ValueArrType,
-        halfKeys: initSelectKeys.halfKeys,
+        AllKeys: initSelectKeys.selectAllKeys as ValueArrType,
+        HalfKeys: initSelectKeys.halfKeys,
         key: value,
         ParentMap,
         ChildParentMap,
       })
     } else {
       result = getCheckedTrue({
-        selectAllKeys: initSelectKeys.selectAllKeys as ValueArrType,
-        halfKeys: initSelectKeys.halfKeys,
+        AllKeys: initSelectKeys.selectAllKeys as ValueArrType,
+        HalfKeys: initSelectKeys.halfKeys,
         key: value,
         ParentMap,
         ChildParentMap,

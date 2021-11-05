@@ -34,7 +34,7 @@ const Input: React.FC<InputProps> = props => {
     style,
     value,
     warpStyle,
-    clearProps,
+    clearProps = {},
     clearSize = 20,
     clearColor = 'rgba(0,0,0,0.1)',
     ...rest
