@@ -66,7 +66,7 @@ const Swiper = (props: SwiperProps) => {
     event: NativeSyntheticEvent<NativeScrollEvent>,
   ) => {
     const X = event.nativeEvent.contentOffset.x
-    const cur = X / width
+    const cur = Math.round(X / width)
     setCurrent(cur)
   }
   // 是否自动进行轮播
