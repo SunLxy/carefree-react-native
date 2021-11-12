@@ -6,6 +6,8 @@ import {
   CheckMarkIcon,
   XIcon,
   StarIcon,
+  TwoLeftIcon,
+  TwoRightIcon,
 } from './../Icons'
 
 export default () => {
@@ -19,6 +21,8 @@ export default () => {
           <RadioIcon visible={visible} />
           <CheckMarkIcon visible={visible} />
           <XIcon />
+          <TwoLeftIcon />
+          <TwoRightIcon />
           <Button
             title="Fade In Or Out"
             onPress={() => {
