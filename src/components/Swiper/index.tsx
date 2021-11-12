@@ -73,6 +73,7 @@ const Swiper = (props: SwiperProps) => {
   React.useEffect(() => {
     let timer
     if (auto) {
+      clearTimeout(timer)
       timer = setTimeout(() => {
         let ind = currentIndex + 1
         if (ind > config.length - 1) {
