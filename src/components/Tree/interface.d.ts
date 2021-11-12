@@ -4,7 +4,7 @@ export interface TreeChildContextProps {
   valueField: string
   childrenField: string
   onCheck: (...arg: any) => void
-  initMap: TreeCalss
+  initMap?: TreeCalss
   // 单选和多选 父级是否可选  是否只用于展示
   /** 多选或单选 */
   multiple?: boolean

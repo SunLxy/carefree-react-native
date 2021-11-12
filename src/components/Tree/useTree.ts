@@ -5,7 +5,6 @@ export const TreeChildContext = React.createContext<TreeChildContextProps>({
   valueField: 'value',
   childrenField: 'children',
   onCheck: () => {},
-  getCheckedSatus: () => 0,
   multiple: true,
   isParentCheck: true,
   isReadOnly: false,
