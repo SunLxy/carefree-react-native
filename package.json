@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.15.3",
-    "carefree-utils": "1.0.13",
+    "carefree-utils": "1.0.14",
     "rc-field-form": "1.21.2"
   },
   "peerDependencies": {
