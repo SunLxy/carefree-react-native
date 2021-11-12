@@ -13,10 +13,10 @@ import { useTreeChild } from './useTree'
 import styles from './styles'
 
 const CheckBoxHalf: React.FC<CheckBoxHalfProps> = props => {
-  const { checked } = props
-  if (checked === 2) {
+  const { checked, checkHalf } = props
+  if (checked) {
     return <CheckBoxIcon visible={true} />
-  } else if (checked === 1) {
+  } else if (checkHalf) {
     return <HalfIcon visible={true} />
   }
   return <CheckBoxIcon visible={false} />
@@ -34,23 +34,20 @@ const Item: React.FC<ItemProps> = props => {
   const { item } = props
   const {
     labelField,
-    valueField,
     childrenField,
     onCheck,
-    getCheckedSatus,
+    initMap,
     isParentCheck,
     isReadOnly,
     layout,
     isRowClick,
   } = useTreeChild()
-  const {
-    [childrenField]: children,
-    [labelField]: label,
-    [valueField]: value,
-  } = item
+  const { [childrenField]: children, [labelField]: label } = item
   const isChild = (Array.isArray(children) && children.length) || false
 
-  const checked = getCheckedSatus(value)
+  const checked = initMap.isCheck(item)
+  const checkHalf = initMap.isCheckHalf(item)
+  const disabled = initMap.isDisabled(item)
 
   const [visible, setVisible] = useState<boolean>(false)
   const deepRight = JSON.stringify({
@@ -72,7 +69,11 @@ const Item: React.FC<ItemProps> = props => {
       <TouchableOpacity
         style={{ marginRight: 3 }}
         onPress={onCheck.bind(this, item)}>
-        <CheckBoxHalf checked={checked} />
+        <CheckBoxHalf
+          checked={checked}
+          checkHalf={checkHalf}
+          disabled={disabled}
+        />
       </TouchableOpacity>
     )
   }
@@ -83,7 +84,7 @@ const Item: React.FC<ItemProps> = props => {
     }
     return (
       <View style={[{ paddingRight: 10 }, isChild && { marginRight: 15 }]}>
-        <CheckMarkIcon visible={[1, 2].includes(checked)} />
+        <CheckMarkIcon visible={checkHalf || checked} />
       </View>
     )
     // eslint-disable-next-line react-hooks/exhaustive-deps

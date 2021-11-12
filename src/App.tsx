@@ -32,7 +32,7 @@ import Button from './components/Button/demo'
 import TabBar from './components/TabBar/demo'
 import TabNav from './components/TabNav/demo'
 import Search from './components/Search/demo'
-
+import Swiper from './components/Swiper/demo'
 // import Demo from "./Demo"
 // import Demo from "./components/Table/demo"
 const App = () => {
@@ -93,6 +93,7 @@ const App = () => {
         <Form />
         <Form2 />
         <Search />
+        <Swiper />
       </ScrollView>
     </SafeAreaView>
   )

@@ -61,3 +61,6 @@ export * from './components/TabNav'
 
 export { default as TabBar } from './components/TabBar'
 export * from './components/TabBar'
+
+export { default as Swiper } from './components/Swiper'
+export * from './components/Swiper'
