@@ -1,7 +1,8 @@
 import React from 'react'
 import { View, TouchableOpacity, Text } from 'react-native'
 import styles from './styles'
-import { AnalysisDateRetrun } from './utils'
+import { getStringNumber, AnalysisDateRetrun } from './utils'
+
 // export { TwoLeftIcon, OneLeftIcon } from './TwoLeft'
 // export { TwoRightIcon, OneRightIcon } from './TwoRight'
 import {
@@ -36,7 +37,7 @@ const Head = (props: HeadProps) => {
       </View>
       <View style={styles.headDate}>
         <Text style={styles.headDateText}>
-          {date.year}-{date.month}-{date.date}
+          {date.year}-{getStringNumber(date.month)}
         </Text>
       </View>
       <View style={styles.headBtnGroup}>

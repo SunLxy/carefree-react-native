@@ -43,7 +43,7 @@
     // "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
     "skipLibCheck": true
   },
-  "include": ["src/**/*.tsx", "src/**/*.ts", "src/index.ts"],
+  "include": ["src/**/*.tsx", "src/**/*.ts", "src/index.ts", "./global.d.ts"],
   "exclude": [
     "node_modules",
     "babel.config.js",
@@ -51,7 +51,6 @@
     "jest.config.js",
     ".ci",
     "website",
-    "src/index.d.ts",
     "src/**/__tests__",
     "src/**/**/demo.tsx",
     "src/**/**/Demo.tsx",

@@ -8,12 +8,12 @@ export const getStringNumber = value => {
 }
 
 export interface AnalysisDateRetrun {
-  year: number
-  month: number | string
-  date: number | string
-  h: number
-  m: number
-  s: number
+  year?: number | string
+  month?: number | string
+  date?: number | string
+  h?: number
+  m?: number
+  s?: number
 }
 // 解析出数据
 export const analysisDate = (dates: string | Date): AnalysisDateRetrun => {

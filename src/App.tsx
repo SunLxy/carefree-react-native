@@ -7,7 +7,7 @@
  *
  * @format
  */
-
+import './components/global'
 import React, { useState } from 'react'
 import {
   SafeAreaView,
@@ -33,11 +33,22 @@ import TabBar from './components/TabBar/demo'
 import TabNav from './components/TabNav/demo'
 import Search from './components/Search/demo'
 import Swiper from './components/Swiper/demo'
-import DatePicker from './components/DatePicker/demo'
-// import Demo from "./Demo"
-// import Demo from "./components/Table/demo"
+import PaneDate from './components/PaneDate/demo'
+
+// global.Person = "222"
+// global.request = (url: RequestInfo, options?: RequestInit) => {
+//   // eslint-disable-next-line no-console
+//   console.log(url, options)
+//   return fetch(url, options)
+// }
+
 const App = () => {
   const [visible, setVisible] = useState(false)
+
+  // eslint-disable-next-line no-console
+  console.log(global.Person)
+  // eslint-disable-next-line no-console
+  console.log(global.request('abdc', {}))
 
   // return <Demo />
   return (
@@ -95,7 +106,7 @@ const App = () => {
         <Form2 />
         <Search />
         <Swiper />
-        <DatePicker />
+        <PaneDate />
       </ScrollView>
     </SafeAreaView>
   )

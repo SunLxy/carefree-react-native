@@ -65,5 +65,7 @@ export * from './components/TabBar'
 export { default as Swiper } from './components/Swiper'
 export * from './components/Swiper'
 
-export { default as DatePicker } from './components/DatePicker'
-export * from './components/DatePicker'
+export { default as PaneDate } from './components/PaneDate'
+export * from './components/PaneDate'
+
+export * from './components/global'

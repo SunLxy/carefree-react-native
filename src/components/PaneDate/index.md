@@ -1,5 +1,5 @@
 ---
-title: DatePicker
+title: PaneDate
 order: 6
 ---
 
@@ -21,12 +21,12 @@ export interface DatePickerProps {
 ```js
 import React from 'react'
 import { SafeAreaView } from 'react-native'
-import {DatePicker} from 'carefree-react-native'
+import {PaneDate} from 'carefree-react-native'
 
 const Demo = () => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <DatePicker />
+      <PaneDate />
     </SafeAreaView>
   )
 }

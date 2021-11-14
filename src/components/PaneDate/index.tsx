@@ -3,7 +3,7 @@ import React from 'react'
 import { View } from 'react-native'
 import { paneDate } from 'carefree-utils'
 import { analysisDate } from './utils'
-import { getStringNumber } from './utils'
+import { AnalysisDateRetrun } from './utils'
 import { solarTolunarReturn } from 'carefree-utils/lib/date/utils'
 import styles from './styles'
 import Head from './Head'
@@ -16,24 +16,25 @@ export interface DatePickerProps {
 
 const DatePicker = props => {
   const { value, onChange } = props
+
   const [current, setCurrent] = React.useState(value)
   let checkValue = current
   if (value) {
     checkValue = value
   }
 
-  const [store, setStore] = React.useState<string>(value)
+  const [store, setStore] = React.useState<AnalysisDateRetrun>(
+    analysisDate(value || new Date()),
+  )
 
   const init = React.useMemo(() => {
-    let result: any = {}
-    if (store) {
-      result = analysisDate(store)
-    } else {
-      result = analysisDate(new Date())
-    }
     return {
-      dataList: new paneDate().getPaneDate('rn', result.year, result.month),
-      date: result,
+      dataList: new paneDate().getPaneDate(
+        'rn',
+        Number(store.year),
+        Number(store.month),
+      ),
+      date: store,
     }
   }, [store])
 
@@ -52,58 +53,42 @@ const DatePicker = props => {
     let valu = `${year}-${month}-${date}`
     onUpdateValue(valu)
     if (currentType !== 'current') {
-      setStore(valu)
+      setStore({ year, month })
     }
   }
+  // 选中日期不变
   // 触发上一个
   const onPre = (mode: ModeType) => {
-    const { year, month, date } = init.date
+    const { year, month } = init.date
     let y = Number(year)
     let m = Number(month)
-    let d = date
     if (mode === 'M') {
       m = Number(month) - 1
       if (m <= 0) {
         m = 12
         y = Number(year) - 1
       }
-      const monthNum = new Date(y, m, 0).getDate()
-      if (date >= monthNum) {
-        d = monthNum
-      }
     } else {
       y = Number(year) - 1
     }
-    let val = `${y}-${getStringNumber(m)}-${getStringNumber(d)}`
-    if (d !== date) {
-      onUpdateValue(val)
-    }
-    setStore(val)
+    setStore({ year: y, month: m })
   }
+  // 选中日期不变
   // 触发下一个
   const onNext = (mode: ModeType) => {
-    const { year, month, date } = init.date
+    const { year, month } = init.date
     let y = Number(year)
     let m = Number(month)
-    let d = date
     if (mode === 'M') {
       m = Number(month) + 1
       if (m >= 13) {
         m = 1
         y = Number(year) + 1
       }
-      const monthNum = new Date(y, m, 0).getDate()
-      if (date >= monthNum) {
-        d = monthNum
-      }
     } else {
       y = Number(year) + 1
     }
-    let val = `${y}-${getStringNumber(m)}-${getStringNumber(d)}`
-    if (d !== date) {
-      onUpdateValue(val)
-    }
-    setStore(val)
+    setStore({ year: y, month: m })
   }
 
   return (
