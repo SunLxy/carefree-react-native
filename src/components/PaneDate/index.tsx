@@ -9,12 +9,12 @@ import styles from './styles'
 import Head from './Head'
 import Pane from './Pane'
 type ModeType = 'M' | 'Y'
-export interface DatePickerProps {
+export interface PaneDateProps {
   value?: string
-  onChange?: (value: string, item: any) => void
+  onChange?: (value: string) => void
 }
 
-const DatePicker = props => {
+const PaneDate: React.FC<PaneDateProps> = props => {
   const { value, onChange } = props
 
   const [current, setCurrent] = React.useState(value)
@@ -99,4 +99,4 @@ const DatePicker = props => {
   )
 }
 
-export default DatePicker
+export default PaneDate

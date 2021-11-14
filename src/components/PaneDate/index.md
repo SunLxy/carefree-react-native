@@ -8,12 +8,10 @@ order: 6
 ### 日期面板参数
 
 ```ts 
-
-export interface DatePickerProps {
-  value?: string;
-  onChange?: (value: string, item: any) => void
+export interface PaneDateProps {
+  value?: string
+  onChange?: (value: string) => void
 }
-
 ```
 
 ### 案例
