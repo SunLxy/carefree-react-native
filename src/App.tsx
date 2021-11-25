@@ -34,6 +34,7 @@ import TabNav from './components/TabNav/demo'
 import Search from './components/Search/demo'
 import Swiper from './components/Swiper/demo'
 import PaneDate from './components/PaneDate/demo'
+import Pagination from './components/Pagination/demo'
 
 // global.Person = "222"
 // global.request = (url: RequestInfo, options?: RequestInit) => {
@@ -56,7 +57,8 @@ const App = () => {
       <StatusBar barStyle={'dark-content'} />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
-        keyboardShouldPersistTaps="handled">
+        keyboardShouldPersistTaps="handled"
+      >
         <View style={{ minHeight: 100 }}>
           <Text style={{ fontSize: 20, fontWeight: 'bold' }}>动画图标</Text>
           <Animated />
@@ -90,7 +92,8 @@ const App = () => {
         <TouchableOpacity
           onPress={() => {
             setVisible(true)
-          }}>
+          }}
+        >
           <Text>点击</Text>
         </TouchableOpacity>
         <ModalLay visible={visible} onRequestClose={() => setVisible(false)} />
@@ -107,6 +110,7 @@ const App = () => {
         <Search />
         <Swiper />
         <PaneDate />
+        <Pagination />
       </ScrollView>
     </SafeAreaView>
   )

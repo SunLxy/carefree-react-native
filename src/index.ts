@@ -68,4 +68,5 @@ export * from './components/Swiper'
 export { default as PaneDate } from './components/PaneDate'
 export * from './components/PaneDate'
 
-export * from './components/global'
+export { default as Pagination } from './components/Pagination'
+export * from './components/Pagination'
