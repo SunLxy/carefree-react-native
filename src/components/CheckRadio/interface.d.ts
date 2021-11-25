@@ -25,7 +25,7 @@ export interface CheckRadioProps {
   /** 选中图标显示位置 */
   checkAlign?: 'left' | 'right'
   /** 图标的大小 */
-  checkSize?: number
+  iconSize?: number
   /** 是显示按钮形式还是默认 */
   type?: 'button' | 'default'
   /** 选中时字体颜色 */
@@ -85,7 +85,7 @@ export interface ChildItemProps extends ItemProps {
   /** 选中图标显示位置 */
   checkAlign?: 'left' | 'right'
   /** 图标的大小 */
-  checkSize?: number
+  iconSize?: number
   /** 是显示按钮形式还是默认 */
   type?: 'button' | 'default'
   /** 选中时字体颜色 */

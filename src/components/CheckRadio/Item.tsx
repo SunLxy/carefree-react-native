@@ -38,7 +38,7 @@ export const Item: React.FC<ChildItemProps> = props => {
     type = 'default',
     layout = 'default',
     checkFontColor = '#fff',
-    checkSize = 20,
+    iconSize = 20,
     checkAlign = 'left',
     flexDirection = 'row',
     checkColor = '#1890ff',
@@ -134,7 +134,7 @@ export const Item: React.FC<ChildItemProps> = props => {
         >
           {checkAlign === 'left' && type === 'default' ? (
             <View style={{ marginRight: 5 }}>
-              <BoxIcon size={checkSize} color={checkColor} visible={check} />
+              <BoxIcon size={iconSize} color={checkColor} visible={check} />
             </View>
           ) : (
             <React.Fragment />
@@ -152,7 +152,7 @@ export const Item: React.FC<ChildItemProps> = props => {
           {checkAlign === 'right' && type === 'default' ? (
             <View style={{ marginRight: 5 }}>
               <CheckMarkIcon
-                size={checkSize}
+                size={iconSize}
                 color={checkColor}
                 visible={check}
               />
@@ -171,7 +171,7 @@ const Warp = (props: ItemProps) => {
     isCancel,
     flexDirection,
     checkAlign,
-    checkSize,
+    iconSize,
     type,
     checkFontColor,
     onParentChange,
@@ -187,7 +187,7 @@ const Warp = (props: ItemProps) => {
         isCancel,
         flexDirection,
         checkAlign,
-        checkSize,
+        iconSize,
         type,
         checkFontColor,
         onParentChange,

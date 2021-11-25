@@ -9,7 +9,7 @@ export const CheckRadioContext = React.createContext<
   itemTextStyle: {},
   type: 'default',
   checkFontColor: '#000',
-  checkSize: 20,
+  iconSize: 20,
   checkAlign: 'left',
   flexDirection: 'row',
   checkColor: '#1890ff',
