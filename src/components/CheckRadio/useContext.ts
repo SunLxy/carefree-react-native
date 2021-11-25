@@ -18,6 +18,7 @@ export const CheckRadioContext = React.createContext<
   disabledBG: 'rgba(0,0,0,0.1)',
   disabledFontColor: '#000',
   layout: 'default',
+  checkBorderColor: 'transparent',
 })
 
 const useCheckRadioContext = () => React.useContext(CheckRadioContext)

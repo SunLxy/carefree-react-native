@@ -48,6 +48,8 @@ export interface CheckRadioProps {
   /** 是否多选 */
   multiple?: boolean
   layout?: 'space' | 'default'
+  /** 选中按钮边框样式 */
+  checkBorderColor?: string
 }
 
 export interface ItemProps {
@@ -97,4 +99,6 @@ export interface ChildItemProps extends ItemProps {
   /** 是否多选 */
   multiple?: boolean
   layout?: 'space' | 'default'
+  /** 选中按钮边框样式 */
+  checkBorderColor?: string
 }

@@ -51,6 +51,7 @@ export const Item: React.FC<ChildItemProps> = props => {
     children,
     itemWarpStyle,
     number,
+    checkBorderColor,
   } = props
 
   const check = useMemo(() => {
@@ -97,6 +98,7 @@ export const Item: React.FC<ChildItemProps> = props => {
       layout,
       number,
       multiple,
+      checkBorderColor,
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
@@ -108,6 +110,7 @@ export const Item: React.FC<ChildItemProps> = props => {
     disabled,
     disabledBG,
     check,
+    checkBorderColor,
   ])
 
   const BoxIcon = multiple ? CheckBoxIcon : RadioIcon
@@ -117,7 +120,8 @@ export const Item: React.FC<ChildItemProps> = props => {
       <TouchableOpacity
         onPress={handleOnValue}
         disabled={disabled}
-        style={[{ marginHorizontal: 5 }, itemBtnStyle, styTouch]}>
+        style={[{ marginHorizontal: 5 }, itemBtnStyle, styTouch]}
+      >
         <View
           style={[
             { flexDirection: 'row', alignItems: 'center' },
@@ -126,7 +130,8 @@ export const Item: React.FC<ChildItemProps> = props => {
                   justifyContent: 'space-between',
                 }
               : {},
-          ]}>
+          ]}
+        >
           {checkAlign === 'left' && type === 'default' ? (
             <View style={{ marginRight: 5 }}>
               <BoxIcon size={checkSize} color={checkColor} visible={check} />
@@ -140,7 +145,8 @@ export const Item: React.FC<ChildItemProps> = props => {
               itemTextStyle,
               disabled ? { color: disabledFontColor } : {},
               check && type === 'button' ? { color: checkFontColor } : {},
-            ]}>
+            ]}
+          >
             {children ? children : label}
           </Text>
           {checkAlign === 'right' && type === 'default' ? (

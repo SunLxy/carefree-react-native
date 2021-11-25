@@ -8,6 +8,7 @@ export const getItemTouchStyle = (
     | 'disabled'
     | 'disabledBG'
     | 'layout'
+    | 'checkBorderColor'
   > & { check: boolean; number: number | 'first' | 'last'; multiple: boolean },
 ) => {
   const {
@@ -20,6 +21,7 @@ export const getItemTouchStyle = (
     layout,
     number,
     multiple,
+    checkBorderColor = 'transparent',
   } = props
   let sty = {}
   if (flexDirection === 'column') {
@@ -85,7 +87,7 @@ export const getItemTouchStyle = (
     sty = {
       ...sty,
       backgroundColor: checkColor,
-      borderColor: 'transparent',
+      borderColor: checkBorderColor,
     }
   }
   if (type === 'button' && disabled) {

@@ -28,6 +28,7 @@ const CheckRadio: React.FC<CheckRadioProps> & { Item: React.FC<ItemProps> } =
       children,
       warpSatyle,
       itemWarpStyle,
+      checkBorderColor = 'transparent',
       ...rest
     } = props
     const [actionValue, setActionValue] = useState<ValueType | ValueType[]>()
@@ -81,14 +82,17 @@ const CheckRadio: React.FC<CheckRadioProps> & { Item: React.FC<ItemProps> } =
           checkFontColor,
           type,
           multiple,
+          checkBorderColor,
           onParentChange: handleValue,
-        }}>
+        }}
+      >
         <View
           style={[
             { flexWrap: 'wrap', paddingTop: 5 },
             warpSatyle,
             { flexDirection },
-          ]}>
+          ]}
+        >
           {children ? children : _optionsRender()}
         </View>
       </CheckRadioContext.Provider>

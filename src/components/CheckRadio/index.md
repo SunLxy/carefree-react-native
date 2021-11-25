@@ -52,6 +52,10 @@ export interface CheckRadioProps {
   itemWarpStyle?: StyleProp<ViewStyle>
   /** 是否多选 */
   multiple?: boolean
+  /** 布局 */ 
+  layout?: 'space' | 'default',
+  /** 选中按钮边框样式 */
+  checkBorderColor?: string
 }
 // CheckRadio.Item 参数
 
