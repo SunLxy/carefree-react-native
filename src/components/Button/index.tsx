@@ -14,8 +14,12 @@ import Item from './Item'
 export interface ButtonProps extends TouchableOpacityProps {
   /** 只有一个字符串子项 字体样式 */
   textStyle?: StyleProp<TextStyle>
+  /** 边框 */
   bordered?: boolean
+  /** 边框颜色 */
   borderColor?: string
+  /** 禁用 字体颜色 */
+  disabledColor?: string
 }
 
 const Button: React.FC<ButtonProps> & {
@@ -28,11 +32,23 @@ const Button: React.FC<ButtonProps> & {
     style,
     bordered = true,
     borderColor,
+    disabled,
+    disabledColor = '#ccc',
     ...rest
   } = props
   let childNode = children
   if (typeof children === 'string') {
-    childNode = <Text style={[styles.btnText, textStyle]}>{children}</Text>
+    childNode = (
+      <Text
+        style={[
+          styles.btnText,
+          textStyle,
+          disabled && { color: disabledColor },
+        ]}
+      >
+        {children}
+      </Text>
+    )
   }
   if (typeof children === 'function') {
     childNode = children()
@@ -41,12 +57,15 @@ const Button: React.FC<ButtonProps> & {
   return (
     <TouchableOpacity
       {...rest}
+      disabled={disabled}
       style={[
         styles.btn,
         bordered && styles.bordered,
         borderColor && { borderColor: borderColor },
         style,
-      ]}>
+        disabled && { opacity: 0.5 },
+      ]}
+    >
       {childNode}
     </TouchableOpacity>
   )

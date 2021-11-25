@@ -22,8 +22,12 @@ export interface ButtonGroupProps {
   onChange?: (value: string | number) => void
   /** 是否 开启选中状态 */
   isOpenCheck?: boolean
+  /** 边框 */
   bordered?: boolean
+  /** 边框 颜色*/
   borderColor?: string
+  /** 禁用 字体颜色 */
+  disabledColor?: string
 }
 
 const Group: React.FC<ButtonGroupProps> = props => {
@@ -41,6 +45,7 @@ const Group: React.FC<ButtonGroupProps> = props => {
     isOpenCheck = false,
     bordered = true,
     borderColor = '#ccc',
+    disabledColor = '#ccc',
     ...rest
   } = props
 
@@ -92,7 +97,9 @@ const Group: React.FC<ButtonGroupProps> = props => {
         isOpenCheck,
         bordered,
         borderColor,
-      }}>
+        disabledColor,
+      }}
+    >
       <View style={{ flexDirection: 'row' }}>
         {_render}
         {children}

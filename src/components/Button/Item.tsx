@@ -18,7 +18,7 @@ export interface ItemProps extends TouchableOpacityProps {
   number?: number | 'first' | 'last'
 }
 const Item: React.FC<ItemProps> = props => {
-  const { label, textStyle, style, number, value, ...rest } = props
+  const { label, textStyle, style, number, value, disabled, ...rest } = props
   const {
     activeBg,
     activeColor,
@@ -31,6 +31,7 @@ const Item: React.FC<ItemProps> = props => {
     isOpenCheck,
     bordered,
     borderColor,
+    disabledColor = '#ccc',
   } = useButtonContext()
 
   // 选中
@@ -39,7 +40,14 @@ const Item: React.FC<ItemProps> = props => {
   let childNode = label
   if (typeof label === 'string') {
     childNode = (
-      <Text style={[styles.btnText, textStyle, act && { color: activeColor }]}>
+      <Text
+        style={[
+          styles.btnText,
+          textStyle,
+          act && { color: activeColor },
+          disabled && { color: disabledColor },
+        ]}
+      >
         {label}
       </Text>
     )
@@ -97,6 +105,7 @@ const Item: React.FC<ItemProps> = props => {
     <TouchableOpacity
       {...rest}
       onPress={onPress}
+      disabled={disabled}
       style={[
         { alignItems: 'center', flex: 1 },
         bordered && { borderWidth: 0.5, borderColor: '#ccc' },
@@ -105,7 +114,9 @@ const Item: React.FC<ItemProps> = props => {
         style,
         cxStyle,
         act && { backgroundColor: activeBg, borderColor: activeBorderColor },
-      ]}>
+        disabled && { opacity: 0.5 },
+      ]}
+    >
       {childNode}
     </TouchableOpacity>
   )

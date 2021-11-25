@@ -6,7 +6,7 @@ export default () => {
   return (
     <React.Fragment>
       <View style={{ paddingHorizontal: 20, paddingVertical: 20 }}>
-        <Button>测试按钮</Button>
+        <Button disabled>测试按钮</Button>
         <Button.Group
           config={[
             { label: '测试按钮2', value: '12' },
