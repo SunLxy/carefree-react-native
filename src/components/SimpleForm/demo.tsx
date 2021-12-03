@@ -20,8 +20,9 @@ export default () => {
       <SimpleForm
         bottomBorder={true}
         form={form}
+        name="test"
         watchList={{
-          namea: value => {
+          test_namea: value => {
             // eslint-disable-next-line no-console
             console.log('监听打印---》', value)
           },
@@ -29,7 +30,7 @@ export default () => {
         layout="vertical"
         config={[
           {
-            label: '测试',
+            label: '测试2222',
             name: 'namea',
             type: 'Input',
             rules: [{ required: true, message: '请输入' }],

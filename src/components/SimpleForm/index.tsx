@@ -28,7 +28,7 @@ const InternalForm: React.ForwardRefRenderFunction<
   FormInstance,
   SimpleFormProps
 > = (props, ref) => {
-  const { config = [], children, watchList, form, ...rest } = props
+  const { config = [], children, watchList, form, name, ...rest } = props
   const formRef = React.useRef<FormInstance>()
 
   const [firstMont, setFirstMont] = useState(false)
@@ -50,9 +50,10 @@ const InternalForm: React.ForwardRefRenderFunction<
         watchList: watchList || {},
         form: forms,
         itemRefHook: formRef.current,
-      }}>
-      <Form {...rest} form={forms} ref={formRef}>
-        {itemRender(config, { watchList })}
+      }}
+    >
+      <Form {...rest} name={name} form={forms} ref={formRef}>
+        {itemRender(config, { watchList, name })}
         {children}
       </Form>
     </FormContext.Provider>

@@ -12,6 +12,9 @@ import { SelectProps } from './../Select'
 import { ItemProps } from './../Form/Item'
 import { CarefreeFormProps } from './../Form'
 
+export type InternalNamePath = (string | number)[]
+export type NamePath = string | number | InternalNamePath
+
 export type ItemChildType =
   | 'Custom'
   | 'Input'

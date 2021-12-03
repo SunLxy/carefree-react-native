@@ -143,10 +143,12 @@ const CarefreeFormItem: React.FC<ItemProps> = props => {
                 itemStyle,
                 bottomBorder && styles.itemWarpBorderBottom,
                 { borderBottomColor: bottomBorderColor || '#ccc' },
-              ]}>
+              ]}
+            >
               <View style={[styles[`label${layout}`], labelW, labelStyle]}>
                 <Text
-                  style={[styles.itemLabelText, labelTextW, labelTextStyle]}>
+                  style={[styles.itemLabelText, labelTextW, labelTextStyle]}
+                >
                   {isRequired && <Text style={styles.labelRedStar}>*</Text>}
                   {label} {colonRender}
                 </Text>
@@ -157,7 +159,8 @@ const CarefreeFormItem: React.FC<ItemProps> = props => {
                   styles[`itemInput${layout}`],
                   styleW,
                   style,
-                ]}>
+                ]}
+              >
                 {childNode}
               </View>
             </View>

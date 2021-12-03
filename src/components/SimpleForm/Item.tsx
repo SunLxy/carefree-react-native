@@ -1,19 +1,23 @@
 import React from 'react'
-
 import Input, { InputProps } from './../Input'
-
 import Select, { SelectProps } from './../Select'
-
 import { SimpleFormConfigProps } from '.'
-
 import CheckBox, { CheckBoxProps } from './../CheckBox'
 import Radio, { RadioProps } from './../Radio'
 import Form from './../Form'
 import { ItemProps } from './../Form/Item'
-
 import { useFormWatchList } from './hooks'
-import { WatchListProps } from './interface'
+import { WatchListProps, NamePath } from './interface'
 
+// 对值进行处理
+const getPathName = (name: NamePath, formName: NamePath) => {
+  if (Array.isArray(name)) {
+    return (formName && [formName].concat(name).join('_')) || name.join('_')
+  }
+  return (formName && `${formName}_${name}`) || name
+}
+
+// 监听外层
 export const Warp = (props: { [x: string]: any }) => {
   const { children, ...rest } = props || {}
   const [childProps] = useFormWatchList(props)
@@ -25,6 +29,7 @@ export const Warp = (props: { [x: string]: any }) => {
   }
   return children
 }
+
 // 监听子组件
 export const ItemWatch = (props: ItemProps) => {
   const { children, ...rest } = props
@@ -40,8 +45,10 @@ export const itemRender = (
   config: SimpleFormConfigProps[],
   {
     watchList,
+    name: formName,
   }: {
     watchList: WatchListProps
+    name: NamePath | undefined
   },
 ) => {
   return config.map((item, index) => {
@@ -70,7 +77,7 @@ export const itemRender = (
       watchList &&
       Object.keys(watchList).length &&
       watch &&
-      watchList[name as string]
+      watchList[getPathName(name, formName) as string]
     ) {
       renderItem = <Warp>{renderItem}</Warp>
     }

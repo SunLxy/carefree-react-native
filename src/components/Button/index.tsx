@@ -37,7 +37,7 @@ const Button: React.FC<ButtonProps> & {
     ...rest
   } = props
   let childNode = children
-  if (typeof children === 'string') {
+  if (['boolean', 'string', 'number'].includes(typeof children)) {
     childNode = (
       <Text
         style={[
