@@ -165,6 +165,7 @@ export interface SimpleFormConfigProps {
   attr: Partial<ItemChildAttr>;
   /** formItem 表单 规则*/
   rules?: Rule[];
+  /** 自定义渲染 */ 
   render?: React.ReactNode | ((...arg: any) => React.ReactNode);
 }
 
@@ -174,4 +175,10 @@ export interface SimpleFormProps extends CarefreeFormProps {
   /** 监听字段 */
   watchList?: WatchListProps;
 }
+
+export interface WatchListProps {
+  /** 字段对应的 监听方法 */
+  [s: string]: (value: any, formValue?: any, child?: ChildPropsType) => void
+}
+
 ```

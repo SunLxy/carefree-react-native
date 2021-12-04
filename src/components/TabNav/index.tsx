@@ -4,26 +4,29 @@ import { TabNavContext } from './context'
 import Item, { ItemProps } from './Item'
 import styles from './styles'
 export interface TabNavProps {
+  /** 选中的 **/
   activeId?: number | string
+  /***切换事件  */
   onChange?: (value: string | number) => void
+  /** 布局 */
   layout?: 'default' | 'vertical'
   /** 首次 默认选中 */
   defaultId?: string | number
   config?: ItemProps[]
   warpStyle?: StyleProp<ViewStyle>
-  // 默认背景整体颜色
+  /** 默认背景整体颜色 */
   defaultBg?: string
-  // 默认边框颜色
+  /** 默认边框颜色 */
   defaultBorderColor?: string
-  // 默认边框颜色
+  /**默认边框颜色  */
   defaultColor?: string
-  // 选中背景颜色
+  /** 选中背景颜色 */
   checkBg?: string
-  // 选中字体颜色
+  /** 选中字体颜色 */
   checkColor?: string
-  // 选中边框颜色
+  /** 选中边框颜色 */
   checkBorderColor?: string
-  // 边框宽度
+  /** 边框宽度 */
   borderWidth?: number
 }
 
@@ -81,7 +84,8 @@ const TabNav: React.FC<TabNavProps> & { Item: typeof Item } = props => {
         checkColor,
         checkBorderColor,
         borderWidth,
-      }}>
+      }}
+    >
       <View style={[warpStyle, styles[layout]]}>
         {_render}
         {props.children}

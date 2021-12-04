@@ -11,25 +11,30 @@ order: 18
 
 ```ts
 export interface TabNavProps {
-  activeId?: number | string;
-  onChange?: (value: string | number) => void;
-  layout?: "default" | "vertical";
-  config?: ItemProps[];
-  warpStyle?: StyleProp<ViewStyle>;
-  // 默认背景整体颜色
-  defaultBg?: string;
-  // 默认边框颜色
-  defaultBorderColor?: string;
-  // 默认边框颜色
-  defaultColor?: string;
-  // 选中背景颜色
-  checkBg?: string;
-  // 选中字体颜色
-  checkColor?: string;
-  // 选中边框颜色
-  checkBorderColor?: string;
-  // 边框宽度
-  borderWidth?: number;
+   /** 选中的 **/
+  activeId?: number | string
+  /***切换事件  */
+  onChange?: (value: string | number) => void
+  /** 布局 */
+  layout?: 'default' | 'vertical'
+  /** 首次 默认选中 */
+  defaultId?: string | number
+  config?: ItemProps[]
+  warpStyle?: StyleProp<ViewStyle>
+  /** 默认背景整体颜色 */
+  defaultBg?: string
+  /** 默认边框颜色 */
+  defaultBorderColor?: string
+  /**默认边框颜色  */
+  defaultColor?: string
+  /** 选中背景颜色 */
+  checkBg?: string
+  /** 选中字体颜色 */
+  checkColor?: string
+  /** 选中边框颜色 */
+  checkBorderColor?: string
+  /** 边框宽度 */
+  borderWidth?: number
 }
 ```
 

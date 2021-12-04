@@ -10,26 +10,27 @@ import {
 import styles from './styles'
 import { ConfigProps } from '.'
 export interface FooterProps {
-  // 配置
+  /** 配置 */
   config: ConfigProps[]
-  // 渲染
+  /** 渲染 */
   render?: (
     currentIndex: number,
     onChange: FooterProps['onChange'],
   ) => React.ReactNode
-  // 当前那个
+  /** 当前那个？ */
   currentIndex: number
-  // 变更当前
+  /**  变更当前 */
   onChange: (index: number) => void
-  // 渲染 label 值
+  /**  渲染 label 值 */
   labelField?: string
-  // 外层样式
+  /** 外层样式 */
   style?: StyleProp<ViewStyle>
-  // 按钮样式
+  /** 按钮样式 */
   btnStyle?: StyleProp<ViewStyle>
   btnActStyle?: StyleProp<ViewStyle>
-  // 按钮内字体样式
+  /** 按钮内字体样式 */
   btnTextStyle?: StyleProp<TextStyle>
+  /** 按钮 选中 颜色 **/
   btnTextActStyle?: StyleProp<TextStyle>
 }
 const Footer = (props: FooterProps) => {
@@ -59,14 +60,16 @@ const Footer = (props: FooterProps) => {
               ind === currentIndex && styles.footerBtnAct,
               ind === currentIndex && btnActStyle,
               btnStyle,
-            ]}>
+            ]}
+          >
             <Text
               style={[
                 styles.footerBtnText,
                 ind === currentIndex && styles.footerBtnActText,
                 ind === currentIndex && btnTextActStyle,
                 btnTextStyle,
-              ]}>
+              ]}
+            >
               {it[labelField]}
             </Text>
           </TouchableOpacity>

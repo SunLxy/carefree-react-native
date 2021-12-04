@@ -41,6 +41,7 @@ export interface TreeProps {
 
   /** 选中图标展示位置 */
   layout?: 'left' | 'right'
+  /** 是否 使用 行点击事件 */ 
   isRowClick?: boolean
 }
 

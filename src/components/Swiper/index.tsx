@@ -17,19 +17,19 @@ export interface ConfigProps {
 }
 export interface SwiperProps {
   config?: ConfigProps[]
-  // 初始第几个 默认第一个
+  /** 初始第几个 默认第一个 */
   index?: number
-  // 每一项的宽度  默认屏幕宽度
+  /** 每一项的宽度  默认屏幕宽度 */
   width?: number
-  // 底部点点
+  /** 底部点点 */
   footer?: Omit<FooterProps, 'currentIndex' | 'onChange' | 'config'>
-  // 内容区域渲染
+  /** 内容区域渲染 */
   render: ItemProps['render']
-  // 是否自动轮询
+  /** 是否自动轮询 */
   auto?: boolean
-  // 间隔时间
+  /** 间隔时间  */
   time?: number
-  // 外层样式
+  /** 外层样式 */
   style?: StyleProp<ViewStyle>
 }
 const W = Dimensions.get('window').width
@@ -100,7 +100,8 @@ const Swiper = (props: SwiperProps) => {
         ref={scrollViewRef}
         horizontal
         onMomentumScrollEnd={onMomentumScrollEnd}
-        pagingEnabled>
+        pagingEnabled
+      >
         <Item
           config={config}
           currentIndex={currentIndex}

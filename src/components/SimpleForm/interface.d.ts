@@ -45,6 +45,7 @@ export interface SimpleFormConfigProps {
   attr?: Partial<ItemChildAttr>
   /** formItem 表单 规则*/
   rules?: Rule[]
+  /** 自定义渲染 */
   render?: React.ReactNode | ((...arg: any) => React.ReactNode)
 }
 

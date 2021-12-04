@@ -10,7 +10,9 @@ import Head from './Head'
 import Pane from './Pane'
 type ModeType = 'M' | 'Y'
 export interface PaneDateProps {
+  /** 选中的日期 */
   value?: string
+  /** 选中日期 事件变更值 */
   onChange?: (value: string) => void
 }
 
