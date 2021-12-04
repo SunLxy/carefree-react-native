@@ -1,5 +1,6 @@
 ---
 title: Swiper
+order: 15
 ---
 
 > 轮播图

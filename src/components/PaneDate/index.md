@@ -1,6 +1,6 @@
 ---
 title: PaneDate
-order: 6
+order: 10
 ---
 
 > 日期面板 只能选择年月日

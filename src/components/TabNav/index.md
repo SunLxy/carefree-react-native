@@ -1,6 +1,6 @@
 ---
 title: TabNav
-order: 2
+order: 18
 ---
 
 > 当前组件应用于 TabBar 组件

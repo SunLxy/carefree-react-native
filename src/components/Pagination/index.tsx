@@ -26,6 +26,7 @@ export interface PaginationProps {
   checkBgColor?: string
   /*** 选中边框颜色 */
   checkBorderColor?: string
+  /** 翻页事件 */
   onChange?: (page: number) => void
 }
 

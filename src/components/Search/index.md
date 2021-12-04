@@ -1,6 +1,6 @@
 ---
 title: Search
-order: 6
+order: 12
 ---
 
 > 在模糊查询组件[FuzzySearch](/components/fuzzy-search)中使用

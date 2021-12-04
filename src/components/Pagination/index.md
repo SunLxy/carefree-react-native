@@ -1,6 +1,6 @@
 ---
 title: Pagination
-order: 2
+order: 9
 ---
 
 ## 分页
@@ -9,14 +9,30 @@ order: 2
 
 ```ts
 export interface PaginationProps {
-  /** 总条数 */
-  total: number;
+   /** 总条数 */
+  total: number
   /** 每页数 */
-  pageSize: number;
+  pageSize: number
   /** 当前页数 */
-  page: number;
+  page: number
   /** 展示范围 */
-  around?: number;
+  around?: number
+  /** 禁用 */
+  disabled?: boolean
+  /** 禁用颜色 */
+  disabledColor?: boolean
+  /** 按钮样式 */
+  btnStyle?: StyleProp<ViewStyle>
+  /** 按钮配置样式 */
+  btnProps?: Omit<ButtonProps, 'style'>
+  /** 选中字体颜色 */
+  checkFontColor?: string
+  /** 选中背景色 */
+  checkBgColor?: string
+  /*** 选中边框颜色 */
+  checkBorderColor?: string
+  /** 翻页事件 */ 
+  onChange?: (page: number) => void
 }
 ```
 

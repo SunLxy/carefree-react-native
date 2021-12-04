@@ -1,5 +1,6 @@
 ---
 title: SimpleForm
+order: 14
 ---
 
 > `SimpleForm`组件表单属性继承 [Form](/components/form) 表单属性
