@@ -58,52 +58,6 @@ export default () => (
   />
 );
 ```
-
-## 查询表单
-
-```js
-import React from 'react';
-import { SimpleForm } from 'carefree-react-native';
-
-export default () => (
-  <SimpleForm
-    layout="vertical"
-    config={[
-      {
-        label: '测试',
-        name: 'namea',
-        type: 'Input',
-      },
-      {
-        label: '测试1',
-        name: 'name1',
-        type: 'Input',
-      },
-      {
-        label: '测试2',
-        name: 'name2',
-        type: 'Input',
-      },
-      {
-        label: '测试3',
-        name: 'namea3',
-        type: 'Input',
-      },
-      {
-        label: '测试4',
-        name: 'name4',
-        type: 'Input',
-      },
-      {
-        label: '测试5',
-        name: 'name5',
-        type: 'Input',
-      },
-    ]}
-  />
-);
-```
-
 ## antd 使用表单
 
 ```js
