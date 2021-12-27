@@ -32,7 +32,6 @@ const PaneDate: React.FC<PaneDateProps> = props => {
   const init = React.useMemo(() => {
     return {
       dataList: new paneDate().getPaneDate(
-        'rn',
         Number(store.year),
         Number(store.month),
       ),
