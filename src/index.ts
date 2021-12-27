@@ -70,3 +70,6 @@ export * from './components/PaneDate'
 
 export { default as Pagination } from './components/Pagination'
 export * from './components/Pagination'
+
+export { default as BlobUtil } from './components/BlobUtil'
+export * from './components/BlobUtil'
