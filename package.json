@@ -1,7 +1,7 @@
 {
   "name": "carefree-react-native",
   "description": "练习 react native ,并尝试封装常用的组件",
-  "version": "0.0.41",
+  "version": "0.0.42",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
@@ -21,11 +21,15 @@
   "dependencies": {
     "@babel/runtime": "7.15.3",
     "carefree-utils": "1.0.17",
-    "rc-field-form": "1.21.2"
+    "rc-field-form": "1.21.2",
+    "react-native-svg": "12.1.1"
   },
   "peerDependencies": {
     "react": ">=17.0.0",
-    "react-native": ">=0.60.0"
+    "react-native": ">=0.60.0",
+    "react-native-svg": "12.1.1",
+    "carefree-utils": "1.0.17",
+    "rc-field-form": "1.21.2"
   },
   "devDependencies": {
     "@babel/core": "7.15.0",
