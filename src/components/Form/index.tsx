@@ -64,7 +64,8 @@ const InitForm: React.ForwardRefRenderFunction<
         name,
         bottomBorder,
         bottomBorderColor,
-      }}>
+      }}
+    >
       <Form {...other} name={name} ref={ref} component={false}>
         {children}
       </Form>
