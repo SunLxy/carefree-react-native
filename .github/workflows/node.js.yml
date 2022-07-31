@@ -83,18 +83,18 @@ jobs:
       - run: npm install @jsdevtools/npm-publish -g
       - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./package.json
 
-build_ios:
-  runs-on: macos-latest
-  steps:
-    - name: install
-      run: npm install
+  build_ios:
+    runs-on: macos-latest
+    steps:
+      - name: install
+        run: npm install
 
-    - name: Build IOS
-      run: |
-          xcode-select -p
-          cd ios
-          pod repo update
-          pod install
-          xcodebuild clean
-          xcodebuild -workspace ./RnComponents.xcworkspace -scheme RnComponents -archivePath ./RnComponents.xcarchive -configuration Debug archive
-          xcodebuild -exportArchive -archivePath ./RnComponents.xcarchive -exportPath ../buildR -exportOptionsPlist ./RnComponents/Info.plist
+      - name: Build IOS
+        run: |
+            xcode-select -p
+            cd ios
+            pod repo update
+            pod install
+            xcodebuild clean
+            xcodebuild -workspace ./RnComponents.xcworkspace -scheme RnComponents -archivePath ./RnComponents.xcarchive -configuration Debug archive
+            xcodebuild -exportArchive -archivePath ./RnComponents.xcarchive -exportPath ../buildR -exportOptionsPlist ./RnComponents/Info.plist
