@@ -1,3 +1,4 @@
+import './components/global/index'
 export {
   CheckBoxIcon,
   RadioIcon,
