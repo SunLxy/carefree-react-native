@@ -40,7 +40,7 @@
     "eslint": "^7.14.0",
     "jest": "^26.6.3",
     "lint-staged": "^11.0.0",
-    "metro-react-native-babel-preset": "^0.64.0",
+    "metro-react-native-babel-preset": "^0.77.0",
     "prettier": "^2.3.2",
     "react": "17.0.1",
     "react-native": "0.64.1",
