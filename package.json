@@ -21,7 +21,7 @@
   "dependencies": {
     "@babel/runtime": "7.15.3",
     "carefree-utils": "1.0.17",
-    "rc-field-form": "1.21.2",
+    "rc-field-form": "1.44.0",
     "react-native-svg": "12.1.1"
   },
   "peerDependencies": {
