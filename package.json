@@ -19,7 +19,7 @@
     "docs:build": "dumi build"
   },
   "dependencies": {
-    "@babel/runtime": "7.15.3",
+    "@babel/runtime": "7.25.9",
     "carefree-utils": "1.0.17",
     "rc-field-form": "1.21.2",
     "react-native-svg": "12.1.1"
@@ -30,7 +30,7 @@
     "react-native-svg": ">=12"
   },
   "devDependencies": {
-    "@babel/core": "7.15.0",
+    "@babel/core": "7.25.9",
     "@react-native-community/eslint-config": "^2.0.0",
     "@types/jest": "^26.0.23",
     "@types/react-native": "^0.64.1",
