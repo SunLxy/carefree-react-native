@@ -30,7 +30,7 @@
     "react-native-svg": ">=12"
   },
   "devDependencies": {
-    "@babel/core": "7.15.0",
+    "@babel/core": "7.29.6",
     "@react-native-community/eslint-config": "^2.0.0",
     "@types/jest": "^26.0.23",
     "@types/react-native": "^0.64.1",
